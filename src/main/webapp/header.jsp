@@ -14,7 +14,7 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-            <img class="mdl-layout-icon" src="logo.png"></img>
+            <a href="."><img class="mdl-layout-icon" src="logo.png"></a>
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                       mdl-textfield--floating-label mdl-textfield--align-right">
