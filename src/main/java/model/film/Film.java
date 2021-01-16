@@ -49,40 +49,36 @@ public class Film {
         return fotografia;
     }
 
+    public void setFotografia(String fotografia) {
+        this.fotografia = fotografia;
+    }
+
     public String getMusiche() {
         return musiche;
-    }
-
-    public String getProduzione() {
-        return produzione;
-    }
-
-    public String getTitolo() {
-        return titolo;
     }
 
     public void setMusiche(String musiche) {
         this.musiche = musiche;
     }
 
-    public void setFotografia(String fotografia) {
-        this.fotografia = fotografia;
+    public String getProduzione() {
+        return produzione;
     }
 
     public void setProduzione(String produzione) {
         this.produzione = produzione;
     }
 
-    public String getSceneggiatura() {
-        return sceneggiatura;
+    public String getTitolo() {
+        return titolo;
     }
 
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
-    public void setGenere(String genere) {
-        this.genere = genere;
+    public String getSceneggiatura() {
+        return sceneggiatura;
     }
 
     public void setSceneggiatura(String sceneggiatura) {
@@ -93,12 +89,24 @@ public class Film {
         return genere;
     }
 
+    public void setGenere(String genere) {
+        this.genere = genere;
+    }
+
     public int getDurata() {
         return durata;
     }
 
+    public void setDurata(int durata) {
+        this.durata = durata;
+    }
+
     public String getAttori() {
         return attori;
+    }
+
+    public void setAttori(String attori) {
+        this.attori = attori;
     }
 
     public String getDistribuzione() {
@@ -113,28 +121,20 @@ public class Film {
         return paese;
     }
 
-    public String getRegia() {
-        return regia;
-    }
-
-    public String getTrama() {
-        return trama;
-    }
-
-    public void setAttori(String attori) {
-        this.attori = attori;
-    }
-
-    public void setDurata(int durata) {
-        this.durata = durata;
-    }
-
     public void setPaese(String paese) {
         this.paese = paese;
     }
 
+    public String getRegia() {
+        return regia;
+    }
+
     public void setRegia(String regia) {
         this.regia = regia;
+    }
+
+    public String getTrama() {
+        return trama;
     }
 
     public void setTrama(String trama) {

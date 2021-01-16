@@ -19,51 +19,51 @@ public class Recensione {
         numero_segnalazioni = 0;
     }
 
-    public void setId_utente(int id_utente) {
-        this.id_utente = id_utente;
-    }
-
     public int getId_utente() {
         return id_utente;
+    }
+
+    public void setId_utente(int id_utente) {
+        this.id_utente = id_utente;
     }
 
     public int getId_film() {
         return id_film;
     }
 
+    public void setId_film(int id_film) {
+        this.id_film = id_film;
+    }
+
     public int getId_recensione() {
         return id_recensione;
-    }
-
-    public int getNumero_segnalazioni() {
-        return numero_segnalazioni;
-    }
-
-    public int getValutazione() {
-        return valutazione;
     }
 
     public void setId_recensione(int id_recensione) {
         this.id_recensione = id_recensione;
     }
 
-    public String getTesto() {
-        return testo;
-    }
-
-    public void setId_film(int id_film) {
-        this.id_film = id_film;
+    public int getNumero_segnalazioni() {
+        return numero_segnalazioni;
     }
 
     public void setNumero_segnalazioni(int numero_segnalazioni) {
         this.numero_segnalazioni = numero_segnalazioni;
     }
 
-    public void setTesto(String testo) {
-        this.testo = testo;
+    public int getValutazione() {
+        return valutazione;
     }
 
     public void setValutazione(int valutazione) {
         this.valutazione = valutazione;
+    }
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
     }
 }

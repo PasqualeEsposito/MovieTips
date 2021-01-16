@@ -14,7 +14,7 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">MovieTips</span>
+            <img class="mdl-layout-icon" src="logo.png"></img>
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                       mdl-textfield--floating-label mdl-textfield--align-right">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Accedi</a>
+                <a class="mdl-navigation__link" href="login.jsp">Accedi</a>
             </nav>
         </div>
     </header>

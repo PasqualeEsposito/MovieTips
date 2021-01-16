@@ -18,10 +18,6 @@ public class Notizia {
         this.id_film = id_film;
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
-    }
-
     public int getId_film() {
         return id_film;
     }
@@ -34,16 +30,24 @@ public class Notizia {
         return titolo;
     }
 
-    public void setTesto(String testo) {
-        this.testo = testo;
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
     public String getTesto() {
         return testo;
     }
 
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+
     public int getId_notizia() {
         return id_notizia;
+    }
+
+    public void setId_notizia(int id_notizia) {
+        this.id_notizia = id_notizia;
     }
 
     public String getFonte() {
@@ -52,9 +56,5 @@ public class Notizia {
 
     public void setFonte(String fonte) {
         this.fonte = fonte;
-    }
-
-    public void setId_notizia(int id_notizia) {
-        this.id_notizia = id_notizia;
     }
 }

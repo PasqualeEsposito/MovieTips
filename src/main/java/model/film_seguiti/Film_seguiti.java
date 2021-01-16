@@ -12,12 +12,12 @@ public class Film_seguiti {
         this.id_utente = id_utente;
     }
 
-    public void setId_film(int id_film) {
-        this.id_film = id_film;
-    }
-
     public int getId_film() {
         return id_film;
+    }
+
+    public void setId_film(int id_film) {
+        this.id_film = id_film;
     }
 
     public int getId_utente() {

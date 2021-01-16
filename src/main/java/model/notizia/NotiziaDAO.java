@@ -1,7 +1,6 @@
 package model.notizia;
 
 import model.connection.ConPool;
-import model.recensione.Recensione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

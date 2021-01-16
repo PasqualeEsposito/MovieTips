@@ -72,9 +72,9 @@ public class FilmDAO {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Film");
             ResultSet rs = ps.executeQuery();
             ArrayList<Film> film = new ArrayList<>();
-            while(rs.next()) {
+            while (rs.next()) {
                 String titolo = rs.getString(2).toLowerCase();
-                if(titolo.contains(ricerca.toLowerCase()) || titolo.equalsIgnoreCase(ricerca)) {
+                if (titolo.contains(ricerca.toLowerCase()) || titolo.equalsIgnoreCase(ricerca)) {
                     Film f = new Film();
                     f.setId_film(rs.getInt(1));
                     f.setTitolo(rs.getString(2));
@@ -99,7 +99,7 @@ public class FilmDAO {
         }
     }
 
-    public void doDeleteById(int id){
+    public void doDeleteById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Film where id_film = ?");
             ps.setInt(1, id);
