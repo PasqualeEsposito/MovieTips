@@ -6,18 +6,19 @@
     <div class="page-content">
         <div class="mdl-cell">
             <h1>Accedi</h1>
-            <form action="#">
+            <form action="login" method="post">
                 <div class="mdl-textfield mdl-js-textfield is-upgraded" data-upgraded=",MaterialTextfield">
-                    <input class="mdl-textfield__input" type="text" id="sample1">
-                    <label class="mdl-textfield__label" for="sample1">E-mail...</label></div>
+                    <input class="mdl-textfield__input" name="email" type="text" id="email">
+                    <label class="mdl-textfield__label" for="email">E-mail...</label></div>
                 <div class="mdl-textfield mdl-js-textfield is-upgraded" data-upgraded=",MaterialTextfield">
-                    <input class="mdl-textfield__input" type="text" id="sample2">
-                    <label class="mdl-textfield__label" for="sample2">Password...</label>
+                    <input class="mdl-textfield__input" name="password" type="text" id="password">
+                    <label class="mdl-textfield__label" for="password">Password...</label>
                 </div>
                 <div class="mdl-cell">
                     <span>Non sei registrato?"</span>
                     <button type="submit"
-                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                            value="login">
                         Accedi
                     </button>
                 </div>
