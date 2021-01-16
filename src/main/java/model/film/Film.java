@@ -14,13 +14,14 @@ public class Film {
     private String regia;
     private String genere;
     private String trama;
+    private int anno;
 
     public Film() {
     }
 
     public Film(String titolo, String produzione, String musiche,
                 String fotografia, String sceneggiatura, String distribuzione, int durata, String paese,
-                String attori, String regia, String genere, String trama) {
+                String attori, String regia, String genere, String trama, int anno) {
         this.titolo = titolo;
         this.produzione = produzione;
         this.musiche = musiche;
@@ -33,6 +34,7 @@ public class Film {
         this.regia = regia;
         this.genere = genere;
         this.trama = trama;
+        this.anno = anno;
     }
 
     public int getId_film() {
@@ -137,5 +139,13 @@ public class Film {
 
     public void setTrama(String trama) {
         this.trama = trama;
+    }
+
+    public int getAnno() {
+        return anno;
+    }
+
+    public void setAnno(int anno) {
+        this.anno = anno;
     }
 }

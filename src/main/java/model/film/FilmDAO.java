@@ -14,7 +14,7 @@ public class FilmDAO {
     public void doSave(Film f) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Film VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Film VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, f.getTitolo());
             ps.setString(2, f.getProduzione());
             ps.setString(3, f.getMusiche());
@@ -27,6 +27,7 @@ public class FilmDAO {
             ps.setString(10, f.getRegia());
             ps.setString(11, f.getGenere());
             ps.setString(12, f.getTrama());
+            ps.setInt(13, f.getAnno());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
@@ -57,6 +58,7 @@ public class FilmDAO {
                 f.setRegia(rs.getString(11));
                 f.setGenere(rs.getString(12));
                 f.setTrama(rs.getString(13));
+                f.setAnno(rs.getInt(14));
                 film.add(f);
             }
             return film;
@@ -87,6 +89,7 @@ public class FilmDAO {
                     f.setRegia(rs.getString(11));
                     f.setGenere(rs.getString(12));
                     f.setTrama(rs.getString(13));
+                    f.setAnno(rs.getInt(14));
                     film.add(f);
                 }
             }
