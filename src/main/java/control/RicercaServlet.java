@@ -14,8 +14,6 @@ import java.util.List;
 
 @WebServlet(name = "RicercaServlet", urlPatterns = "/Ricerca")
 public class RicercaServlet extends HttpServlet {
-
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
