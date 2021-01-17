@@ -37,10 +37,12 @@ public class FilmDAO {
         }
     }
 
-    public ArrayList<Film> doRetrieveAll() {
+    public ArrayList<Film> doRetrieveAll(int offset, int limit) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM Film");
+                    con.prepareStatement("SELECT * FROM Film LIMIT ?, ?");
+                            ps.setInt(1, offset);
+                            ps.setInt(2, limit);
             ResultSet rs = ps.executeQuery();
             ArrayList<Film> film = new ArrayList<>();
             while (rs.next()) {

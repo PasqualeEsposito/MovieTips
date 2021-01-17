@@ -21,7 +21,7 @@ public class Home extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
-        List<Film> films = filmDao.doRetrieveAll();//nella lista di film che prendiamo dovremmo mettere un limite
+        List<Film> films = filmDao.doRetrieveAll(0,3);//nella lista di film che prendiamo mettiamo un offset e limite
         request.setAttribute("films", films);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/index.jsp");
         requestDispatcher.forward(request, response);
