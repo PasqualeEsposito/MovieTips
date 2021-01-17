@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -52,9 +54,12 @@ public class Login extends HttpServlet {
                     } else {
                         MessageDigest md = MessageDigest.getInstance("SHA-256");
                         //Problema in questo passaggio
-                        byte curr[] = md.digest(password.getBytes()); //Password inserita hashata in SHA-256
-                        byte user[] = utente.getPassword(); //Password dell'utente
-                        if (!Arrays.equals(curr, user)) {
+                        MessageDigest digest = MessageDigest.getInstance("SHA-1");
+                        digest.reset();
+                        digest.update(password.getBytes(StandardCharsets.UTF_8));
+                        String curr = String.format("%040x", new BigInteger(1, digest.digest()));
+                        String user = utente.getPassword(); //Password dell'utente
+                        if (user.equals(curr)) {
                             request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email e la password non combaciano");
                             session.setAttribute("errorType", "password");
                             session.setAttribute("error", "Email o password errate");

@@ -10,14 +10,13 @@ public class Utente {
     private String nome;
     private String cognome;
     private String email;
-    private byte[] password;
+    private String password;
     private String genere;
     private String ddn;
     private int id_utente;
     private int ruolo;
 
     public Utente() {
-        password = new byte[32];
     }
 
     public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int id_utente, int ruolo) {
@@ -88,25 +87,19 @@ public class Utente {
         this.nome = nome;
     }
 
-    public byte[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(String passwordToEncode) {
-
+    public void setPassword(String password) {
         try {
-            MessageDigest md;
-            md = MessageDigest.getInstance("SHA-256");
-            byte arr[] = md.digest(passwordToEncode.getBytes());
-            this.password = arr;
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            digest.reset();
+            digest.update(password.getBytes(StandardCharsets.UTF_8));
+            this.password = String.format("%040x", new BigInteger(1, digest.digest()));
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
     }
 
-    public void setPassword(byte[] password) {
-        this.password = password;
+    public String getPassword() {
+        return password;
     }
 
     public String getUsername() {

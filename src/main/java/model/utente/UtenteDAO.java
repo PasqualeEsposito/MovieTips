@@ -21,7 +21,7 @@ public class UtenteDAO {
             ps.setString(2, u.getNome());
             ps.setString(3, u.getCognome());
             ps.setString(4, u.getEmail());
-            ps.setBytes(5, u.getPassword());
+            ps.setString(5, u.getPassword());
             ps.setString(6, u.getGenere());
             ps.setString(7, u.getDdn());
             ps.setInt(8, u.getRuolo());
