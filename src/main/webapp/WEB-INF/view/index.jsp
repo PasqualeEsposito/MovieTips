@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp">
     <jsp:param name="pageTitle" value="Home page"/>
 </jsp:include>
@@ -16,26 +17,12 @@
 </style>
 <main class="mdl-layout__content">
     <div class="page-content">
-        <div class="mdl-grid" style="justify-content: space-evenly;">
-            <div class="mdl-cell film">
-                <div class="demo-card-image mdl-card mdl-shadow--2dp"></div>
+        <c:forEach items="${films}" var="film">
+            <div>
+                <a href="film?id=<c:out value="${film.id_film}"/>"><img src="img/<c:out value="${film.id_film}"/>.jpg"></a>
+                <h3><c:out value="${film.titolo}"/></h3>
             </div>
-            <div class="mdl-cell film">
-                <div class="demo-card-image mdl-card mdl-shadow--2dp"></div>
-            </div>
-            <div class="mdl-cell film">
-                <div class="demo-card-image mdl-card mdl-shadow--2dp"></div>
-            </div>
-            <div class="mdl-cell film">
-                <div class="demo-card-image mdl-card mdl-shadow--2dp"></div>
-            </div>
-            <div class="mdl-cell film">
-                <div class="demo-card-image mdl-card mdl-shadow--2dp"></div>
-            </div>
-            <div class="mdl-cell film">
-                <div class="demo-card-image mdl-card mdl-shadow--2dp"></div>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 </main>
 </div>
