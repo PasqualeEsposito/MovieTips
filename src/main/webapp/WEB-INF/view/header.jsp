@@ -31,6 +31,13 @@
                 </div>
             </form>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="Login">Accedi</a>
+                <c:choose>
+                    <c:when test="${utente == null}">
+                        <a class="mdl-navigation__link" href="Login">Accedi</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="mdl-navigation__link" href="Logout">Disconnettiti</a>
+                    </c:otherwise>
+                </c:choose>
             </nav>
         </div>
