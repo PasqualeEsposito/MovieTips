@@ -6,8 +6,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utente {
-    private String username, nome, cognome, email, password, genere, ddn;
-    private int id_utente, ruolo;
+    private String username;
+    private String nome;
+    private String cognome;
+    private String email;
+    private String password;
+    private String genere;
+    private String ddn;
+    private int id_utente;
+    private int ruolo;
 
     public Utente() {
     }
@@ -17,7 +24,7 @@ public class Utente {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.setPassword(password);
+        setPassword(password);
         this.genere = genere;
         this.ddn = ddn;
         this.id_utente = id_utente;
@@ -80,10 +87,6 @@ public class Utente {
         this.nome = nome;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
@@ -95,11 +98,30 @@ public class Utente {
         }
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "username='" + username + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", genere='" + genere + '\'' +
+                ", ddn='" + ddn + '\'' +
+                ", id_utente=" + id_utente +
+                ", ruolo=" + ruolo +
+                '}';
     }
 }
