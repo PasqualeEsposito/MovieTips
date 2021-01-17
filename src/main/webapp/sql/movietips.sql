@@ -126,6 +126,8 @@ VALUES (6, 'Parasite',
 
 
 INSERT INTO Utente
-VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', 'Fabrizio1!', 'M',
+VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
         '2001-05-22',
         2);
+
+DROP DATABASE movietipsdb;
