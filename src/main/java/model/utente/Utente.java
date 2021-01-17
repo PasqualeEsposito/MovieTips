@@ -110,6 +110,39 @@ public class Utente {
         this.username = username;
     }
 
+    /*
+     * Ruolo:
+     *   Filmino: 1
+     *   Moderatore: 2
+     *   Articolista: 3
+     *   Amministratore: 4
+     * */
+
+    public boolean isFilmino() {
+        if (ruolo == 1)
+            return true;
+        return false;
+    }
+
+    public boolean isModeratore() {
+        if (ruolo == 2)
+            return true;
+        return false;
+    }
+
+    public boolean isArticolista() {
+        if (ruolo == 3)
+            return true;
+        return false;
+    }
+
+
+    public boolean isAmministratore() {
+        if (ruolo == 4)
+            return true;
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Utente{" +

@@ -27,23 +27,22 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             if (email.length() == 0) {
-                request.setAttribute("errorTest", "Il login non va a buon fine poiché il campo email è vuoto");
+                /*request.setAttribute("errorTest", "Il login non va a buon fine poiché il campo email è vuoto");
                 session.setAttribute("errorType", "email");
-                session.setAttribute("error", "Campo vuoto");
+                session.setAttribute("error", "Campo vuoto");*/
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
-
             } else {
                 if (password.length() == 0) {
-                    request.setAttribute("errorTest", "Il login non va a buon fine poiché il campo password è vuoto");
+                    /*request.setAttribute("errorTest", "Il login non va a buon fine poiché il campo password è vuoto");
                     session.setAttribute("errorType", "password");
-                    session.setAttribute("error", "Campo vuoto");
+                    session.setAttribute("error", "Campo vuoto");*/
                     response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                 } else {
                     utente = serviceUtente.doRetrieveByEmail(email);
                     if (utente.getEmail().equals("")) { //Controllo se l'email non è presente nel db
-                        request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email non è presente nel db");
+                        /*request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email non è presente nel db");
                         session.setAttribute("errorType", "email");
-                        session.setAttribute("error", "Email non presente nel database");
+                        session.setAttribute("error", "Email non presente nel database");*/
                         response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                     } else {
                         //Problema in questo passaggio
@@ -53,16 +52,16 @@ public class LoginServlet extends HttpServlet {
                         String curr = String.format("%040x", new BigInteger(1, digest.digest()));
                         String user = utente.getPassword(); //Password dell'utente
                         if (!user.equals(curr)) {
-                            request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email e la password non combaciano");
+                            /*request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email e la password non combaciano");
                             session.setAttribute("errorType", "password");
-                            session.setAttribute("error", "Email o password errate");
+                            session.setAttribute("error", "Email o password errate");*/
                             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                         } else {
-                            request.setAttribute("errorTest", "Il login viene effettuato correttamente");
+                            /*request.setAttribute("errorTest", "Il login viene effettuato correttamente");
                             session.setAttribute("recensione", serviceRecensione.doRetrieveById_utente(utente.getId_utente()));
                             session.setAttribute("utente", utente);
                             session.setAttribute("errorType", null);
-                            session.setAttribute("error", null);
+                            session.setAttribute("error", null);*/
                         }
                     }
                 }
