@@ -24,9 +24,9 @@ public class Login extends HttpServlet {
         doGet(request, response);
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        Utente utente = new Utente();
+        Utente utente;
         UtenteDAO serviceUtente = new UtenteDAO();
         RecensioneDAO serviceRecensione = new RecensioneDAO();
         try {
@@ -52,14 +52,13 @@ public class Login extends HttpServlet {
                         session.setAttribute("error", "Email non presente nel database");
                         response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                     } else {
-                        MessageDigest md = MessageDigest.getInstance("SHA-256");
                         //Problema in questo passaggio
                         MessageDigest digest = MessageDigest.getInstance("SHA-1");
                         digest.reset();
                         digest.update(password.getBytes(StandardCharsets.UTF_8));
                         String curr = String.format("%040x", new BigInteger(1, digest.digest()));
                         String user = utente.getPassword(); //Password dell'utente
-                        if (user.equals(curr)) {
+                        if (!user.equals(curr)) {
                             request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email e la password non combaciano");
                             session.setAttribute("errorType", "password");
                             session.setAttribute("error", "Email o password errate");
@@ -70,7 +69,6 @@ public class Login extends HttpServlet {
                             session.setAttribute("utente", utente);
                             session.setAttribute("errorType", null);
                             session.setAttribute("error", null);
-                            System.out.println("Ok");
                         }
                     }
                 }
