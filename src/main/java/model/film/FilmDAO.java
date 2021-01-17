@@ -41,8 +41,8 @@ public class FilmDAO {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM Film LIMIT ?, ?");
-                            ps.setInt(1, offset);
-                            ps.setInt(2, limit);
+            ps.setInt(1, offset);
+            ps.setInt(2, limit);
             ResultSet rs = ps.executeQuery();
             ArrayList<Film> film = new ArrayList<>();
             while (rs.next()) {
@@ -130,6 +130,7 @@ public class FilmDAO {
             throw new RuntimeException(e);
         }
     }
+
     public void doDeleteById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Film where id_film = ?");

@@ -6,8 +6,24 @@ a {
     text-align: -webkit-center;
 }
 
-form > div {
+.cell {
+    display: flex;
+    margin: 8px;
+    place-content: center;
+}
+
+.form {
+    max-width: 400px;
+    margin: 8px;
+}
+
+.form > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.form > div > label {
+    width: 100px;
+    text-align: left;
 }

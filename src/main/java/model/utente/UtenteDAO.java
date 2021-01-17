@@ -1,7 +1,6 @@
 package model.utente;
 
 
-
 import model.connection.ConPool;
 
 import java.sql.Connection;

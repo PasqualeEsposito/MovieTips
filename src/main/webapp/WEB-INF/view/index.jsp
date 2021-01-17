@@ -12,7 +12,6 @@
     .demo-card-image.mdl-card {
         width: inherit;
         height: inherit;
-        background: url('https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UY404_.jpg%20272w') center / cover;
     }
 </style>
 <main class="mdl-layout__content">
