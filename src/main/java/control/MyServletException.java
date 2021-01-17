@@ -51,4 +51,10 @@ public class MyServletException extends ServletException {
             throw new MyServletException("Utente non autorizzato");
         }
     }
+
+    public static void checkAccount(HttpServletRequest request) throws MyServletException {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if(utente == null)
+            throw new MyServletException(("Utente non autorizzato"));
+    }
 }
