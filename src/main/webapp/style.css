@@ -1,0 +1,13 @@
+a {
+    color: rgb(244, 67, 54);
+}
+
+.page-content {
+    text-align: -webkit-center;
+}
+
+form > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -5,4 +5,7 @@
 <main class="mdl-layout__content">
     <div class="page-content">
     </div>
-<jsp:include page="footer.jsp"></jsp:include>
+</main>
+</div>
+</body>
+</html>
