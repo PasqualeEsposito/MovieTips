@@ -132,7 +132,7 @@ public class FilmDAO {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Film where id_film = ?");
             ps.setInt(1, id);
             if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("Delete error");
+                throw new RuntimeException("delete ERROR");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

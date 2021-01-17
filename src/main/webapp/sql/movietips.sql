@@ -130,4 +130,5 @@ VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@un
         '2001-05-22',
         2);
 
+
 DROP DATABASE movietipsdb;

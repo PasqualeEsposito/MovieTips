@@ -121,7 +121,7 @@ public class UtenteDAO {
             ps.setString(1, password);
             ps.setString(2, email);
             if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("Update error.");
+                throw new RuntimeException("update ERROR");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
