@@ -6,10 +6,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utente {
-    private String username, nome, cognome, email, password, genere, ddn;
-    private int id_utente, ruolo;
+    private String username;
+    private String nome;
+    private String cognome;
+    private String email;
+    private byte[] password;
+    private String genere;
+    private String ddn;
+    private int id_utente;
+    private int ruolo;
 
     public Utente() {
+        password = new byte[32];
     }
 
     public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int id_utente, int ruolo) {
@@ -17,7 +25,7 @@ public class Utente {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.setPassword(password);
+        setPassword(password);
         this.genere = genere;
         this.ddn = ddn;
         this.id_utente = id_utente;
@@ -80,19 +88,25 @@ public class Utente {
         this.nome = nome;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String passwordToEncode) {
+
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(password.getBytes(StandardCharsets.UTF_8));
-            this.password = String.format("%040x", new BigInteger(1, digest.digest()));
+            MessageDigest md;
+            md = MessageDigest.getInstance("SHA-256");
+            byte arr[] = md.digest(passwordToEncode.getBytes());
+            this.password = arr;
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+    }
+
+    public void setPassword(byte[] password) {
+        this.password = password;
     }
 
     public String getUsername() {
@@ -101,5 +115,20 @@ public class Utente {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "username='" + username + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", genere='" + genere + '\'' +
+                ", ddn='" + ddn + '\'' +
+                ", id_utente=" + id_utente +
+                ", ruolo=" + ruolo +
+                '}';
     }
 }

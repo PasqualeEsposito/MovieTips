@@ -15,7 +15,7 @@
                 <br>
                 <div class="mdl-textfield mdl-js-textfield is-upgraded" data-upgraded=",MaterialTextfield">
                     <label for="password">Password...</label>
-                    <input class="mdl-textfield__input" name="password" type="text" id="password">
+                    <input class="mdl-textfield__input" name="password" type="password" id="password">
                 </div>
                 <div style="display: flex;justify-content: space-between;align-items: center;width: 300px;">
                     <a style="color: rgb(244,67,54);">Non sei registrato?</a>

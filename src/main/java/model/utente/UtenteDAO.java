@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Clock;
 import java.util.ArrayList;
 
 public class UtenteDAO {
@@ -20,7 +21,7 @@ public class UtenteDAO {
             ps.setString(2, u.getNome());
             ps.setString(3, u.getCognome());
             ps.setString(4, u.getEmail());
-            ps.setString(5, u.getPassword());
+            ps.setBytes(5, u.getPassword());
             ps.setString(6, u.getGenere());
             ps.setString(7, u.getDdn());
             ps.setInt(8, u.getRuolo());
@@ -46,7 +47,6 @@ public class UtenteDAO {
                 u.setNome(rs.getString(3));
                 u.setCognome(rs.getString(4));
                 u.setEmail(rs.getString(5));
-                u.setPassword(rs.getString(6));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
                 u.setRuolo(rs.getInt(9));
@@ -60,7 +60,7 @@ public class UtenteDAO {
 
     public Utente doRetrieveByEmailPassword(String email, String password) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente WHERE email = ? AND password = SHA1(?)");
+            PreparedStatement ps = con.prepareStatement("select * from Utente where email = ? and password = SHA1(?)");
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -71,7 +71,6 @@ public class UtenteDAO {
                 u.setNome(rs.getString(3));
                 u.setCognome(rs.getString(4));
                 u.setEmail(rs.getString(5));
-                u.setPassword(rs.getString(6));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
                 u.setRuolo(rs.getInt(9));
@@ -79,7 +78,7 @@ public class UtenteDAO {
             }
             return null;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
     }
 
