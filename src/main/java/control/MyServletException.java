@@ -24,6 +24,12 @@ public class MyServletException extends ServletException {
         super(rootCause);
     }
 
+    public static void checkAccount(HttpServletRequest request) throws MyServletException {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente != null)
+            throw new MyServletException(("Utente non autorizzato"));
+    }
+
     public static void checkFilmino(HttpServletRequest request) throws MyServletException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || !utente.isFilmino()) {
@@ -50,11 +56,5 @@ public class MyServletException extends ServletException {
         if (utente == null || !utente.isAmministratore()) {
             throw new MyServletException("Utente non autorizzato");
         }
-    }
-
-    public static void checkAccount(HttpServletRequest request) throws MyServletException {
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente != null)
-            throw new MyServletException(("Utente non autorizzato"));
     }
 }
