@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-indigo.min.css"/>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <link href="style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-            <a href="."><img class="mdl-layout-icon" src="logo.png"></a>
+            <a href="../.."><img class="mdl-layout-icon" src="../../img/logo.png"></a>
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                       mdl-textfield--floating-label mdl-textfield--align-right">
