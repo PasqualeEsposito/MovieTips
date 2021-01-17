@@ -11,4 +11,4 @@ gen
 target/
 log/
 
-src/main/java/model/connection
+src/main/java/model/connection/
