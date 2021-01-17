@@ -34,4 +34,3 @@
                 <a class="mdl-navigation__link" href="Login">Accedi</a>
             </nav>
         </div>
-    </header>

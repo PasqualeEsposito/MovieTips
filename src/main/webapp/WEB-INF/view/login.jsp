@@ -2,6 +2,7 @@
 <jsp:include page="header.jsp">
     <jsp:param name="pageTitle" value="Accedi"/>
 </jsp:include>
+</header>
 <div class="page-content" style="place-self: center;">
     <h2 style="text-align: center;">Accedi</h2>
     <div>
