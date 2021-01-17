@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FilmDAO {
-
-    //ho tolto il campo id_film, verificare il corretto funzionamento
     public void doSave(Film f) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
@@ -28,7 +26,6 @@ public class FilmDAO {
             ps.setString(11, f.getGenere());
             ps.setString(12, f.getTrama());
             ps.setInt(13, f.getAnno());
-
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -122,7 +119,6 @@ public class FilmDAO {
                 f.setGenere(rs.getString(12));
                 f.setTrama(rs.getString(13));
                 f.setAnno(rs.getInt(14));
-
                 return f;
             }
             return null;

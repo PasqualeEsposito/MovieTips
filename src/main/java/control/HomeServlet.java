@@ -12,22 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Ricerca", urlPatterns = "/ricerca")
-public class Ricerca extends HttpServlet {
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+@WebServlet(name = "Home", urlPatterns = "", loadOnStartup = 1)
+public class HomeServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
-        List<Film> films = filmDao.doRetrieveByWord(request.getParameter("inputRicerca"));
+        List<Film> films = filmDao.doRetrieveAll(0, 10);
         request.setAttribute("films", films);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/index.jsp");
         requestDispatcher.forward(request, response);
     }
-
-
 }

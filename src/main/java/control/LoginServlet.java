@@ -4,6 +4,7 @@ import model.recensione.RecensioneDAO;
 import model.utente.Utente;
 import model.utente.UtenteDAO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,13 +16,9 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-@WebServlet(name = "Login", urlPatterns = "/login")
-public class Login extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = "/Login")
+public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         Utente utente;
         UtenteDAO serviceUtente = new UtenteDAO();
@@ -73,5 +70,10 @@ public class Login extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/login.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

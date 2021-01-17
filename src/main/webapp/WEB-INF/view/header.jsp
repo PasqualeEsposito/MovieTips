@@ -17,19 +17,21 @@
         <div class="mdl-layout__header-row">
             <a href="."><img class="mdl-layout-icon" src="./img/logo.png"></a>
             <div class="mdl-layout-spacer"></div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                      mdl-textfield--floating-label mdl-textfield--align-right">
-                <label class="mdl-button mdl-js-button mdl-button--icon"
-                       for="fixed-header-drawer-exp">
-                    <i class="material-icons">search</i>
-                </label>
-                <div class="mdl-textfield__expandable-holder">
-                    <input class="mdl-textfield__input" type="text" name="sample"
-                           id="fixed-header-drawer-exp">
+            <form action="Ricerca" method="get">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                          mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon"
+                           for="fixed-header-drawer-exp">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" name="input_ricerca"
+                               id="fixed-header-drawer-exp">
+                    </div>
                 </div>
-            </div>
+            </form>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="login.jsp">Accedi</a>
+                <a class="mdl-navigation__link" href="Login">Accedi</a>
             </nav>
         </div>
     </header>

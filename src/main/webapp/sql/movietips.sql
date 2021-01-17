@@ -1,6 +1,9 @@
 CREATE DATABASE movietipsdb;
 
+
 USE movietipsdb;
+
+
 CREATE TABLE Utente
 (
     id_utente INT AUTO_INCREMENT PRIMARY KEY,

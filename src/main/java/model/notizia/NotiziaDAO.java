@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class NotiziaDAO {
-    //Ho tolto il primo campo (id_notizia) perché è auto_increment. Controllare se funziona
     public void doSave(Notizia n) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Notizia VALUES (?, ?, ?, ?)");
@@ -22,6 +21,4 @@ public class NotiziaDAO {
             throw new RuntimeException(e);
         }
     }
-
-
 }

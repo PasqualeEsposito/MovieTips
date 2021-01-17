@@ -12,17 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Home", urlPatterns = "", loadOnStartup = 1)
-public class Home extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@WebServlet(name = "RicercaServlet", urlPatterns = "/Ricerca")
+public class RicercaServlet extends HttpServlet {
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
-        List<Film> films = filmDao.doRetrieveAll(0, 3);//nella lista di film che prendiamo mettiamo un offset e limite
+        List<Film> films = filmDao.doRetrieveByWord(request.getParameter("input_ricerca"));
         request.setAttribute("films", films);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
         requestDispatcher.forward(request, response);
     }
 }

@@ -1,6 +1,5 @@
 package model.utente;
 
-
 import model.connection.ConPool;
 
 import java.sql.Connection;
@@ -10,13 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UtenteDAO {
-
-    //Ho tolto il primo campo (id_utente) perché è auto_increment. Controllare se funziona
     public void doSave(Utente u) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Utente (username, nome, cognome, email, passowrd, genere, ddn, ruolo) " +
-                            "VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Utente (username, nome, cognome, email, passowrd, genere, ddn, ruolo) " + "VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getNome());
             ps.setString(3, u.getCognome());
@@ -25,7 +21,6 @@ public class UtenteDAO {
             ps.setString(6, u.getGenere());
             ps.setString(7, u.getDdn());
             ps.setInt(8, u.getRuolo());
-
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -36,8 +31,7 @@ public class UtenteDAO {
 
     public ArrayList<Utente> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM Utente");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
             ResultSet rs = ps.executeQuery();
             ArrayList<Utente> utenti = new ArrayList<>();
             while (rs.next()) {
@@ -133,5 +127,4 @@ public class UtenteDAO {
             throw new RuntimeException(e);
         }
     }
-
 }
