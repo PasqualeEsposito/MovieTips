@@ -87,6 +87,10 @@ public class Utente {
         this.nome = nome;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
@@ -96,10 +100,6 @@ public class Utente {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getUsername() {

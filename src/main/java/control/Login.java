@@ -11,12 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "Login", urlPatterns = "/login")
 public class Login extends HttpServlet {
@@ -75,8 +72,7 @@ public class Login extends HttpServlet {
                     }
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

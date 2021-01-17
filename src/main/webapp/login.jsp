@@ -4,13 +4,13 @@
 </jsp:include>
 <div class="page-content">
     <h1>Accedi</h1>
-    <div class="mdl-cell">
+    <div style="max-width: 400px;margin: 8px;">
         <form action="login" method="post">
-            <div><label for="email">Email:</label>
+            <div><label style="width: 100px;text-align: left;" for="email">Email:</label>
                 <div class="mdl-textfield">
                     <input class="mdl-textfield__input" name="email" type="text" id="email"></div>
             </div>
-            <div><label for="password">Password:</label>
+            <div><label style="width: 100px;text-align: left;" for="password">Password:</label>
                 <div class="mdl-textfield " data-upgraded=",MaterialTextfield">
                     <input class="mdl-textfield__input" name="password" type="text" id="password">
                 </div>
