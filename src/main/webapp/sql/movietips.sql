@@ -129,12 +129,13 @@ INSERT INTO Utente
 VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
         '2001-05-22', '001000'),
        (2, 'marco_bellamico', 'Marco', 'Bellamico', 'marco.bellamico@unisa.it', SHA1('Marco1!'), 'M', '1990-03-01',
-        '001100'),
-       (3, 'luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02', '000000'),
+        '000100'),
+       (3, 'luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02', '001100'),
        (4, 'francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F',
-        '1999-04-13', '001110'),
+        '1999-04-13', '100000'),
        (5, 'roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M',
-        '2000-03-30', '000101');
+        '2000-03-30', '010000');
+
 
 INSERT INTO Film_seguiti
 VALUES (1, 6),
