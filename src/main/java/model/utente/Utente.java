@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class Utente {
     private String username;
@@ -14,9 +15,16 @@ public class Utente {
     private String genere;
     private String ddn;
     private int idUtente;
-    private int ruolo;
+    private ArrayList<String> ruoli = new ArrayList<>();
 
     public Utente() {
+    }
+
+    /**
+     * @return
+     */
+    public int getIdUtente() {
+        return idUtente;
     }
 
     /**
@@ -30,9 +38,8 @@ public class Utente {
      * @param genere il sesso dell'utente
      * @param ddn la data di nascita dell'utente
      * @param idUtente l'id dell'utente generato automaticamente
-     * @param ruolo il ruolo dell'utente (utente bannato, filmino, articolista, moderatore, amministratore)
      */
-    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, int ruolo) {
+    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, ArrayList<String> ruoli) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
@@ -41,14 +48,7 @@ public class Utente {
         this.genere = genere;
         this.ddn = ddn;
         this.idUtente = idUtente;
-        this.ruolo = ruolo;
-    }
-
-    /**
-     * @return
-     */
-    public int getIdUtente() {
-        return idUtente;
+        this.ruoli = ruoli;
     }
 
     /**
@@ -70,20 +70,6 @@ public class Utente {
      */
     public void setCognome(String cognome) {
         this.cognome = cognome;
-    }
-
-    /**
-     * @return
-     */
-    public int getRuolo() {
-        return ruolo;
-    }
-
-    /**
-     * @param ruolo
-     */
-    public void setRuolo(int ruolo) {
-        this.ruolo = ruolo;
     }
 
     /**
@@ -189,7 +175,7 @@ public class Utente {
      * @return
      */
     public boolean isFilmino() {
-        if (ruolo == 1)
+        if (ruoli.contains("Filmino"))
             return true;
         return false;
     }
@@ -198,7 +184,7 @@ public class Utente {
      * @return
      */
     public boolean isModeratore() {
-        if (ruolo == 2)
+        if (ruoli.contains("Moderatore"))
             return true;
         return false;
     }
@@ -207,7 +193,7 @@ public class Utente {
      * @return
      */
     public boolean isArticolista() {
-        if (ruolo == 3)
+        if (ruoli.contains("Articolista"))
             return true;
         return false;
     }
@@ -217,7 +203,7 @@ public class Utente {
      * @return
      */
     public boolean isAmministratore() {
-        if (ruolo == 4)
+        if (ruoli.contains("Amministratore"))
             return true;
         return false;
     }
@@ -226,7 +212,16 @@ public class Utente {
      * @return
      */
     public boolean isBanned() {
-        if (ruolo == -1)
+        if (ruoli.contains("Utente bannato"))
+            return true;
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isNonAttivo() {
+        if(ruoli.contains("Utente non attivo"))
             return true;
         return false;
     }
@@ -245,7 +240,6 @@ public class Utente {
                 ", genere='" + genere + '\'' +
                 ", ddn='" + ddn + '\'' +
                 ", idUtente=" + idUtente +
-                ", ruolo=" + ruolo +
                 '}';
     }
 }
