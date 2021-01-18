@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecensioneDAO {
-    //Ho tolto il primo campo (id_recensione) perché è auto_increment. Controllare se funziona
     public void doSave(Recensione r) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione VALUES (?, ?, ?, ?, ?)");

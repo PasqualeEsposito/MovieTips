@@ -153,7 +153,7 @@ public class Utente {
                 ", password='" + password + '\'' +
                 ", genere='" + genere + '\'' +
                 ", ddn='" + ddn + '\'' +
-                ", id_utente=" + idUtente +
+                ", idUtente=" + idUtente +
                 ", ruolo=" + ruolo +
                 '}';
     }

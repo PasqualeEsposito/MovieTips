@@ -22,7 +22,7 @@ public class HomeServlet extends HttpServlet {
         FilmDAO filmDao = new FilmDAO();
         List<Film> films = filmDao.doRetrieveAll(0, 10);
         request.setAttribute("films", films);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/homePage.jsp");
         requestDispatcher.forward(request, response);
     }
 }

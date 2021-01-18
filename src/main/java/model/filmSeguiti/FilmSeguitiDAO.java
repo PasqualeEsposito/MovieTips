@@ -23,11 +23,11 @@ public class FilmSeguitiDAO {
         }
     }
 
-    public ArrayList<Film> doRetrieveByIdUtente(int id_utente) {
+    public ArrayList<Film> doRetrieveByIdUtente(int idUtente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT f.id_film, f.titolo, f.produzione, f.musiche, f.fotografia, f.sceneggiatura, f.distribuzione, f.durata," +
                     "f.paese, f.attori, f.regia, f.genere, f.trama, f.anno FROM Film_seguiti s JOIN Film f WHERE id_utente  = ? AND f.id_film = s.id_film");
-            ps.setInt(1, id_utente);
+            ps.setInt(1, idUtente);
             ResultSet rs = ps.executeQuery();
             ArrayList<Film> filmSeguiti = new ArrayList<>();
             while (rs.next()) {

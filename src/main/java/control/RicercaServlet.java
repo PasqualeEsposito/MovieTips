@@ -21,11 +21,11 @@ public class RicercaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
-        String inputRicerca = request.getParameter("input_ricerca");
+        String inputRicerca = request.getParameter("inputRicerca");
         List<Film> films = filmDao.doRetrieveByWord(inputRicerca);
-        request.setAttribute("input_ricerca", inputRicerca);
+        request.setAttribute("inputRicerca", inputRicerca);
         request.setAttribute("films", films);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/risultatiRicerca.jsp");
         requestDispatcher.forward(request, response);
     }
 }

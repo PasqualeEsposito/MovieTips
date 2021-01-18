@@ -26,7 +26,7 @@
                         <i class="material-icons">search</i>
                     </label>
                     <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" name="input_ricerca"
+                        <input class="mdl-textfield__input" type="text" name="inputRicerca"
                                id="fixed-header-drawer-exp">
                     </div>
                 </div>

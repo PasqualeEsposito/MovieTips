@@ -130,7 +130,10 @@ VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@un
         '2001-05-22',
         2);
 
-INSERT INTO Film_seguiti VALUES (1, 6), (1, 4), (1, 1);
+INSERT INTO Film_seguiti
+VALUES (1, 6),
+       (1, 4),
+       (1, 1);
 
 
 DROP DATABASE movietipsdb;

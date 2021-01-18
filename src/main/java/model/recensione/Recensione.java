@@ -31,7 +31,7 @@ public class Recensione {
         return idFilm;
     }
 
-    public void setIdFilm(int id_film) {
+    public void setIdFilm(int idFilm) {
         this.idFilm = idFilm;
     }
 
