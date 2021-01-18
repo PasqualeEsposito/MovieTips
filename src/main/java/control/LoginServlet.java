@@ -19,6 +19,8 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteDAO utenteDAO = new UtenteDAO();
 
+    public LoginServlet() {}
+
     /**
      * @param request
      * @param response
@@ -37,7 +39,7 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");

@@ -43,7 +43,19 @@ public class UtenteDAO {
         }
     }
 
-    /*public void doSave(Utente u) {
+    public void doDeleteByEmail(String email){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Utente WHERE email = ?");
+            ps.setString(1, email);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Delete error");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doSave(Utente u) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO Utente (username, nome, cognome, email, passowrd, genere, ddn, ruolo) " + "VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
@@ -63,7 +75,7 @@ public class UtenteDAO {
         }
     }
 
-    public ArrayList<Utente> doRetrieveAll() {
+    /*public ArrayList<Utente> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
             ResultSet rs = ps.executeQuery();
