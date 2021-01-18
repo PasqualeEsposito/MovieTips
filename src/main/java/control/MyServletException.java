@@ -24,7 +24,6 @@ public class MyServletException extends ServletException {
 
     /**
      * Metodo che lancia l'eccezione MyServletException se esiste un attributo "utente" all'interno della sessione
-     *
      * @param request
      * @throws MyServletException
      */

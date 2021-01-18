@@ -155,6 +155,13 @@ public class Utente {
     }
 
     /**
+     * @return Ritorna la password dell'utente
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
      * @param password La password dell'utente
      */
     public void setPassword(String password) {
@@ -182,58 +189,39 @@ public class Utente {
         this.username = username;
     }
 
-
-    /**
-     * @return
-     */
-    public boolean isBanned() {
+    /*public boolean isBanned() {
         if (ruolo.charAt(0) == '1')
             return true;
         return false;
     }
 
-    /**
-     * @return
-     */
     public boolean isNotActive() {
         if (ruolo.charAt(1) == '1')
             return true;
         return false;
     }
 
-    /**
-     * @return
-     */
     public boolean isFilmino() {
         if (ruolo.charAt(2) == '1')
             return true;
         return false;
     }
 
-    /**
-     * @return
-     */
     public boolean isAmministratore() {
         if (ruolo.charAt(3) == '1')
             return true;
         return false;
     }
 
-    /**
-     * @return
-     */
     public boolean isArticolista() {
         if (ruolo.charAt(4) == '1')
             return true;
         return false;
     }
 
-    /**
-     * @return
-     */
     public boolean isModeratore() {
         if (ruolo.charAt(5) == '1')
             return true;
         return false;
-    }
+    }*/
 }
