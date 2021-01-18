@@ -44,7 +44,7 @@ public class FilmDAO {
             ArrayList<Film> film = new ArrayList<>();
             while (rs.next()) {
                 Film f = new Film();
-                f.setId_film(rs.getInt(1));
+                f.setIdFilm(rs.getInt(1));
                 f.setTitolo(rs.getString(2));
                 f.setProduzione(rs.getString(3));
                 f.setMusiche(rs.getString(4));
@@ -75,7 +75,7 @@ public class FilmDAO {
                 String titolo = rs.getString(2).toLowerCase();
                 if (titolo.contains(ricerca.toLowerCase()) || titolo.equalsIgnoreCase(ricerca)) {
                     Film f = new Film();
-                    f.setId_film(rs.getInt(1));
+                    f.setIdFilm(rs.getInt(1));
                     f.setTitolo(rs.getString(2));
                     f.setProduzione(rs.getString(3));
                     f.setMusiche(rs.getString(4));
@@ -105,7 +105,7 @@ public class FilmDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Film f = new Film();
-                f.setId_film(rs.getInt(1));
+                f.setIdFilm(rs.getInt(1));
                 f.setTitolo(rs.getString(2));
                 f.setProduzione(rs.getString(3));
                 f.setMusiche(rs.getString(4));
