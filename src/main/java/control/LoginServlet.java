@@ -56,21 +56,18 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("errorTest", "Il login non va a buon fine poiché il campo email è vuoto");
                 session.setAttribute("errorType", "email");
                 session.setAttribute("error", "Campo vuoto");
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
 
             } else {
                 if (password.length() == 0) {
                     request.setAttribute("errorTest", "Il login non va a buon fine poiché il campo password è vuoto");
                     session.setAttribute("errorType", "password");
                     session.setAttribute("error", "Campo vuoto");
-                    response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                 } else {
                     utente = utenteDAO.doRetrieveByEmail(email);
                     if (utente.getEmail().equals("")) {//Controllo se l'email non è presente nel db
                         request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email non è presente nel db");
                         session.setAttribute("errorType", "email");
                         session.setAttribute("error", "Email non presente nel database");
-                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                     } else {
                         MessageDigest digest = MessageDigest.getInstance("SHA-1");
                         digest.reset();
@@ -81,7 +78,6 @@ public class LoginServlet extends HttpServlet {
                             request.setAttribute("errorTest", "Il login non va a buon fine poiché l'email e la password non combaciano");
                             session.setAttribute("errorType", "password");
                             session.setAttribute("error", "Email o password errate");
-                            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/login.jsp"));
                         } else {
                             request.setAttribute("errorTest", "Il login viene effettuato correttamente");
                             session.setAttribute("utente", utente);

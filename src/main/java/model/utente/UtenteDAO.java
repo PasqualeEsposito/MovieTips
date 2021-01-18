@@ -43,16 +43,18 @@ public class UtenteDAO {
         }
     }
 
-    public void doDeleteByEmail(String email){
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Utente WHERE email = ?");
-            ps.setString(1, email);
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("Delete error");
-            }
+    public boolean doDeleteByEmail(String email) {
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement statement = con.prepareStatement("DELETE FROM Utente WHERE email = ?");) {
+            statement.setString(1, email);
+            statement.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
+
     }
 
     public void doSave(Utente u) {
