@@ -152,13 +152,24 @@ VALUES (6, 'Parasite',
 
 
 INSERT INTO Utente
-VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M', '2001-05-22'),
+VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
+        '2001-05-22'),
        (2, 'marco_bellamico', 'Marco', 'Bellamico', 'marco.bellamico@unisa.it', SHA1('Marco1!'), 'M', '1990-03-01'),
        (3, 'luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02'),
-       (4, 'francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F', '1999-04-13'),
-       (5, 'roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M', '2000-03-30');
+       (4, 'francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F',
+        '1999-04-13'),
+       (5, 'roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M',
+        '2000-03-30');
 
-INSERT INTO Ruolo_utenti VALUES (1, 1), (2, 1), (2, 2), (3, 2), (4, 0), (5, -1);
+
+INSERT INTO Ruolo_utenti
+VALUES (1, 1), # Utente 1: filmino
+       (2, 1), # Utente 2: filmino, amministratore
+       (2, 2),
+       (3, 2), # Utente 3: amministratore
+       (4, 0), # Utente 4: non attivo
+       (5, -1); # Utente 5: bannato
+
 
 INSERT INTO Film_seguiti
 VALUES (1, 6),

@@ -18,7 +18,7 @@ public class UtenteDAO {
     public void doSave(Utente u) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Utente (username, nome, cognome, email, passowrd, genere, ddn) " + "VALUE(?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Utente (username, nome, cognome, email, passowrd, genere, ddn, ruolo) " + "VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getNome());
             ps.setString(3, u.getCognome());
@@ -26,6 +26,7 @@ public class UtenteDAO {
             ps.setString(5, u.getPassword());
             ps.setString(6, u.getGenere());
             ps.setString(7, u.getDdn());
+            ps.setString(8, u.getRuolo());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -39,7 +40,7 @@ public class UtenteDAO {
      */
     public ArrayList<Utente> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente u JOIN Ruolo_utenti r WHERE u.id_utente = r.id_utente");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
             ResultSet rs = ps.executeQuery();
             ArrayList<Utente> utenti = new ArrayList<>();
             while (rs.next()) {
@@ -51,6 +52,7 @@ public class UtenteDAO {
                 u.setEmail(rs.getString(5));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
+                u.setRuolo(rs.getString(9));
                 utenti.add(u);
             }
             return utenti;
@@ -79,6 +81,7 @@ public class UtenteDAO {
                 u.setEmail(rs.getString(5));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
+                u.setRuolo(rs.getString(9));
                 return u;
             }
             return null;
@@ -106,6 +109,7 @@ public class UtenteDAO {
                 u.setPassword(rs.getString(6));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
+                u.setRuolo(rs.getString(9));
                 return u;
             }
             return null;
