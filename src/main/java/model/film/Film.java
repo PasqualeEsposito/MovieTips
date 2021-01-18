@@ -1,7 +1,7 @@
 package model.film;
 
 public class Film {
-    private int id_film;
+    private int idFilm;
     private String titolo;
     private String produzione;
     private String musiche;
@@ -37,12 +37,12 @@ public class Film {
         this.anno = anno;
     }
 
-    public int getId_film() {
-        return id_film;
+    public int getIdFilm() {
+        return idFilm;
     }
 
-    public void setId_film(int id_film) {
-        this.id_film = id_film;
+    public void setIdFilm(int idFilm) {
+        this.idFilm = idFilm;
     }
 
     public String getFotografia() {
