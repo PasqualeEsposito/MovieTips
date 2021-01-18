@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FilmSeguitiDAO {
-    public void doSave(FilmSeguiti f) {
+    public void doSave(int idUtente, int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Film_seguiti VALUES (?, ?)");
-            ps.setInt(1, f.getIdUtente());
-            ps.setInt(2, f.getIdFilm());
+            ps.setInt(1, idUtente);
+            ps.setInt(2, idFilm);
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -47,24 +47,6 @@ public class FilmSeguitiDAO {
                 f.setGenere(rs.getString(13));
                 f.setTrama(rs.getString(14));
                 f.setAnno(rs.getInt(15));
-                filmSeguiti.add(f);
-            }
-            return filmSeguiti;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public ArrayList<FilmSeguiti> doRetrieveByIdFilm(int id_film) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Film_seguiti WHERE id_film  = ?");
-            ps.setInt(1, id_film);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<FilmSeguiti> filmSeguiti = new ArrayList<>();
-            while (rs.next()) {
-                FilmSeguiti f = new FilmSeguiti();
-                f.setIdUtente(rs.getInt(1));
-                f.setIdFilm(rs.getInt(2));
                 filmSeguiti.add(f);
             }
             return filmSeguiti;
