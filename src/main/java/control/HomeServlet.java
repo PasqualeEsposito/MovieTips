@@ -14,10 +14,22 @@ import java.util.List;
 
 @WebServlet(name = "Home", urlPatterns = "", loadOnStartup = 1)
 public class HomeServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
         List<Film> films = filmDao.doRetrieveAll(0, 10);

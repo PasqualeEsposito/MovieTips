@@ -19,6 +19,17 @@ public class Utente {
     public Utente() {
     }
 
+    /**
+     * @param username
+     * @param nome
+     * @param cognome
+     * @param email
+     * @param password
+     * @param genere
+     * @param ddn
+     * @param idUtente
+     * @param ruolo
+     */
     public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, int ruolo) {
         this.username = username;
         this.nome = nome;
@@ -31,66 +42,114 @@ public class Utente {
         this.ruolo = ruolo;
     }
 
+    /**
+     * @return
+     */
     public int getIdUtente() {
         return idUtente;
     }
 
+    /**
+     * @param idUtente
+     */
     public void setIdUtente(int idUtente) {
         this.idUtente = idUtente;
     }
 
+    /**
+     * @return
+     */
     public String getCognome() {
         return cognome;
     }
 
+    /**
+     * @param cognome
+     */
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
 
+    /**
+     * @return
+     */
     public int getRuolo() {
         return ruolo;
     }
 
+    /**
+     * @param ruolo
+     */
     public void setRuolo(int ruolo) {
         this.ruolo = ruolo;
     }
 
+    /**
+     * @return
+     */
     public String getDdn() {
         return ddn;
     }
 
+    /**
+     * @param ddn
+     */
     public void setDdn(String ddn) {
         this.ddn = ddn;
     }
 
+    /**
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * @return
+     */
     public String getGenere() {
         return genere;
     }
 
+    /**
+     * @param genere
+     */
     public void setGenere(String genere) {
         this.genere = genere;
     }
 
+    /**
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password
+     */
     public void setPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
@@ -102,10 +161,16 @@ public class Utente {
         }
     }
 
+    /**
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
@@ -118,18 +183,27 @@ public class Utente {
      *   Amministratore: 4
      * */
 
+    /**
+     * @return
+     */
     public boolean isFilmino() {
         if (ruolo == 1)
             return true;
         return false;
     }
 
+    /**
+     * @return
+     */
     public boolean isModeratore() {
         if (ruolo == 2)
             return true;
         return false;
     }
 
+    /**
+     * @return
+     */
     public boolean isArticolista() {
         if (ruolo == 3)
             return true;
@@ -137,12 +211,18 @@ public class Utente {
     }
 
 
+    /**
+     * @return
+     */
     public boolean isAmministratore() {
         if (ruolo == 4)
             return true;
         return false;
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Utente{" +

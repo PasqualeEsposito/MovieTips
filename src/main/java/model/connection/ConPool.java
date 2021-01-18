@@ -10,6 +10,10 @@ import java.util.TimeZone;
 public class ConPool {
     private static DataSource datasource;
 
+    /**
+     * @return ritorna la connessione da utilizzare per il database
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         if (datasource == null) {
             PoolProperties p = new PoolProperties();

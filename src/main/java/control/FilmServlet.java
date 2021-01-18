@@ -13,10 +13,26 @@ import java.io.IOException;
 
 @WebServlet(name = "FilmServlet", urlPatterns = "/Film")
 public class FilmServlet extends HttpServlet {
+    /**
+     * La servlet prende in input l'id da visualizzare, e
+     */
+
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDAO = new FilmDAO();
         int id = Integer.parseInt(request.getParameter("id"));

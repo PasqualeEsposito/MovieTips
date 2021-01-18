@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FilmDAO {
+    /**
+     * @param f
+     */
     public void doSave(Film f) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
@@ -34,6 +37,11 @@ public class FilmDAO {
         }
     }
 
+    /**
+     * @param offset
+     * @param limit
+     * @return
+     */
     public ArrayList<Film> doRetrieveAll(int offset, int limit) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
@@ -66,6 +74,10 @@ public class FilmDAO {
         }
     }
 
+    /**
+     * @param ricerca
+     * @return
+     */
     public ArrayList<Film> doRetrieveByWord(String ricerca) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Film");
@@ -98,6 +110,10 @@ public class FilmDAO {
         }
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public Film doRetrieveById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM FILM WHERE Id_film=?");
@@ -127,6 +143,9 @@ public class FilmDAO {
         }
     }
 
+    /**
+     * @param id
+     */
     public void doDeleteById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Film where id_film = ?");

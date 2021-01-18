@@ -14,11 +14,29 @@ import java.util.List;
 
 @WebServlet(name = "RicercaServlet", urlPatterns = "/Ricerca")
 public class RicercaServlet extends HttpServlet {
+    /**
+     * La servlet prende in input una stringa da ricercare all'interno del database. Nel caso in cui ci sono
+     * film con il nome contenente (o uguale) la stringa da ricercare, ritorna la lista di film che soddisfano
+     * la query.
+     */
+
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
         String inputRicerca = request.getParameter("inputRicerca");

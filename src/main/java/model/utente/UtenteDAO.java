@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UtenteDAO {
+    /**
+     * @param u
+     */
     public void doSave(Utente u) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
@@ -29,6 +32,9 @@ public class UtenteDAO {
         }
     }
 
+    /**
+     * @return
+     */
     public ArrayList<Utente> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
@@ -52,6 +58,11 @@ public class UtenteDAO {
         }
     }
 
+    /**
+     * @param email
+     * @param password
+     * @return
+     */
     public Utente doRetrieveByEmailPassword(String email, String password) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from Utente where email = ? and password = SHA1(?)");
@@ -76,6 +87,10 @@ public class UtenteDAO {
         }
     }
 
+    /**
+     * @param email
+     * @return
+     */
     public Utente doRetrieveByEmail(String email) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente WHERE email = ?");
@@ -100,6 +115,10 @@ public class UtenteDAO {
         }
     }
 
+    /**
+     * @param email
+     * @return
+     */
     public String doRetrievePasswordByEmail(String email) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente WHERE email = ?");
@@ -115,6 +134,10 @@ public class UtenteDAO {
         }
     }
 
+    /**
+     * @param email
+     * @param password
+     */
     public void doUpdatePasswordByEmail(String email, String password) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE Utente SET password = SHA1(?) WHERE email = ?");
