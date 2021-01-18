@@ -14,7 +14,7 @@ public class Utente {
     private String genere;
     private String ddn;
     private int idUtente;
-    private int ruolo;
+    private String ruolo;
 
     public Utente() {
     }
@@ -23,16 +23,16 @@ public class Utente {
      * Classe che rappresenta un utente qualsiasi
      *
      * @param username l'username dell'utente, univoco per ciascun utente
-     * @param nome il nome dell'utente
-     * @param cognome il cognome dell'utente
-     * @param email l'email dell'utente, univoca per ciascun utente
+     * @param nome     il nome dell'utente
+     * @param cognome  il cognome dell'utente
+     * @param email    l'email dell'utente, univoca per ciascun utente
      * @param password la password dell'utente
-     * @param genere il sesso dell'utente
-     * @param ddn la data di nascita dell'utente
+     * @param genere   il sesso dell'utente
+     * @param ddn      la data di nascita dell'utente
      * @param idUtente l'id dell'utente generato automaticamente
-     * @param ruolo il ruolo dell'utente (utente bannato, filmino, articolista, moderatore, amministratore)
+     * @param ruolo    il ruolo dell'utente (utente bannato, utente non attivo, filmino, amministratore, articolista, moderatore)
      */
-    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, int ruolo) {
+    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, String ruolo) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
@@ -75,14 +75,14 @@ public class Utente {
     /**
      * @return
      */
-    public int getRuolo() {
+    public String getRuolo() {
         return ruolo;
     }
 
     /**
      * @param ruolo
      */
-    public void setRuolo(int ruolo) {
+    public void setRuolo(String ruolo) {
         this.ruolo = ruolo;
     }
 
@@ -178,18 +178,21 @@ public class Utente {
     }
 
     /*
-     * Ruolo:
-     *   Filmino: 1
-     *   Moderatore: 2
-     *   Articolista: 3
-     *   Amministratore: 4
+     * Ruolo "ABCDEF":
+     *
+     * 'A' utente bannato
+     * 'B' utente non attivo
+     * 'C' filmino
+     * 'D' amministratore
+     * 'E' articolista
+     * 'F' moderatore
      * */
 
     /**
      * @return
      */
-    public boolean isFilmino() {
-        if (ruolo == 1)
+    public boolean isBanned() {
+        if (ruolo.charAt(0) == '1')
             return true;
         return false;
     }
@@ -197,8 +200,26 @@ public class Utente {
     /**
      * @return
      */
-    public boolean isModeratore() {
-        if (ruolo == 2)
+    public boolean isNotActive() {
+        if (ruolo.charAt(1) == '1')
+            return true;
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isFilmino() {
+        if (ruolo.charAt(2) == '1')
+            return true;
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isAmministratore() {
+        if (ruolo.charAt(3) == '1')
             return true;
         return false;
     }
@@ -207,17 +228,7 @@ public class Utente {
      * @return
      */
     public boolean isArticolista() {
-        if (ruolo == 3)
-            return true;
-        return false;
-    }
-
-
-    /**
-     * @return
-     */
-    public boolean isAmministratore() {
-        if (ruolo == 4)
+        if (ruolo.charAt(4) == '1')
             return true;
         return false;
     }
@@ -225,8 +236,8 @@ public class Utente {
     /**
      * @return
      */
-    public boolean isBanned() {
-        if (ruolo == -1)
+    public boolean isModeratore() {
+        if (ruolo.charAt(5) == '1')
             return true;
         return false;
     }

@@ -22,7 +22,6 @@ public class Film {
     /**
      * Classe che rappresenta un film
      *
-     * @param idFilm        l'id del film
      * @param titolo        il titolo del film
      * @param produzione    la casa di produzione cinematografica
      * @param musiche       il nome del compositore delle musiche usate nel film

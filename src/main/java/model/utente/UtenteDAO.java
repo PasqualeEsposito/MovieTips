@@ -26,7 +26,7 @@ public class UtenteDAO {
             ps.setString(5, u.getPassword());
             ps.setString(6, u.getGenere());
             ps.setString(7, u.getDdn());
-            ps.setInt(8, u.getRuolo());
+            ps.setString(8, u.getRuolo());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -52,7 +52,7 @@ public class UtenteDAO {
                 u.setEmail(rs.getString(5));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getInt(9));
+                u.setRuolo(rs.getString(9));
                 utenti.add(u);
             }
             return utenti;
@@ -81,7 +81,7 @@ public class UtenteDAO {
                 u.setEmail(rs.getString(5));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getInt(9));
+                u.setRuolo(rs.getString(9));
                 return u;
             }
             return null;
@@ -109,7 +109,7 @@ public class UtenteDAO {
                 u.setPassword(rs.getString(6));
                 u.setGenere(rs.getString(7));
                 u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getInt(9));
+                u.setRuolo(rs.getString(9));
                 return u;
             }
             return null;

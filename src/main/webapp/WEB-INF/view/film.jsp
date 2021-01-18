@@ -8,6 +8,9 @@
 </div>
 </header>
 <main class="mdl-layout__content">
+    <div class="page-content">
+        <h3>${film.titolo} (${film.anno})</h3>
+    </div>
     <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
         <div class="page-content">
             <div class="film">
@@ -15,7 +18,6 @@
                     <img src="img/<c:out value="${film.idFilm}"/>.png">
                 </div>
                 <div>
-                    <h3>${film.titolo} (${film.anno})</h3>
                     <p><b>Genere:</b> ${film.genere}</p>
                     <p><b>Anno:</b> ${film.anno}</p>
                     <p><b>Regia:</b> ${film.regia}</p>
