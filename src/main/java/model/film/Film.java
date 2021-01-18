@@ -62,6 +62,13 @@ public class Film {
     }
 
     /**
+     * @return Ritorna l'intero che distingue univocamente un film dall'altro
+     */
+    public int getIdFilm() {
+        return idFilm;
+    }
+
+    /**
      * @param idFilm L'intero che distingue univocamente un film dall'altro
      */
     public void setIdFilm(int idFilm) {

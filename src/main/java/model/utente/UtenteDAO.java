@@ -11,14 +11,6 @@ import java.sql.SQLException;
  * Classe che gestisce le interazioni con la tabella del database Utente
  */
 public class UtenteDAO {
-
-    /**
-     * Metodo che recupera un utente dal database in base all'email e alla password
-     *
-     * @param email    L'email dell'utente
-     * @param password La password dell'utente
-     * @return Ritorna un utente
-     */
     public Utente doRetrieveByEmailPassword(String email, String password) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from Utente where email = ? and password = SHA1(?)");

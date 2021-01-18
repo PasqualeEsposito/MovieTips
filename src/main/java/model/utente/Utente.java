@@ -49,6 +49,13 @@ public class Utente {
     }
 
     /**
+     * @return Ritorna l'intero che distingue univocamente un utente dall'altro
+     */
+    public int getIdUtente() {
+        return idUtente;
+    }
+
+    /**
      * @param idUtente L'intero che distingue univocamente un utente dall'altro
      */
     public void setIdUtente(int idUtente) {
