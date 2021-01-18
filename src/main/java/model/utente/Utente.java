@@ -5,6 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Classe che rappresenta un utente
+ */
 public class Utente {
     private String username;
     private String nome;
@@ -16,23 +19,25 @@ public class Utente {
     private int idUtente;
     private String ruolo;
 
+    /**
+     * Inizializza un oggetto Utente appena creato
+     */
     public Utente() {
     }
 
     /**
-     * Classe che rappresenta un utente qualsiasi
+     * Costruisce una nuovo Utente utilizzando i dati in input
      *
-     * @param username l'username dell'utente, univoco per ciascun utente
-     * @param nome     il nome dell'utente
+     * @param username L'username dell'utente
+     * @param nome     Il nome dell'utente
      * @param cognome  il cognome dell'utente
-     * @param email    l'email dell'utente, univoca per ciascun utente
-     * @param password la password dell'utente
-     * @param genere   il sesso dell'utente
-     * @param ddn      la data di nascita dell'utente
-     * @param idUtente l'id dell'utente generato automaticamente
-     * @param ruolo    il ruolo dell'utente (utente bannato, utente non attivo, filmino, amministratore, articolista, moderatore)
+     * @param email    L'email dell'utente
+     * @param password La password dell'utente
+     * @param genere   Il genere dell'utente
+     * @param ddn      La data di nascita dell'utente
+     * @param ruolo    I ruoli dell'utente (utente bannato, utente non attivo, filmino, amministratore, articolista, moderatore)
      */
-    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, String ruolo) {
+    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, String ruolo) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
@@ -40,117 +45,117 @@ public class Utente {
         setPassword(password);
         this.genere = genere;
         this.ddn = ddn;
-        this.idUtente = idUtente;
         this.ruolo = ruolo;
     }
 
     /**
-     * @return
-     */
-    public int getIdUtente() {
-        return idUtente;
-    }
-
-    /**
-     * @param idUtente
+     * @param idUtente L'intero che distingue univocamente un utente dall'altro
      */
     public void setIdUtente(int idUtente) {
         this.idUtente = idUtente;
     }
 
     /**
-     * @return
+     * @return Ritorna il cognome dell'utente
      */
     public String getCognome() {
         return cognome;
     }
 
     /**
-     * @param cognome
+     * @param cognome Il cognome dell'utente
      */
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
 
     /**
-     * @return
+     * Ruolo "ABCDEF":
+     * 'A' utente bannato
+     * 'B' utente non attivo
+     * 'C' filmino
+     * 'D' amministratore
+     * 'E' articolista
+     * 'F' moderatore
+     *
+     * @return Ritorna i ruoli dell'utente
      */
     public String getRuolo() {
         return ruolo;
     }
 
     /**
-     * @param ruolo
+     * Ruolo "ABCDEF":
+     * 'A' utente bannato
+     * 'B' utente non attivo
+     * 'C' filmino
+     * 'D' amministratore
+     * 'E' articolista
+     * 'F' moderatore
+     * @param ruolo I ruoli dell'utente
      */
     public void setRuolo(String ruolo) {
         this.ruolo = ruolo;
     }
 
     /**
-     * @return
+     * @return Ritorna La data di nascita dell'utente
      */
     public String getDdn() {
         return ddn;
     }
 
     /**
-     * @param ddn
+     * @param ddn La data di nascita dell'utente
      */
     public void setDdn(String ddn) {
         this.ddn = ddn;
     }
 
     /**
-     * @return
+     * @return Ritorna l'email dell'utente
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * @param email
+     * @param email L'email dell'utente
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * @return
+     * @return Ritorna il genere dell'utente
      */
     public String getGenere() {
         return genere;
     }
 
     /**
-     * @param genere
+     * @param genere Il genere dell'utente
      */
     public void setGenere(String genere) {
         this.genere = genere;
     }
 
     /**
-     * @return
+     * @return Ritorna il nome dell'utente
      */
     public String getNome() {
         return nome;
     }
 
     /**
-     * @param nome
+     * @param nome Il nome dell'utente
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @return
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password
+     * @param password La password dell'utente
      */
     public void setPassword(String password) {
         try {
@@ -164,29 +169,19 @@ public class Utente {
     }
 
     /**
-     * @return
+     * @return Ritorna l'username dell'utente
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * @param username
+     * @param username L'username dell'utente
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    /*
-     * Ruolo "ABCDEF":
-     *
-     * 'A' utente bannato
-     * 'B' utente non attivo
-     * 'C' filmino
-     * 'D' amministratore
-     * 'E' articolista
-     * 'F' moderatore
-     * */
 
     /**
      * @return
@@ -240,23 +235,5 @@ public class Utente {
         if (ruolo.charAt(5) == '1')
             return true;
         return false;
-    }
-
-    /**
-     * @return
-     */
-    @Override
-    public String toString() {
-        return "Utente{" +
-                "username='" + username + '\'' +
-                ", nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", genere='" + genere + '\'' +
-                ", ddn='" + ddn + '\'' +
-                ", idUtente=" + idUtente +
-                ", ruolo=" + ruolo +
-                '}';
     }
 }

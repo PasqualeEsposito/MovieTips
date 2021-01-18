@@ -13,20 +13,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Servlet che carica i film all'interno della homepage
+ * Servlet che gestisce la corretta visualizzazione della home page inserendo i film nella request
  */
 @WebServlet(name = "Home", urlPatterns = "", loadOnStartup = 1)
 public class HomeServlet extends HttpServlet {
-    /**
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
-
     /**
      * @param request
      * @param response

@@ -1,5 +1,9 @@
 package model.film;
 
+
+/**
+ * Classe rappresenta un film
+ */
 public class Film {
     private int idFilm;
     private String titolo;
@@ -16,25 +20,28 @@ public class Film {
     private String trama;
     private int anno;
 
+    /**
+     * Inizializza un oggetto Film appena creato
+     */
     public Film() {
     }
 
     /**
-     * Classe che rappresenta un film
+     * Costruisce una nuovo Film utilizzando i dati in input
      *
-     * @param titolo        il titolo del film
-     * @param produzione    la casa di produzione cinematografica
-     * @param musiche       il nome del compositore delle musiche usate nel film
-     * @param fotografia    il nome di chi si occupa della fotografia
-     * @param sceneggiatura il nome di chi si occupa della sceneggiatura
-     * @param distribuzione il nome di chi distribuisce il film
-     * @param durata        la durata in minuti del film
-     * @param paese         il paese dove è stato girato il film
-     * @param attori        i nomi degli attori presenti nel film
-     * @param regia         la regia del film
-     * @param genere        il genere/i generi del film
-     * @param trama         la trama del film
-     * @param anno          l'anno di uscita del film
+     * @param titolo        Il titolo del film
+     * @param produzione    I nomi delle case di produzione del film
+     * @param musiche       Ii nomi dei compositori delle musiche utilizzate nel film
+     * @param fotografia    Ii nomi di chi si occupa della fotografia nel film
+     * @param sceneggiatura Ii nomi di chi si occupa della sceneggiatura nel film
+     * @param distribuzione Il nome del distributore del film
+     * @param durata        La durata in minuti del film
+     * @param paese         Il paese dove è stato prodotto il film
+     * @param attori        I nomi degli attori presenti nel film
+     * @param regia         I nomi di chi si occupa della regia del film
+     * @param genere        I generi del film
+     * @param trama         La trama del film
+     * @param anno          L'anno di uscita del film
      */
     public Film(String titolo, String produzione, String musiche,
                 String fotografia, String sceneggiatura, String distribuzione, int durata, String paese,
@@ -55,196 +62,189 @@ public class Film {
     }
 
     /**
-     * @return
-     */
-    public int getIdFilm() {
-        return idFilm;
-    }
-
-    /**
-     * @param idFilm
+     * @param idFilm L'intero che distingue univocamente un film dall'altro
      */
     public void setIdFilm(int idFilm) {
         this.idFilm = idFilm;
     }
 
     /**
-     * @return
+     * @return Ritorna i nomi di chi si occupa della fotografia nel film
      */
     public String getFotografia() {
         return fotografia;
     }
 
     /**
-     * @param fotografia
+     * @param fotografia I nomi di chi si occupa della fotografia nel film
      */
     public void setFotografia(String fotografia) {
         this.fotografia = fotografia;
     }
 
     /**
-     * @return
+     * @return Ritorna i nomi dei compositori delle musiche utilizzate nel film
      */
     public String getMusiche() {
         return musiche;
     }
 
     /**
-     * @param musiche
+     * @param musiche I nomi dei compositori delle musiche utilizzate nel film
      */
     public void setMusiche(String musiche) {
         this.musiche = musiche;
     }
 
     /**
-     * @return
+     * @return Ritorna il nome delle case di produzione del film
      */
     public String getProduzione() {
         return produzione;
     }
 
     /**
-     * @param produzione
+     * @param produzione Il nome delle case di produzione del film
      */
     public void setProduzione(String produzione) {
         this.produzione = produzione;
     }
 
     /**
-     * @return
+     * @return Ritorna il titolo del film
      */
     public String getTitolo() {
         return titolo;
     }
 
     /**
-     * @param titolo
+     * @param titolo Il titolo del film
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
     /**
-     * @return
+     * @return Ritorna i nomi di chi si occupa della sceneggiatura nel film
      */
     public String getSceneggiatura() {
         return sceneggiatura;
     }
 
     /**
-     * @param sceneggiatura
+     * @param sceneggiatura I nomi di chi si occupa della sceneggiatura nel film
      */
     public void setSceneggiatura(String sceneggiatura) {
         this.sceneggiatura = sceneggiatura;
     }
 
     /**
-     * @return
+     * @return Ritorna i generi del film
      */
     public String getGenere() {
         return genere;
     }
 
     /**
-     * @param genere
+     * @param genere I generi del film
      */
     public void setGenere(String genere) {
         this.genere = genere;
     }
 
     /**
-     * @return
+     * @return Ritorna la durata in minuti del film
      */
     public int getDurata() {
         return durata;
     }
 
     /**
-     * @param durata
+     * @param durata La durata in minuti del film
      */
     public void setDurata(int durata) {
         this.durata = durata;
     }
 
     /**
-     * @return
+     * @return Ritorna i nomi degli attori presenti nel film
      */
     public String getAttori() {
         return attori;
     }
 
     /**
-     * @param attori
+     * @param attori I nomi degli attori presenti nel film
      */
     public void setAttori(String attori) {
         this.attori = attori;
     }
 
     /**
-     * @return
+     * @return Ritorna il nome del distributore del film
      */
     public String getDistribuzione() {
         return distribuzione;
     }
 
     /**
-     * @param distribuzione
+     * @param distribuzione Il nome del distributore del film
      */
     public void setDistribuzione(String distribuzione) {
         this.distribuzione = distribuzione;
     }
 
     /**
-     * @return
+     * @return Ritorna il paese dove è stato prodotto il film
      */
     public String getPaese() {
         return paese;
     }
 
     /**
-     * @param paese
+     * @param paese Il paese dove è stato prodotto il film
      */
     public void setPaese(String paese) {
         this.paese = paese;
     }
 
     /**
-     * @return
+     * @return Ritorna i nomi di chi si occupa della regia del film
      */
     public String getRegia() {
         return regia;
     }
 
     /**
-     * @param regia
+     * @param regia I nomi di chi si occupa della regia del film
      */
     public void setRegia(String regia) {
         this.regia = regia;
     }
 
     /**
-     * @return
+     * @return Ritorna la trama del film
      */
     public String getTrama() {
         return trama;
     }
 
     /**
-     * @param trama
+     * @param trama La trama del film
      */
     public void setTrama(String trama) {
         this.trama = trama;
     }
 
     /**
-     * @return
+     * @return Ritorna l'anno di uscita del film
      */
     public int getAnno() {
         return anno;
     }
 
     /**
-     * @param anno
+     * @param anno L'anno di uscita del film
      */
     public void setAnno(int anno) {
         this.anno = anno;

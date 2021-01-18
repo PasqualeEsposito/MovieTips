@@ -11,7 +11,7 @@ public class ConPool {
     private static DataSource datasource;
 
     /**
-     * @return Ritorna la connessione da utilizzare per il database
+     * @return
      * @throws SQLException
      */
     public static Connection getConnection() throws SQLException {
@@ -20,7 +20,7 @@ public class ConPool {
             p.setUrl("jdbc:mysql://localhost:3306/movietipsdb?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             p.setUsername("root");
-            p.setPassword("root");
+            p.setPassword("MovieTips");
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

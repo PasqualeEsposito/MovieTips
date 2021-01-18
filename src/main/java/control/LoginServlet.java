@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet permette di effettuare il login prendendo i dati dal form di login presente nella view login.jsp,
- * controlla i campi e ritorna errori nel caso in cui i dati in input siano errati. Nel caso in cui i dati sono
- * corretti, l'utente viene inserito in sessione.
+ * Servlet che gestisce il login inserendo l'utente nella sessione. Lancia l'eccezione MyServletException se i dati inseriti dall'utente non sono validi
  */
 @WebServlet(name = "LoginServlet", urlPatterns = "/Login")
 public class LoginServlet extends HttpServlet {
@@ -28,7 +26,7 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        MyServletException.checkAccount(request);
+        MyServletException.checkSession(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/login.jsp");
         requestDispatcher.forward(request, response);
     }
