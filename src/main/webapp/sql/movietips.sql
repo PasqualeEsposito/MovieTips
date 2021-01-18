@@ -134,7 +134,9 @@ VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@un
        (4, 'francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F',
         '1999-04-13', '100000'),
        (5, 'roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M',
-        '2000-03-30', '010000');
+        '2000-03-30', '010000'),
+       (6, 'franco.ceriello', 'Franco', 'Ceriello', 'franco.ceriello@unisa.it', SHA1('Franco1!'), 'M', '1999-12-30',
+        '001000');
 
 
 INSERT INTO Film_seguiti

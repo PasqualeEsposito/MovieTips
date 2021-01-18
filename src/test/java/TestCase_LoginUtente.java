@@ -42,8 +42,8 @@ public class TestCase_LoginUtente extends Mockito {
 
     @Test
     public void TC_LoginUtente_2() throws ServletException, IOException {
-        request.addParameter("email", "marior@funisa.com");
-        request.addParameter("password", "MarioRossi01?");
+        request.addParameter("email", "franco@unisa.it");
+        request.addParameter("password", "Franco1!");
         String message = "Il login non va a buon fine poiché l'email non è presente nel db";
         servlet.doPost(request, response);
         String result = (String) request.getAttribute("errorTest");
@@ -52,7 +52,7 @@ public class TestCase_LoginUtente extends Mockito {
 
     @Test
     public void TC_LoginUtente_3() throws ServletException, IOException {
-        request.addParameter("email", "mariorossi@funisa.com");
+        request.addParameter("email", "franco.ceriello@unisa.it");
         request.addParameter("password", "");
         String message = "Il login non va a buon fine poiché il campo password è vuoto";
         servlet.doPost(request, response);
@@ -62,8 +62,8 @@ public class TestCase_LoginUtente extends Mockito {
 
     @Test
     public void TC_LoginUtente_4() throws ServletException, IOException {
-        request.addParameter("email", "mariorossi@funisa.com");
-        request.addParameter("password", "MarioRossi0?");
+        request.addParameter("email", "franco.ceriello@unisa.it");
+        request.addParameter("password", "Franco1?");
         String message = "Il login non va a buon fine poiché l'email e la password non combaciano";
         servlet.doPost(request, response);
         String result = (String) request.getAttribute("errorTest");
@@ -73,8 +73,8 @@ public class TestCase_LoginUtente extends Mockito {
 
     @Test
     public void TC_LoginUtente_5() throws ServletException, IOException {
-        request.addParameter("email", "mariorossi@funisa.com");
-        request.addParameter("password", "MarioRossi01?");
+        request.addParameter("email", "franco.ceriello@unisa.it");
+        request.addParameter("password", "Franco1!");
         String message = "Il login viene effettuato correttamente";
         servlet.doPost(request, response);
         String result = (String) request.getAttribute("errorTest");

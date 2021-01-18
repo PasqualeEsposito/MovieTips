@@ -58,7 +58,7 @@ public class UtenteDAO {
     public void doSave(Utente u) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Utente (username, nome, cognome, email, passowrd, genere, ddn, ruolo) " + "VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Utente (username, nome, cognome, email, password, genere, ddn, ruolo) " + "VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getNome());
             ps.setString(3, u.getCognome());
@@ -70,29 +70,6 @@ public class UtenteDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /*public ArrayList<Utente> doRetrieveAll() {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Utente> utenti = new ArrayList<>();
-            while (rs.next()) {
-                Utente u = new Utente();
-                u.setIdUtente(rs.getInt(1));
-                u.setUsername(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setEmail(rs.getString(5));
-                u.setGenere(rs.getString(7));
-                u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getString(9));
-                utenti.add(u);
-            }
-            return utenti;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -117,6 +94,29 @@ public class UtenteDAO {
                 return u;
             }
             return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*public ArrayList<Utente> doRetrieveAll() {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Utente> utenti = new ArrayList<>();
+            while (rs.next()) {
+                Utente u = new Utente();
+                u.setIdUtente(rs.getInt(1));
+                u.setUsername(rs.getString(2));
+                u.setNome(rs.getString(3));
+                u.setCognome(rs.getString(4));
+                u.setEmail(rs.getString(5));
+                u.setGenere(rs.getString(7));
+                u.setDdn(rs.getString(8));
+                u.setRuolo(rs.getString(9));
+                utenti.add(u);
+            }
+            return utenti;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
