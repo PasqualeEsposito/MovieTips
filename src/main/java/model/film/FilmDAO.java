@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classe che interagisce con la tabella Film all'interno del database
+ */
 public class FilmDAO {
     /**
      * @param f

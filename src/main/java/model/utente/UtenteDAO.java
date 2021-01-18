@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classe che interagisce con la tabella Utente all'interno del database
+ */
 public class UtenteDAO {
     /**
      * @param u

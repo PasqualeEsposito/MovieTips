@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * La servlet prende in input l'id da visualizzare, e darà in output i dati relativi al film da visualizzare
+ * La servlet prende in input l'id del film, e darà in output i dati relativi al film da visualizzare
  */
 
 @WebServlet(name = "FilmServlet", urlPatterns = "/Film")

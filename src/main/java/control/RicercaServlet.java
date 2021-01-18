@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * La servlet prende in input una stringa da ricercare all'interno del database. Nel caso in cui ci sono
+ * Servlet che prende in input una stringa da ricercare all'interno del database. Nel caso in cui ci sono
  * film con il nome contenente (o uguale) la stringa da ricercare, ritorna la lista di film che soddisfano
  * la query
  */

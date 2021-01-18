@@ -20,18 +20,17 @@ public class Utente {
     }
 
     /**
-     *
      * Classe che rappresenta un utente qualsiasi
      *
      * @param username l'username dell'utente, univoco per ciascun utente
-     * @param nome
-     * @param cognome
-     * @param email
-     * @param password
-     * @param genere
-     * @param ddn
-     * @param idUtente
-     * @param ruolo
+     * @param nome il nome dell'utente
+     * @param cognome il cognome dell'utente
+     * @param email l'email dell'utente, univoca per ciascun utente
+     * @param password la password dell'utente
+     * @param genere il sesso dell'utente
+     * @param ddn la data di nascita dell'utente
+     * @param idUtente l'id dell'utente generato automaticamente
+     * @param ruolo il ruolo dell'utente (utente bannato, filmino, articolista, moderatore, amministratore)
      */
     public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, int ruolo) {
         this.username = username;
@@ -219,6 +218,15 @@ public class Utente {
      */
     public boolean isAmministratore() {
         if (ruolo == 4)
+            return true;
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public boolean isBanned() {
+        if (ruolo == -1)
             return true;
         return false;
     }

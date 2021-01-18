@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet che carica i film all'interno della homepage
+ */
 @WebServlet(name = "Home", urlPatterns = "", loadOnStartup = 1)
 public class HomeServlet extends HttpServlet {
     /**

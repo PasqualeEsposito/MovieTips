@@ -5,12 +5,12 @@ import model.utente.Utente;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Servlet che gestisce gli errori generici e relativi al ruolo
+ */
 public class MyServletException extends ServletException {
     private static final long serialVersionUID = -8976023136478643816L;
 
-    /**
-     *
-     */
     public MyServletException() {
         super();
     }
@@ -87,6 +87,17 @@ public class MyServletException extends ServletException {
     public static void checkAmministratore(HttpServletRequest request) throws MyServletException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || !utente.isAmministratore()) {
+            throw new MyServletException("Utente non autorizzato");
+        }
+    }
+
+    /**
+     * @param request
+     * @throws MyServletException
+     */
+    public static void checkBanned(HttpServletRequest request) throws MyServletException {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente == null || !utente.isBanned()) {
             throw new MyServletException("Utente non autorizzato");
         }
     }

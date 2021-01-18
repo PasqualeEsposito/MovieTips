@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * La servlet permette di effettuare il login prendendo i dati dal form di login presente nella view login.jsp,
+ * Servlet permette di effettuare il login prendendo i dati dal form di login presente nella view login.jsp,
  * controlla i campi e ritorna errori nel caso in cui i dati in input siano errati. Nel caso in cui i dati sono
  * corretti, l'utente viene inserito in sessione.
  */
