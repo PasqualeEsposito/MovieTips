@@ -12,7 +12,7 @@
         <div class="page-content">
             <div class="film">
                 <div>
-                    <img src="img/<c:out value="${film.id_film}"/>.png">
+                    <img src="img/<c:out value="${film.idFilm}"/>.png">
                 </div>
                 <div>
                     <h3>${film.titolo} (${film.anno})</h3>

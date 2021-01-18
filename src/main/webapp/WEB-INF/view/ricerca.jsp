@@ -8,21 +8,21 @@
     <div class="page-content">
         <c:choose>
             <c:when test="${empty films}">
-                <h2>Nessun risultato trovato per "${input_ricerca}"</h2>
+                <h2>Nessun risultato trovato per "${inputRicerca}"</h2>
             </c:when>
             <c:otherwise>
-                <h2>Risultati trovati per "${input_ricerca}"</h2>
+                <h2>Risultati trovati per "${inputRicerca}"</h2>
             </c:otherwise>
         </c:choose>
         <c:forEach items="${films}" var="film">
             <div class="film">
                 <div>
-                    <a href="Film?id=<c:out value="${film.id_film}"/>">
-                        <img src="img/<c:out value="${film.id_film}"/>.png">
+                    <a href="Film?id=<c:out value="${film.idFilm}"/>">
+                        <img src="img/<c:out value="${film.idFilm}"/>.png">
                     </a>
                 </div>
                 <div>
-                    <a href="Film?id=<c:out value="${film.id_film}"/>">
+                    <a href="Film?id=<c:out value="${film.idFilm}"/>">
                         <h3>${film.titolo}</h3>
                     </a>
                     <p><b>Genere:</b> ${film.genere}</p>

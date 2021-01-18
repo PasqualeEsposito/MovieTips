@@ -21,9 +21,9 @@ public class RicercaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDao = new FilmDAO();
-        String input_ricerca = request.getParameter("input_ricerca");
-        List<Film> films = filmDao.doRetrieveByWord(input_ricerca);
-        request.setAttribute("input_ricerca", input_ricerca);
+        String inputRicerca = request.getParameter("input_ricerca");
+        List<Film> films = filmDao.doRetrieveByWord(inputRicerca);
+        request.setAttribute("input_ricerca", inputRicerca);
         request.setAttribute("films", films);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
         requestDispatcher.forward(request, response);
