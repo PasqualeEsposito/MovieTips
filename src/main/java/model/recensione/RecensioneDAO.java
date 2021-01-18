@@ -16,7 +16,7 @@ public class RecensioneDAO {
             ps.setInt(1, r.getValutazione());
             ps.setString(2, r.getTesto());
             ps.setInt(3, r.getNumeroSegnalazioni());
-            ps.setInt(4, r.getId_utente());
+            ps.setInt(4, r.getIdUtente());
             ps.setInt(5, r.getIdFilm());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
@@ -26,10 +26,10 @@ public class RecensioneDAO {
         }
     }
 
-    public ArrayList<Recensione> doRetrieveById_utente(int id_utente) {
+    public ArrayList<Recensione> doRetrieveByIdUtente(int idUtente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE id_utente = ?");
-            ps.setInt(1, id_utente);
+            ps.setInt(1, idUtente);
             ResultSet rs = ps.executeQuery();
             ArrayList<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
@@ -48,10 +48,10 @@ public class RecensioneDAO {
         }
     }
 
-    public ArrayList<Recensione> doRetrieveById_film(int id_film) {
+    public ArrayList<Recensione> doRetrieveByIdFilm(int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE id_film = ?");
-            ps.setInt(1, id_film);
+            ps.setInt(1, idFilm);
             ResultSet rs = ps.executeQuery();
             ArrayList<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {

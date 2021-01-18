@@ -11,15 +11,15 @@ public class Recensione {
     public Recensione() {
     }
 
-    public Recensione(int valutazione, String testo, int id_utente, int id_film) {
+    public Recensione(int valutazione, String testo, int idUtente, int idFilm) {
         this.valutazione = valutazione;
         this.testo = testo;
-        this.idUtente = id_utente;
-        this.idFilm = id_film;
+        this.idUtente = idUtente;
+        this.idFilm = idFilm;
         numeroSegnalazioni = 0;
     }
 
-    public int getId_utente() {
+    public int getIdUtente() {
         return idUtente;
     }
 
@@ -39,15 +39,15 @@ public class Recensione {
         return idRecensione;
     }
 
-    public void setIdRecensione(int id_recensione) {
-        this.idRecensione = id_recensione;
+    public void setIdRecensione(int idRecensione) {
+        this.idRecensione = idRecensione;
     }
 
     public int getNumeroSegnalazioni() {
         return numeroSegnalazioni;
     }
 
-    public void setNumeroSegnalazioni(int numero_segnalazioni) {
+    public void setNumeroSegnalazioni(int numeroSegnalazioni) {
         this.numeroSegnalazioni = numeroSegnalazioni;
     }
 
