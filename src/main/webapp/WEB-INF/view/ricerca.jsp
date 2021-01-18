@@ -8,10 +8,10 @@
     <div class="page-content">
         <c:choose>
             <c:when test="${empty films}">
-                <h2>Nessun risultato trovato per "${inputRicerca}"</h2>
+                <h2>Nessun risultato trovato per "${input_ricerca}"</h2>
             </c:when>
             <c:otherwise>
-                <h2>Risultati trovati per "${inputRicerca}"</h2>
+                <h2>Risultati trovati per "${input_ricerca}"</h2>
             </c:otherwise>
         </c:choose>
         <c:forEach items="${films}" var="film">
