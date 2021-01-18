@@ -13,7 +13,8 @@ CREATE TABLE Utente
     email     VARCHAR(255) NOT NULL UNIQUE,
     password  VARCHAR(255) NOT NULL,
     genere    CHAR(1)      NOT NULL,
-    ddn       DATE         NOT NULL
+    ddn       DATE         NOT NULL,
+    ruolo     CHAR(6)      NOT NULL
 );
 
 CREATE TABLE Film
@@ -74,33 +75,6 @@ CREATE TABLE Notizia
         ON DELETE CASCADE
 );
 
-CREATE TABLE Ruolo
-(
-    id_ruolo   INT PRIMARY KEY,
-    nome_ruolo VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE Ruolo_utenti
-(
-    id_utente INT NOT NULL,
-    id_ruolo  INT NOT NULL,
-    FOREIGN KEY (id_ruolo) REFERENCES Ruolo (id_ruolo)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-
-INSERT INTO Ruolo
-VALUES (-1, 'Utente bannato'),
-       (0, 'Utente non attivo'),
-       (1, 'Filmino'),
-       (2, 'Amministratore'),
-       (3, 'Articolista'),
-       (4, 'moderatore');
-
 
 INSERT INTO Film
 VALUES (1, 'La città incantata', 'Studio Ghibli, Nippon Television Network (NTV), DENTSU Music And Entertainment',
@@ -153,23 +127,14 @@ VALUES (6, 'Parasite',
 
 INSERT INTO Utente
 VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
-        '2001-05-22'),
-       (2, 'marco_bellamico', 'Marco', 'Bellamico', 'marco.bellamico@unisa.it', SHA1('Marco1!'), 'M', '1990-03-01'),
-       (3, 'luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02'),
+        '2001-05-22', '001000'),
+       (2, 'marco_bellamico', 'Marco', 'Bellamico', 'marco.bellamico@unisa.it', SHA1('Marco1!'), 'M', '1990-03-01',
+        '001100'),
+       (3, 'luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02', '000000'),
        (4, 'francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F',
-        '1999-04-13'),
+        '1999-04-13', '001110'),
        (5, 'roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M',
-        '2000-03-30');
-
-
-INSERT INTO Ruolo_utenti
-VALUES (1, 1), # Utente 1: filmino
-       (2, 1), # Utente 2: filmino, amministratore
-       (2, 2),
-       (3, 2), # Utente 3: amministratore
-       (4, 0), # Utente 4: non attivo
-       (5, -1); # Utente 5: bannato
-
+        '2000-03-30', '000101');
 
 INSERT INTO Film_seguiti
 VALUES (1, 6),
