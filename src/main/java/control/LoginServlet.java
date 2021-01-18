@@ -11,16 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * La servlet permette di effettuare il login prendendo i dati dal form di login presente nella view login.jsp,
+ * controlla i campi e ritorna errori nel caso in cui i dati in input siano errati. Nel caso in cui i dati sono
+ * corretti, l'utente viene inserito in sessione.
+ */
 @WebServlet(name = "LoginServlet", urlPatterns = "/Login")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteDAO utenteDAO = new UtenteDAO();
-
-    /**
-     * La servlet permette di effettuare il login prendendo i dati dal form di login presente nella view login.jsp,
-     * controlla i campi e ritorna errori nel caso in cui i dati in input siano errati. Nel caso in cui i dati sono
-     * corretti, l'utente viene inserito in sessione.
-     */
 
     /**
      * @param request

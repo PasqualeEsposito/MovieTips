@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * La servlet prende in input una stringa da ricercare all'interno del database. Nel caso in cui ci sono
+ * film con il nome contenente (o uguale) la stringa da ricercare, ritorna la lista di film che soddisfano
+ * la query
+ */
+
 @WebServlet(name = "RicercaServlet", urlPatterns = "/Ricerca")
 public class RicercaServlet extends HttpServlet {
-    /**
-     * La servlet prende in input una stringa da ricercare all'interno del database. Nel caso in cui ci sono
-     * film con il nome contenente (o uguale) la stringa da ricercare, ritorna la lista di film che soddisfano
-     * la query.
-     */
 
     /**
      * @param request

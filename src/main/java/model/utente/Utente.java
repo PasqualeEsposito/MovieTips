@@ -20,7 +20,10 @@ public class Utente {
     }
 
     /**
-     * @param username
+     *
+     * Classe che rappresenta un utente qualsiasi
+     *
+     * @param username l'username dell'utente, univoco per ciascun utente
      * @param nome
      * @param cognome
      * @param email

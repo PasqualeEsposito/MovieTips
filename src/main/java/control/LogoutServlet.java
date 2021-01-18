@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * La servlet rimuove l'utente dalla sessione
+ */
+
 @WebServlet(name = "LogoutServlet", urlPatterns = "/Logout")
 public class LogoutServlet extends HttpServlet {
-    /**
-     * La servlet rimuove l'utente dalla sessione.
-     */
 
     /**
      * @param request

@@ -7,10 +7,10 @@ USE movietipsdb;
 CREATE TABLE Utente
 (
     id_utente INT AUTO_INCREMENT PRIMARY KEY,
-    username  VARCHAR(35)  NOT NULL,
+    username  VARCHAR(35)  NOT NULL UNIQUE,
     nome      VARCHAR(35)  NOT NULL,
     cognome   VARCHAR(35)  NOT NULL,
-    email     VARCHAR(255) NOT NULL,
+    email     VARCHAR(255) NOT NULL UNIQUE,
     password  VARCHAR(255) NOT NULL,
     genere    CHAR(1)      NOT NULL,
     ddn       DATE         NOT NULL,
@@ -124,6 +124,11 @@ VALUES (6, 'Parasite',
         'Parasite, film diretto da Joon-ho Bong, è un dramma che racconta la storia della famiglia Kim, formata dal padre Ki-taek (Kang-ho Song), un uomo privo di stimoli, una madre, Chung-sook (Hye-jin Jang), senza alcuna ambizione e due figli, la 25enne Ki-jung (So-dam Park) e il minore, Ki-woo (Woo-sik Choi). Vivono in uno squallido appartamento, sito nel seminterrato di un palazzo, e sono molto legati tra loro, ma senza un soldo in tasca né un lavoro né una speranza per un futuro roseo. A Ki-woo viene la perversa idea di falsificare il suo diploma e la sua identità per reinventarsi come tutor e impartire lezioni a Yeon-kyuo (Yeo-jeong Jo), la figlia adolescente dei Park. Quest''ultimi sono una ricca famiglia, che, al contrario dei Kim, vivono in una grande villa, grazie ai guadagni del patriarca, dirigente di un''azienda informatica. Ki-woo insegna principalmente inglese alla ragazza a un ottimo prezzo, cosa che genera entusiasmo e speranza nella suoi parenti. Il ragazzo, notando come alla figlia minore dei Park piaccia disegnare, ha la subdola idea di inventare che sua sorella Ki-jung è un''insegnante d''arte, permettendo anche a lei di infiltrarsi nella loro vita. Le due famiglie non sanno, però, che questo incontro è solo l''inizio di una storia strana, che porterà i Kim a introdursi sempre più nella routine dei Park, come un parassita fa con un organismo estraneo.',
         2019);
 
+
+INSERT INTO Utente
+VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
+        '2001-05-22',
+        2);
 
 INSERT INTO Utente
 VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',

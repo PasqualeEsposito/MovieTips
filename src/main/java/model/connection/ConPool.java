@@ -11,7 +11,7 @@ public class ConPool {
     private static DataSource datasource;
 
     /**
-     * @return ritorna la connessione da utilizzare per il database
+     * @return Ritorna la connessione da utilizzare per il database
      * @throws SQLException
      */
     public static Connection getConnection() throws SQLException {
