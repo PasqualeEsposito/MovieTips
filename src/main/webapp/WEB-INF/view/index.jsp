@@ -10,12 +10,12 @@
         <c:forEach items="${films}" var="film">
             <div class="film">
                 <div>
-                    <a href="Film?id=<c:out value="${film.id_film}"/>">
-                        <img src="img/<c:out value="${film.id_film}"/>.png">
+                    <a href="Film?id=<c:out value="${film.idFilm}"/>">
+                        <img src="img/<c:out value="${film.idFilm}"/>.png">
                     </a>
                 </div>
                 <div>
-                    <a href="Film?id=<c:out value="${film.id_film}"/>">
+                    <a href="Film?id=<c:out value="${film.idFilm}"/>">
                         <h3>${film.titolo}</h3>
                     </a>
                     <p><b>Genere:</b> ${film.genere}</p>
