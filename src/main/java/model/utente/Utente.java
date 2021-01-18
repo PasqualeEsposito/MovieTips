@@ -13,13 +13,13 @@ public class Utente {
     private String password;
     private String genere;
     private String ddn;
-    private int id_utente;
+    private int idUtente;
     private int ruolo;
 
     public Utente() {
     }
 
-    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int id_utente, int ruolo) {
+    public Utente(String username, String nome, String cognome, String email, String password, String genere, String ddn, int idUtente, int ruolo) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
@@ -27,16 +27,16 @@ public class Utente {
         setPassword(password);
         this.genere = genere;
         this.ddn = ddn;
-        this.id_utente = id_utente;
+        this.idUtente = idUtente;
         this.ruolo = ruolo;
     }
 
-    public int getId_utente() {
-        return id_utente;
+    public int getIdUtente() {
+        return idUtente;
     }
 
-    public void setId_utente(int id_utente) {
-        this.id_utente = id_utente;
+    public void setIdUtente(int idUtente) {
+        this.idUtente = idUtente;
     }
 
     public String getCognome() {
@@ -153,7 +153,7 @@ public class Utente {
                 ", password='" + password + '\'' +
                 ", genere='" + genere + '\'' +
                 ", ddn='" + ddn + '\'' +
-                ", id_utente=" + id_utente +
+                ", id_utente=" + idUtente +
                 ", ruolo=" + ruolo +
                 '}';
     }

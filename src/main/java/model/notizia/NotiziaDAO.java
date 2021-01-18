@@ -13,7 +13,7 @@ public class NotiziaDAO {
             ps.setString(1, n.getTitolo());
             ps.setString(2, n.getTesto());
             ps.setString(3, n.getFonte());
-            ps.setInt(4, n.getId_film());
+            ps.setInt(4, n.getIdFilm());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }

@@ -36,7 +36,7 @@ public class UtenteDAO {
             ArrayList<Utente> utenti = new ArrayList<>();
             while (rs.next()) {
                 Utente u = new Utente();
-                u.setId_utente(rs.getInt(1));
+                u.setIdUtente(rs.getInt(1));
                 u.setUsername(rs.getString(2));
                 u.setNome(rs.getString(3));
                 u.setCognome(rs.getString(4));
@@ -60,7 +60,7 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Utente u = new Utente();
-                u.setId_utente(rs.getInt(1));
+                u.setIdUtente(rs.getInt(1));
                 u.setUsername(rs.getString(2));
                 u.setNome(rs.getString(3));
                 u.setCognome(rs.getString(4));
@@ -83,7 +83,7 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Utente u = new Utente();
-                u.setId_utente(rs.getInt(1));
+                u.setIdUtente(rs.getInt(1));
                 u.setUsername(rs.getString(2));
                 u.setNome(rs.getString(3));
                 u.setCognome(rs.getString(4));

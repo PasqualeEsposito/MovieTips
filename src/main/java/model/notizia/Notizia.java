@@ -1,29 +1,29 @@
 package model.notizia;
 
 public class Notizia {
-    private int id_notizia;
+    private int idNotizia;
     private String titolo;
     private String testo;
     private String fonte;
-    private int id_film;
+    private int idFilm;
 
     public Notizia() {
     }
 
-    public Notizia(int id_notizia, String titolo, String testo, String fonte, int id_film) {
-        this.id_notizia = id_notizia;
+    public Notizia(int idNotizia, String titolo, String testo, String fonte, int idFilm) {
+        this.idNotizia = idNotizia;
         this.titolo = titolo;
         this.testo = testo;
         this.fonte = fonte;
-        this.id_film = id_film;
+        this.idFilm = idFilm;
     }
 
-    public int getId_film() {
-        return id_film;
+    public int getIdFilm() {
+        return idFilm;
     }
 
-    public void setId_film(int id_film) {
-        this.id_film = id_film;
+    public void setIdFilm(int idFilm) {
+        this.idFilm = idFilm;
     }
 
     public String getTitolo() {
@@ -42,12 +42,12 @@ public class Notizia {
         this.testo = testo;
     }
 
-    public int getId_notizia() {
-        return id_notizia;
+    public int getIdNotizia() {
+        return idNotizia;
     }
 
-    public void setId_notizia(int id_notizia) {
-        this.id_notizia = id_notizia;
+    public void setIdNotizia(int idNotizia) {
+        this.idNotizia = idNotizia;
     }
 
     public String getFonte() {

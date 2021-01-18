@@ -15,9 +15,9 @@ public class RecensioneDAO {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, r.getValutazione());
             ps.setString(2, r.getTesto());
-            ps.setInt(3, r.getNumero_segnalazioni());
+            ps.setInt(3, r.getNumeroSegnalazioni());
             ps.setInt(4, r.getId_utente());
-            ps.setInt(5, r.getId_film());
+            ps.setInt(5, r.getIdFilm());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -34,12 +34,12 @@ public class RecensioneDAO {
             ArrayList<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
                 Recensione r = new Recensione();
-                r.setId_recensione(rs.getInt(1));
+                r.setIdRecensione(rs.getInt(1));
                 r.setValutazione(rs.getInt(2));
                 r.setTesto(rs.getString(3));
-                r.setNumero_segnalazioni(rs.getInt(4));
-                r.setId_utente(rs.getInt(5));
-                r.setId_film(rs.getInt(6));
+                r.setNumeroSegnalazioni(rs.getInt(4));
+                r.setIdUtente(rs.getInt(5));
+                r.setIdFilm(rs.getInt(6));
                 recensioni.add(r);
             }
             return recensioni;
@@ -56,12 +56,12 @@ public class RecensioneDAO {
             ArrayList<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
                 Recensione r = new Recensione();
-                r.setId_recensione(rs.getInt(1));
+                r.setIdRecensione(rs.getInt(1));
                 r.setValutazione(rs.getInt(2));
                 r.setTesto(rs.getString(3));
-                r.setNumero_segnalazioni(rs.getInt(4));
-                r.setId_utente(rs.getInt(5));
-                r.setId_film(rs.getInt(6));
+                r.setNumeroSegnalazioni(rs.getInt(4));
+                r.setIdUtente(rs.getInt(5));
+                r.setIdFilm(rs.getInt(6));
                 recensioni.add(r);
             }
             return recensioni;
