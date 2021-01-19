@@ -1,22 +1,25 @@
 package control;
 
-import model.segnalazione.SegnalazioneDAO;
+import model.recensione.RecensioneDAO;
+import model.utente.Utente;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-public class IgnoraRecensioneServlet extends HttpServlet {
+@WebServlet(name = "EliminaRecensioneServlet", urlPatterns = "/EliminaRecensioneProfilo")
+public class EliminaRecensioneProfiloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        SegnalazioneDAO serviceSegnalazione = new SegnalazioneDAO();
-        serviceSegnalazione.doDeleteByIdRecensione(idRecensione);
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        RecensioneDAO serviceRecensione = new RecensioneDAO();
+        serviceRecensione.doDeleteByIdRecensione(idRecensione);
 
-        response.sendRedirect("./GestioneSegnalazioni");
+        response.sendRedirect("./Profilo?username=" + utente.getUsername());
     }
 
     @Override
