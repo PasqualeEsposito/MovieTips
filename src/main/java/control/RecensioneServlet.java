@@ -3,31 +3,27 @@ package control;
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet(name = "RecensioneServlet", urlPatterns = "/Recensione")
 public class RecensioneServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int valutazione = Integer.parseInt(req.getParameter("valutazione"));
-        String testo = req.getParameter("testo");
-        String usernameUtente = req.getParameter("usernameUtente");
-        int idFilm = Integer.parseInt(req.getParameter("idFilm"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int valutazione = Integer.parseInt(request.getParameter("valutazione"));
+        String testo = request.getParameter("testo");
 
-        if(valutazione != 0) {
+        String usernameUtente = (String) request.getSession().getAttribute("usernameUtente");
+        int idFilm = Integer.parseInt(request.getParameter("idFilm"));
+        if (valutazione != 0) {
             Recensione recensione = new Recensione(valutazione, testo, usernameUtente, idFilm);
             RecensioneDAO service = new RecensioneDAO();
             service.doSave(recensione);
         }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        response.sendRedirect("./Film?id=" + idFilm);
     }
 }

@@ -1,5 +1,13 @@
+<%@ page import="model.utente.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% Utente utente = (Utente) session.getAttribute("utente");
+    int check = 0;
+    if (utente != null) {
+        if (utente.isFilmino())
+            check = 1;
+    }
+%>
 <jsp:include page="header.jsp">
     <jsp:param name="pageTitle" value=""/>
 </jsp:include>
@@ -40,8 +48,28 @@
             <hr>
         </div>
     </section>
-    <section>
+    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
         <div class="page-content">
+                <% if (check == 1) { %>
+            <form action="Recensione" method="post">
+                <input type="hidden" name="idFilm" value="${film.idFilm}">
+                <div class="submit">
+
+                    <input class="mdl-slider mdl-js-slider" type="range"
+                           min="0" max="5" value="0" tabindex="0" id="valutazione">
+
+                    <button type="submit"
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                        Aggiungi recensione
+                    </button>
+                </div>
+                <div style="width: -webkit-fill-available;" class="mdl-textfield mdl-js-textfield">
+                    <textarea class="mdl-textfield__input" type="text" rows="1" id="testo"></textarea>
+                    <label class="mdl-textfield__label" for="testo">Testo recensione:</label>
+                </div>
+            </form>
+                <% } %>
+            <hr>
             <div>
                 <c:forEach items="${recensioni}" var="recensione">
                     <div class="recensione">
@@ -53,7 +81,9 @@
                             <p>${recensione.testo}</p>
                         </div>
                         <div>
-                            <a href="Segnala?id=<c:out value="${recensione.idRecensione}"/>">Segnala recensione</a>
+                            <c:if test="${utente != null}">
+                                <a href="Segnala?id=<c:out value="${recensione.idRecensione}"/>">Segnala recensione</a>
+                            </c:if>
                         </div>
                     </div>
                     <hr>

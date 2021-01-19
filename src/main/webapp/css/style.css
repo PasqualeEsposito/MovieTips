@@ -16,9 +16,10 @@ a {
     width: 100px;
 }
 
-.form > div:last-child {
+.submit {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .film {

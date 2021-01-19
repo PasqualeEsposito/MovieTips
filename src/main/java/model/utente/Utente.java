@@ -181,6 +181,12 @@ public class Utente {
         this.username = username;
     }
 
+    public boolean isFilmino() {
+        if (ruolo.charAt(2) == '1')
+            return true;
+        return false;
+    }
+
     /*public boolean isBanned() {
         if (ruolo.charAt(0) == '1')
             return true;
@@ -189,12 +195,6 @@ public class Utente {
 
     public boolean isNotActive() {
         if (ruolo.charAt(1) == '1')
-            return true;
-        return false;
-    }
-
-    public boolean isFilmino() {
-        if (ruolo.charAt(2) == '1')
             return true;
         return false;
     }

@@ -19,7 +19,7 @@
                     <input class="mdl-textfield__input" name="password" type="text" id="password">
                 </div>
             </div>
-            <div style="display: flex;justify-content: space-between;">
+            <div class="submit">
                 <a></a>
                 <button type="submit"
                         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
