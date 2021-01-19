@@ -40,6 +40,8 @@ public class LoginServlet extends HttpServlet {
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        //INSERIRE CONTROLLO NEL CASO IN CUI IL CLIENTE è BANNATO
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Utente utente = null;

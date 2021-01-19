@@ -34,6 +34,19 @@ public class UtenteDAO {
         }
     }
 
+    public void doUpdateUtente(String username, String ruolo){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE Utente SET ruolo = ? WHERE username = ?");
+            ps.setString(1, ruolo);
+            ps.setString(2, username);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean doDeleteByEmail(String email) {
 
         try (Connection con = ConPool.getConnection();
