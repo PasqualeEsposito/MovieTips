@@ -3,6 +3,7 @@ package control;
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,6 @@ public class RecensioneServlet extends HttpServlet {
             RecensioneDAO service = new RecensioneDAO();
             service.doSave(recensione);
         }
-
 
     }
 
