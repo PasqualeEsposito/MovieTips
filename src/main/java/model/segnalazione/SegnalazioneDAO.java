@@ -79,4 +79,16 @@ public class SegnalazioneDAO {
             throw new RuntimeException();
         }
     }
+
+    public void doDeleteByIdRecensione(int idRecensione) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Segnalazione where id_segnalazione = ?");
+            ps.setInt(1, idRecensione);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Delete error");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
