@@ -21,7 +21,6 @@ public class EliminaRecensioneServlet extends HttpServlet {
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
         RecensioneDAO serviceRecensione = new RecensioneDAO();
         serviceRecensione.doDeleteByIdRecensione(idRecensione);
-
         response.sendRedirect("./GestioneSegnalazioni");
     }
 }

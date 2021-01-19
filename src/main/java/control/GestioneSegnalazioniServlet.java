@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "EliminaRecensioneServlet", urlPatterns = "/GestioneSegnalazioni")
+@WebServlet(name = "GestioneSegnalazioniServlet", urlPatterns = "/GestioneSegnalazioni")
 public class GestioneSegnalazioniServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,9 +33,6 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
             Recensione r = serviceRecensioni.doRetrieveByIdRecensione(segnalazioni.get(i).getIdRecensione());
             recensioni.add(r);
         }
-
-        //sia segnalazioni che recensioni sono in ordine, nel senso che se si prende la segnalazione 1,
-        // la recensione 1 avrà i valori complementari a quella segnalazione
         request.setAttribute("segnalazioni", segnalazioni);
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioniRecensioni.jsp");

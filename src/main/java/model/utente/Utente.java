@@ -187,6 +187,12 @@ public class Utente {
         return false;
     }
 
+    public boolean isModeratore() {
+        if (ruolo.charAt(5) == '1')
+            return true;
+        return false;
+    }
+
     /*public boolean isBanned() {
         if (ruolo.charAt(0) == '1')
             return true;
@@ -207,12 +213,6 @@ public class Utente {
 
     public boolean isArticolista() {
         if (ruolo.charAt(4) == '1')
-            return true;
-        return false;
-    }
-
-    public boolean isModeratore() {
-        if (ruolo.charAt(5) == '1')
             return true;
         return false;
     }*/

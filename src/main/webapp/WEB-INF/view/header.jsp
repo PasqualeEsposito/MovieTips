@@ -1,5 +1,13 @@
+<%@ page import="model.utente.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% Utente utente = (Utente) session.getAttribute("utente");
+    int check = 0;
+    if (utente != null) {
+        if (utente.isModeratore())
+            check = 1;
+    }
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,6 +21,14 @@
     <link href="./css/style.css" rel="stylesheet">
 </head>
 <body>
+    <% if (check == 1) { %>
+<form action="GestioneSegnalazioni">
+    <button style="background: rgb(244,67,54);"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored float">
+        <i class="material-icons">admin_panel_settings</i>
+    </button>
+</form>
+    <% } %>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
@@ -37,7 +53,7 @@
                         <a class="mdl-navigation__link" href="Login">Accedi</a>
                     </c:when>
                     <c:otherwise>
-                        <a class="mdl-navigation__link" href="Logout">Disconnettiti</a>
+                        <a href="Profilo?username=<c:out value="${utente.username}"/>"></a>
                     </c:otherwise>
                 </c:choose>
             </nav>
