@@ -13,7 +13,7 @@ public class SegnalazioneDAO {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Segnalazione VALUES (?, ?);");
             ps.setInt(1, s.getIdRecensione());
-            ps.setInt(1, s.getIdUtente());
+            ps.setString(1, s.getUsernameUtente());
             if (ps.executeUpdate() != 1)
                 throw new RuntimeException("INSERT ERROR");
         } catch (SQLException throwables) {
@@ -28,7 +28,7 @@ public class SegnalazioneDAO {
             ResultSet rs = ps.executeQuery();
             Segnalazione s = new Segnalazione();
             if (rs.next())
-                return rs.getInt(2);
+                return rs.getInt(1);
             return 0;
         } catch (SQLException e) {
             throw new RuntimeException();
@@ -52,12 +52,11 @@ public class SegnalazioneDAO {
         }
     }
 
-    /*
-    public boolean doCheckIdRecensioneIdUtente(int idRecensione, int idUtente) {
+    public boolean doCheckIdRecensioneIdUtente(int idRecensione, String usernameUtente) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Segnalazione WHERE id_recensione = ? AND id_utente = ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Segnalazione WHERE id_recensione = ? AND username_utente = ?;");
             ps.setInt(1, idRecensione);
-            ps.setInt(2, idUtente);
+            ps.setString(2, usernameUtente);
             ResultSet rs = ps.executeQuery();
             if (rs.next())
                 return true;
@@ -66,12 +65,11 @@ public class SegnalazioneDAO {
             throw new RuntimeException();
         }
     }
-    */
 
-    public ArrayList<Integer> doRetrieveByIdUtente(int idUtente) {
+    public ArrayList<Integer> doRetrieveByIdUtente(String usernameUtente) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT id_recensione FROM Segnalazione WHERE id_utente = ?;");
-            ps.setInt(1, idUtente);
+            PreparedStatement ps = con.prepareStatement("SELECT id_recensione FROM Segnalazione WHERE username_utente = ?;");
+            ps.setString(1, usernameUtente);
             ResultSet rs = ps.executeQuery();
             ArrayList<Integer> list = new ArrayList<>();
             while (rs.next())

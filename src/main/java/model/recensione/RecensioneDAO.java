@@ -15,7 +15,7 @@ public class RecensioneDAO {
             ps.setInt(1, r.getValutazione());
             ps.setString(2, r.getTesto());
             ps.setInt(3, r.getNumeroSegnalazioni());
-            ps.setInt(4, r.getIdUtente());
+            ps.setString(4, r.getUsernameUtente());
             ps.setInt(5, r.getIdFilm());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
@@ -37,7 +37,7 @@ public class RecensioneDAO {
                 r.setValutazione(rs.getInt(2));
                 r.setTesto(rs.getString(3));
                 r.setNumeroSegnalazioni(rs.getInt(4));
-                r.setIdUtente(rs.getInt(5));
+                r.setUsernameUtente(rs.getString(5));
                 r.setIdFilm(rs.getInt(6));
                 recensioni.add(r);
             }
@@ -59,7 +59,7 @@ public class RecensioneDAO {
                 r.setValutazione(rs.getInt(2));
                 r.setTesto(rs.getString(3));
                 r.setNumeroSegnalazioni(rs.getInt(4));
-                r.setIdUtente(rs.getInt(5));
+                r.setUsernameUtente(rs.getString(5));
                 r.setIdFilm(rs.getInt(6));
                 recensioni.add(r);
             }

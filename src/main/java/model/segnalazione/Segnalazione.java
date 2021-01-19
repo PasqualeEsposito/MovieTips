@@ -2,15 +2,15 @@ package model.segnalazione;
 
 public class Segnalazione {
     private int idRecensione;
-    private int idUtente;
+    private String usernameUtente;
     private int counter;
 
     public Segnalazione() {
     }
 
-    public Segnalazione(int idRecensione, int idUtente) {
+    public Segnalazione(int idRecensione, String usernameUtente) {
         this.idRecensione = idRecensione;
-        this.idUtente = idUtente;
+        this.usernameUtente = usernameUtente;
     }
 
     public int getIdRecensione() {
@@ -21,12 +21,12 @@ public class Segnalazione {
         this.idRecensione = idRecensione;
     }
 
-    public int getIdUtente() {
-        return idUtente;
+    public String getUsernameUtente() {
+        return usernameUtente;
     }
 
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
+    public void setUsernameUtente(String usernameUtente) {
+        this.usernameUtente = usernameUtente;
     }
 
     public int getCounter() {

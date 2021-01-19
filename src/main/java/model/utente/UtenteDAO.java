@@ -19,14 +19,13 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Utente u = new Utente();
-                u.setIdUtente(rs.getInt(1));
-                u.setUsername(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setEmail(rs.getString(5));
-                u.setGenere(rs.getString(7));
-                u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getString(9));
+                u.setUsername(rs.getString(1));
+                u.setNome(rs.getString(2));
+                u.setCognome(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                u.setGenere(rs.getString(6));
+                u.setDdn(rs.getString(7));
+                u.setRuolo(rs.getString(8));
                 return u;
             }
             return null;
@@ -76,15 +75,13 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Utente u = new Utente();
-                u.setIdUtente(rs.getInt(1));
-                u.setUsername(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setEmail(rs.getString(5));
-                u.setPassword(rs.getString(6));
-                u.setGenere(rs.getString(7));
-                u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getString(9));
+                u.setUsername(rs.getString(1));
+                u.setNome(rs.getString(2));
+                u.setCognome(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                u.setGenere(rs.getString(6));
+                u.setDdn(rs.getString(7));
+                u.setRuolo(rs.getString(8));
                 return u;
             }
             return null;
@@ -100,14 +97,13 @@ public class UtenteDAO {
             ArrayList<Utente> utenti = new ArrayList<>();
             while (rs.next()) {
                 Utente u = new Utente();
-                u.setIdUtente(rs.getInt(1));
-                u.setUsername(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setEmail(rs.getString(5));
-                u.setGenere(rs.getString(7));
-                u.setDdn(rs.getString(8));
-                u.setRuolo(rs.getString(9));
+                u.setUsername(rs.getString(1));
+                u.setNome(rs.getString(2));
+                u.setCognome(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                u.setGenere(rs.getString(6));
+                u.setDdn(rs.getString(7));
+                u.setRuolo(rs.getString(8));
                 utenti.add(u);
             }
             return utenti;

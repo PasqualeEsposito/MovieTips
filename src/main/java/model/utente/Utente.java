@@ -16,7 +16,6 @@ public class Utente {
     private String password;
     private String genere;
     private String ddn;
-    private int idUtente;
     private String ruolo;
 
     /**
@@ -46,20 +45,6 @@ public class Utente {
         this.genere = genere;
         this.ddn = ddn;
         this.ruolo = ruolo;
-    }
-
-    /**
-     * @return Ritorna l'intero che distingue univocamente un utente dall'altro
-     */
-    public int getIdUtente() {
-        return idUtente;
-    }
-
-    /**
-     * @param idUtente L'intero che distingue univocamente un utente dall'altro
-     */
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
     }
 
     /**

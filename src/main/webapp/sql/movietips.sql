@@ -6,15 +6,14 @@ USE movietipsdb;
 
 CREATE TABLE Utente
 (
-    id_utente INT AUTO_INCREMENT PRIMARY KEY,
-    username  VARCHAR(35)  NOT NULL UNIQUE,
-    nome      VARCHAR(35)  NOT NULL,
-    cognome   VARCHAR(35)  NOT NULL,
-    email     VARCHAR(255) NOT NULL UNIQUE,
-    password  VARCHAR(255) NOT NULL,
-    genere    CHAR(1)      NOT NULL,
-    ddn       DATE         NOT NULL,
-    ruolo     CHAR(6)      NOT NULL
+    username VARCHAR(35)  NOT NULL PRIMARY KEY,
+    nome     VARCHAR(35)  NOT NULL,
+    cognome  VARCHAR(35)  NOT NULL,
+    email    VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    genere   CHAR(1)      NOT NULL,
+    ddn      DATE         NOT NULL,
+    ruolo    CHAR(6)      NOT NULL
 );
 
 CREATE TABLE Film
@@ -37,12 +36,12 @@ CREATE TABLE Film
 
 CREATE TABLE Recensione
 (
-    id_recensione INT AUTO_INCREMENT PRIMARY KEY,
-    valutazione   INT  NOT NULL,
-    testo         text NOT NULL,
-    id_utente     INT  NOT NULL,
-    id_film       INT  NOT NULL,
-    FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
+    id_recensione   INT AUTO_INCREMENT PRIMARY KEY,
+    valutazione     INT         NOT NULL,
+    testo           text        NOT NULL,
+    username_utente VARCHAR(35) NOT NULL,
+    id_film         INT         NOT NULL,
+    FOREIGN KEY (username_utente) REFERENCES Utente (username)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (id_film) REFERENCES Film (id_film)
@@ -52,12 +51,12 @@ CREATE TABLE Recensione
 
 CREATE TABLE Segnalazione
 (
-    id_recensione INT NOT NULL,
-    id_utente     INT NOT NULL,
+    id_recensione   INT         NOT NULL,
+    username_utente VARCHAR(35) NOT NULL,
     FOREIGN KEY (id_recensione) REFERENCES Recensione (id_recensione)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
+    FOREIGN KEY (username_utente) REFERENCES Utente (username)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -113,23 +112,32 @@ VALUES (6, 'Parasite',
 
 
 INSERT INTO Utente
-VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
+VALUES ('fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa.it', SHA1('Fabrizio1!'), 'M',
         '2001-05-22', '001000'),
-       (2, 'marco_bellamico', 'Marco', 'Bellamico', 'marco.bellamico@unisa.it', SHA1('Marco1!'), 'M', '1990-03-01',
+       ('marco_bellamico', 'Marco', 'Bellamico', 'marco.bellamico@unisa.it', SHA1('Marco1!'), 'M', '1990-03-01',
         '000001'),
-       (3, 'luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02', '001001'),
-       (4, 'francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F',
+       ('luca_ciao', 'Luca', 'Ciao', 'luca.ciao@unisa.it', SHA1('Luca1!'), 'M', '1991-03-02', '001001'),
+       ('francesca_di_mauro', 'Francesca', 'Di Mauro', 'francesca.dimauro@unisa.it', SHA1('Francesca1!'), 'F',
         '1999-04-13', '100000'),
-       (5, 'roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M',
+       ('roberta_esposito', 'Roberta', 'Esposito', 'roberta.esposito@unisa.it', SHA1('Roberta1!'), 'M',
         '2000-03-30', '010000'),
-       (6, 'franco.ceriello', 'Franco', 'Ceriello', 'franco.ceriello@unisa.it', SHA1('Franco1!'), 'M', '1999-12-30',
+       ('franco.ceriello', 'Franco', 'Ceriello', 'franco.ceriello@unisa.it', SHA1('Franco1!'), 'M', '1999-12-30',
         '001000');
 
-INSERT INTO Recensione VALUES (1, 4, 'Il film è molto bello', 1, 5),
-                              (2, 1, 'Il film non mi è piaciuto per niente', 6, 5),
-                              (3, 5, 'Il film è stupendo!!!', 3, 5);
+INSERT INTO Recensione
+VALUES (1, 4, 'Il film è molto bello', 'fabrizio_cerciello', 5),
+       (2, 1, 'Il film non mi è piaciuto per niente', 'franco.ceriello', 5),
+       (3, 5, 'Il film è stupendo!!!', 'luca_ciao', 5);
 
-SELECT  id_recensione, COUNT(id_utente) FROM Recensione GROUP BY id_recensione;
+INSERT INTO Segnalazione
+VALUES (1, 'franco.ceriello'),
+       (1, 'luca_ciao'),
+       (2, 'franco.ceriello');
 
+SELECT id_recensione, COUNT(username_utente)
+FROM Recensione
+GROUP BY id_recensione;
+
+SELECT id_recensione, COUNT(id_recensione) FROM Segnalazione WHERE id_recensione = 1 GROUP BY id_recensione;
 
 DROP DATABASE movietipsdb;
