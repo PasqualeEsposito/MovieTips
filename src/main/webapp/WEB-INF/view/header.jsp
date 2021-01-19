@@ -53,7 +53,10 @@
                         <a class="mdl-navigation__link" href="Login">Accedi</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="Profilo?username=<c:out value="${utente.username}"/>"></a>
+                        <a href="Profilo?username=<c:out value="${utente.username}"/>">
+                            <span style="color: rgb(255,255,255)" class="material-icons">account_circle</span>
+                        </a>
+                        <a class="mdl-navigation__link" href="Logout">Disconnetti</a>
                     </c:otherwise>
                 </c:choose>
             </nav>
