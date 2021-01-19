@@ -90,6 +90,28 @@ public class UtenteDAO {
         }
     }
 
+    public Utente doRetrieveByUsername(String username) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente WHERE username = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Utente u = new Utente();
+                u.setUsername(rs.getString(1));
+                u.setNome(rs.getString(2));
+                u.setCognome(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                u.setGenere(rs.getString(6));
+                u.setDdn(rs.getString(7));
+                u.setRuolo(rs.getString(8));
+                return u;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /*public ArrayList<Utente> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");

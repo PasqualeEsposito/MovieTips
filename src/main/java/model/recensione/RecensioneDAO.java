@@ -24,10 +24,10 @@ public class RecensioneDAO {
         }
     }
 
-    public ArrayList<Recensione> doRetrieveByIdUtente(int idUtente) {
+    public ArrayList<Recensione> doRetrieveByUsername(String username) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE id_utente = ?");
-            ps.setInt(1, idUtente);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE username_utente = ?");
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             ArrayList<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {

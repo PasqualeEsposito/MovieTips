@@ -21,7 +21,7 @@ public class SegnalazioneServlet extends HttpServlet {
         SegnalazioneDAO service = new SegnalazioneDAO();
         service.doSave(s);
 
-        response.sendRedirect("/Film?id=" + idFilm);
+        response.sendRedirect(request.getContextPath() + "/Film?id=" + idFilm);
     }
 
     @Override
