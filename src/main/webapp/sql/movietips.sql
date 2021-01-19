@@ -35,26 +35,13 @@ CREATE TABLE Film
     anno          INT          NOT NULL
 );
 
-CREATE TABLE Film_seguiti
-(
-    id_utente INT NOT NULL,
-    id_film   INT NOT NULL,
-    FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (id_film) REFERENCES Film (id_film)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
 CREATE TABLE Recensione
 (
-    id_recensione       INT AUTO_INCREMENT PRIMARY KEY,
-    valutazione         INT  NOT NULL,
-    testo               text NOT NULL,
-    numero_segnalazioni INT  NOT NULL,
-    id_utente           INT  NOT NULL,
-    id_film             INT  NOT NULL,
+    id_recensione INT AUTO_INCREMENT PRIMARY KEY,
+    valutazione   INT  NOT NULL,
+    testo         text NOT NULL,
+    id_utente     INT  NOT NULL,
+    id_film       INT  NOT NULL,
     FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -63,14 +50,14 @@ CREATE TABLE Recensione
         ON DELETE CASCADE
 );
 
-CREATE TABLE Notizia
+CREATE TABLE Segnalazione
 (
-    id_notizia INT AUTO_INCREMENT PRIMARY KEY,
-    titolo     VARCHAR(255) NOT NULL,
-    testo      text         NOT NULL,
-    fonte      VARCHAR(255) NOT NULL,
-    id_film    INT          NOT NULL,
-    FOREIGN KEY (id_film) REFERENCES Film (id_film)
+    id_recensione INT NOT NULL,
+    id_utente     INT NOT NULL,
+    FOREIGN KEY (id_recensione) REFERENCES Recensione (id_recensione)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -138,11 +125,11 @@ VALUES (1, 'fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@un
        (6, 'franco.ceriello', 'Franco', 'Ceriello', 'franco.ceriello@unisa.it', SHA1('Franco1!'), 'M', '1999-12-30',
         '001000');
 
+INSERT INTO Recensione VALUES (1, 4, 'Il film è molto bello', 1, 5),
+                              (2, 1, 'Il film non mi è piaciuto per niente', 6, 5),
+                              (3, 5, 'Il film è stupendo!!!', 3, 5);
 
-INSERT INTO Film_seguiti
-VALUES (1, 6),
-       (1, 4),
-       (1, 1);
+SELECT  id_recensione, COUNT(id_utente) FROM Recensione GROUP BY id_recensione;
 
 
 DROP DATABASE movietipsdb;

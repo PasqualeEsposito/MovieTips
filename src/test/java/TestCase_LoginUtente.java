@@ -17,7 +17,7 @@ public class TestCase_LoginUtente extends Mockito {
     private LoginServlet servlet;
     private UtenteDAO dao = new UtenteDAO();
     private Utente franco = new Utente("franco.ceriello", "Franco", "Ceriello",
-            "franco.ceriello@unisa.it", "Franco1!", "m", "1999-12-30", "001000");
+            "franco.ceriello@unisa.it", "Franco1!", "M", "1999-12-30", "001000");
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
 

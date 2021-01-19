@@ -38,12 +38,12 @@ public class UtenteDAO {
     public boolean doDeleteByEmail(String email) {
 
         try (Connection con = ConPool.getConnection();
-             PreparedStatement statement = con.prepareStatement("DELETE FROM Utente WHERE email = ?");) {
+             PreparedStatement statement = con.prepareStatement("DELETE FROM Utente WHERE email = ?;")) {
             statement.setString(1, email);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
 
