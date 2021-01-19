@@ -72,7 +72,9 @@
                 <c:forEach items="${recensioni}" var="recensione">
                     <div class="recensione">
                         <div>
-                            <b>${recensione.usernameUtente}</b>
+                            <a href="Profilo?username=<c:out value="${recensione.usernameUtente}"/>"${recensione.usernameUtente}>
+                                    ${recensione.usernameUtente}
+                            </a>
                             <p><b>Voto:</b> ${recensione.valutazione}</p>
                         </div>
                         <div>

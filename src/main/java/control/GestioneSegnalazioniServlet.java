@@ -1,6 +1,5 @@
 package control;
 
-
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneDAO;
 
