@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class RecensioneDAO {
     public void doSave(Recensione r) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione VALUES (?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione (valutazione, testo, username_utente, id_film) VALUES (?, ?, ?, ?);");
             ps.setInt(1, r.getValutazione());
             ps.setString(2, r.getTesto());
             ps.setString(3, r.getUsernameUtente());

@@ -2,6 +2,7 @@ package control;
 
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneDAO;
+import model.utente.Utente;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,17 +16,11 @@ public class SegnalazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        String usernameUtente = request.getParameter("usernameUtente");
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
         int idFilm = Integer.parseInt(request.getParameter("idFilm"));
-        Segnalazione s = new Segnalazione(idRecensione, usernameUtente);
+        Segnalazione s = new Segnalazione(idRecensione, utente.getUsername());
         SegnalazioneDAO service = new SegnalazioneDAO();
         service.doSave(s);
-
-        response.sendRedirect(request.getContextPath() + "/Film?id=" + idFilm);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
+        response.sendRedirect("./Film?id=" + idFilm);
     }
 }

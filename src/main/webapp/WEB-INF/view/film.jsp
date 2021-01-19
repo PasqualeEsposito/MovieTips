@@ -54,17 +54,15 @@
             <form action="Recensione" method="post">
                 <input type="hidden" name="idFilm" value="${film.idFilm}">
                 <div class="submit">
-
                     <input class="mdl-slider mdl-js-slider" type="range"
-                           min="0" max="5" value="0" tabindex="0" id="valutazione">
-
+                           min="1" max="5" value="1" tabindex="0" name="valutazione">
                     <button type="submit"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                         Aggiungi recensione
                     </button>
                 </div>
                 <div style="width: -webkit-fill-available;" class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows="1" id="testo"></textarea>
+                    <textarea class="mdl-textfield__input" type="text" rows="1" id="testo" name="testo"></textarea>
                     <label class="mdl-textfield__label" for="testo">Testo recensione:</label>
                 </div>
             </form>
@@ -82,7 +80,14 @@
                         </div>
                         <div>
                             <c:if test="${utente != null}">
-                                <a href="Segnala?id=<c:out value="${recensione.idRecensione}"/>">Segnala recensione</a>
+                                <form action="Segnala">
+                                    <input type="hidden" name="idFilm" value="${film.idFilm}">
+                                    <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
+                                    <button type="submit"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                        Segnala recensione
+                                    </button>
+                                </form>
                             </c:if>
                         </div>
                     </div>
