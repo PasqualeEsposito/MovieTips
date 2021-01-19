@@ -4,7 +4,6 @@ public class Recensione {
     private int idRecensione;
     private int valutazione;
     private String testo;
-    private int numeroSegnalazioni;
     private String usernameUtente;
     private int idFilm;
 
@@ -16,7 +15,6 @@ public class Recensione {
         this.testo = testo;
         this.usernameUtente = usernameUtente;
         this.idFilm = idFilm;
-        numeroSegnalazioni = 0;
     }
 
     public String getUsernameUtente() {
@@ -41,14 +39,6 @@ public class Recensione {
 
     public void setIdRecensione(int idRecensione) {
         this.idRecensione = idRecensione;
-    }
-
-    public int getNumeroSegnalazioni() {
-        return numeroSegnalazioni;
-    }
-
-    public void setNumeroSegnalazioni(int numeroSegnalazioni) {
-        this.numeroSegnalazioni = numeroSegnalazioni;
     }
 
     public int getValutazione() {

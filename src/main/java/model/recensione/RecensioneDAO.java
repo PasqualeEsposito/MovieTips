@@ -11,12 +11,11 @@ import java.util.ArrayList;
 public class RecensioneDAO {
     public void doSave(Recensione r) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione VALUES (?, ?, ?, ?)");
             ps.setInt(1, r.getValutazione());
             ps.setString(2, r.getTesto());
-            ps.setInt(3, r.getNumeroSegnalazioni());
-            ps.setString(4, r.getUsernameUtente());
-            ps.setInt(5, r.getIdFilm());
+            ps.setString(3, r.getUsernameUtente());
+            ps.setInt(4, r.getIdFilm());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("Insert ERROR");
             }
@@ -36,9 +35,8 @@ public class RecensioneDAO {
                 r.setIdRecensione(rs.getInt(1));
                 r.setValutazione(rs.getInt(2));
                 r.setTesto(rs.getString(3));
-                r.setNumeroSegnalazioni(rs.getInt(4));
-                r.setUsernameUtente(rs.getString(5));
-                r.setIdFilm(rs.getInt(6));
+                r.setUsernameUtente(rs.getString(4));
+                r.setIdFilm(rs.getInt(5));
                 recensioni.add(r);
             }
             return recensioni;
@@ -58,9 +56,8 @@ public class RecensioneDAO {
                 r.setIdRecensione(rs.getInt(1));
                 r.setValutazione(rs.getInt(2));
                 r.setTesto(rs.getString(3));
-                r.setNumeroSegnalazioni(rs.getInt(4));
-                r.setUsernameUtente(rs.getString(5));
-                r.setIdFilm(rs.getInt(6));
+                r.setUsernameUtente(rs.getString(4));
+                r.setIdFilm(rs.getInt(5));
                 recensioni.add(r);
             }
             return recensioni;
