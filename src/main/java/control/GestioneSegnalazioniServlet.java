@@ -1,9 +1,6 @@
 package control;
 
-import model.film.Film;
-import model.film.FilmDAO;
-import model.recensione.Recensione;
-import model.recensione.RecensioneDAO;
+
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneDAO;
 

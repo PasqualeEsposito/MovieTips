@@ -13,7 +13,7 @@ public class SegnalazioneDAO {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Segnalazione VALUES (?, ?);");
             ps.setInt(1, s.getIdRecensione());
-            ps.setString(1, s.getUsernameUtente());
+            ps.setString(2, s.getUsernameUtente());
             if (ps.executeUpdate() != 1)
                 throw new RuntimeException("INSERT ERROR");
         } catch (SQLException throwables) {
