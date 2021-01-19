@@ -5,11 +5,12 @@
 </jsp:include>
 <div style="justify-content: space-around;" class="mdl-layout__tab-bar mdl-js-ripple-effect">
     <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Trama e cast</a>
+    <a href="#fixed-tab-2" class="mdl-layout__tab">Recensioni</a>
 </div>
 </header>
 <main class="mdl-layout__content">
     <div class="page-content">
-        <h3>${film.titolo} (${film.anno})</h3>
+        <h2>${film.titolo} (${film.anno})</h2>
     </div>
     <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
         <div class="page-content">
@@ -33,11 +34,31 @@
             </div>
             <hr>
             <div>
-                <h2>Trama</h2>
+                <h3>Trama</h3>
                 <p>${film.trama}</p>
             </div>
             <hr>
         </div>
+    </section>
+    <section>
+        <div class="page-content">
+            <div>
+                <c:forEach items="${recensioni}" var="recensione">
+                    <div class="recensione">
+                        <div>
+                            <b>${recensione.username}</b>
+                            <p><b>Voto:</b> ${recensione.valutazione}</p>
+                        </div>
+                        <div>
+                            <p>${recensione.testo}</p>
+                        </div>
+                        <div>
+                            <a href="Segnala?id=<c:out value="${recensione.idRecensione}"/>">Segnala recensione</a>
+                        </div>
+                    </div>
+                    <hr>
+                </c:forEach>
+            </div>
     </section>
 </main>
 </div>

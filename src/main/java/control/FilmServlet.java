@@ -4,8 +4,6 @@ import model.film.Film;
 import model.film.FilmDAO;
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
-import model.segnalazione.Segnalazione;
-import model.segnalazione.SegnalazioneDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,18 +28,13 @@ public class FilmServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDAO = new FilmDAO();
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
         int id = Integer.parseInt(request.getParameter("id"));
         Film film = filmDAO.doRetrieveById(id);
         if (film == null) {
             throw new MyServletException("Film non trovato");
         }
-        RecensioneDAO serviceRecensione = new RecensioneDAO();
-        ArrayList<Recensione> recensioni = serviceRecensione.doRetrieveByIdFilm(id);
-        SegnalazioneDAO serviceSegnalazione = new SegnalazioneDAO();
-        ArrayList<Segnalazione> segnalazioniUtente = new ArrayList<>();
-
-
-
+        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveByIdFilm(id);
         request.setAttribute("film", film);
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/film.jsp");

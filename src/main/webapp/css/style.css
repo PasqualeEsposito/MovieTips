@@ -10,6 +10,17 @@ a {
     display: none;
 }
 
+.form > div > label {
+    display: inline-block;
+    text-align: left;
+    width: 100px;
+}
+
+.form > div:last-child {
+    display: flex;
+    justify-content: space-between;
+}
+
 .film {
     display: flex;
     margin: 8px;
@@ -23,15 +34,13 @@ a {
     margin-left: 8px;
 }
 
-.form > div > label {
-    display: inline-block;
-    text-align: left;
-    width: 100px;
-}
-
-.form > div:last-child {
+.recensione > div:first-child {
     display: flex;
     justify-content: space-between;
+}
+
+.recensione > div:last-child {
+    text-align: right;
 }
 
 @media screen and (max-width: 1024px) {
