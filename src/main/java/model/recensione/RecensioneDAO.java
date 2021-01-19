@@ -65,4 +65,23 @@ public class RecensioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public Recensione doRetrieveByIdRecensione(int idRecensione) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE id_recensione = ?");
+            ps.setInt(1, idRecensione);
+            ResultSet rs = ps.executeQuery();
+            Recensione r = new Recensione();
+            if (rs.next()) {
+                r.setIdRecensione(rs.getInt(1));
+                r.setValutazione(rs.getInt(2));
+                r.setTesto(rs.getString(3));
+                r.setUsernameUtente(rs.getString(4));
+                r.setIdFilm(rs.getInt(5));
+            }
+            return r;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -37,7 +37,7 @@ public class SegnalazioneDAO {
 
     public ArrayList<Segnalazione> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT id_recensione, COUNT(id_recensione) FROM Segnalazione GROUP BY id_recensione;");
+            PreparedStatement ps = con.prepareStatement("SELECT id_recensione, COUNT(id_recensione) FROM Segnalazione GROUP BY id_recensione ORDER BY COUNT(id_recensione) DESC;;");
             ResultSet rs = ps.executeQuery();
             ArrayList<Segnalazione> list = new ArrayList<>();
             while (rs.next()) {

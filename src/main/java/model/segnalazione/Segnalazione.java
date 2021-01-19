@@ -29,11 +29,11 @@ public class Segnalazione {
         this.usernameUtente = usernameUtente;
     }
 
-    public int getCounter() {
-        return counter;
-    }
-
     public void setCounter(int counter) {
         this.counter = counter;
+    }
+
+    public int getCounter() {
+        return counter;
     }
 }

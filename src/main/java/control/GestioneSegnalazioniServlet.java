@@ -1,5 +1,7 @@
 package control;
 
+import model.recensione.Recensione;
+import model.recensione.RecensioneDAO;
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneDAO;
 
@@ -21,7 +23,18 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
         SegnalazioneDAO serviceSegnalazione = new SegnalazioneDAO();
         ArrayList<Segnalazione> segnalazioni;
         segnalazioni = serviceSegnalazione.doRetrieveAll();
+        RecensioneDAO serviceRecensioni = new RecensioneDAO();
+        ArrayList<Recensione> recensioni = new ArrayList<>();
 
+        for(int i = 0; i < segnalazioni.size(); i++) {
+            Recensione r = serviceRecensioni.doRetrieveByIdRecensione(segnalazioni.get(i).getIdRecensione());
+            recensioni.add(r);
+        }
+
+        //sia segnalazioni che recensioni sono in ordine, nel senso che se si prende la segnalazione 1,
+        // la recensione 1 avrà i valori complementari a quella segnalazione
         request.setAttribute("segnalazioni", segnalazioni);
+        request.setAttribute("recensioni", recensioni);
+
     }
 }
