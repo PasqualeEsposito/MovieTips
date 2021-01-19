@@ -38,7 +38,7 @@ CREATE TABLE Recensione
 (
     id_recensione   INT AUTO_INCREMENT PRIMARY KEY,
     valutazione     INT         NOT NULL,
-    testo           text        NOT NULL,
+    testo           text,
     username_utente VARCHAR(35) NOT NULL,
     id_film         INT         NOT NULL,
     FOREIGN KEY (username_utente) REFERENCES Utente (username)
