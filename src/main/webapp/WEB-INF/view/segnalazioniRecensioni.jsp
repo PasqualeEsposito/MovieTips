@@ -10,6 +10,7 @@
             <a href="Profilo?username=<c:out value="${recensione.usernameUtente}"/>"${recensione.usernameUtente}>
                     ${recensione.usernameUtente}
             </a>
+            <p><b>Numero segnalazioni:</b> ${segnalazioni.counter}</p>
             <p><b>Voto:</b> ${recensione.valutazione}</p>
             <p>${recensione.testo}</p>
             <div style="display:flex;">

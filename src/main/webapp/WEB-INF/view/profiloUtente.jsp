@@ -37,7 +37,7 @@
                 <b>${recensione.usernameUtente}</b>
                 <p><b>Voto:</b> ${recensione.valutazione}</p>
                 <p>${recensione.testo}</p>
-                <c:if test="${utente != null}">
+                <c:if test="${utente.username == profilo.username}">
                     <form action="EliminaRecensioneProfilo">
                         <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
                         <button type="submit"
