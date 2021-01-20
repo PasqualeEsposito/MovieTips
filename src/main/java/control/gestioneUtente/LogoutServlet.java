@@ -1,4 +1,4 @@
-package control;
+package control.gestioneUtente;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package control;
+package control.gestioneRecensione;
 
 import model.recensione.RecensioneDAO;
 import model.utente.Utente;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "EliminaRecensioneProfiloServlet", urlPatterns = "/EliminaRecensioneProfilo")
-public class EliminaRecensioneProfiloServlet extends HttpServlet {
+public class EliminaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));

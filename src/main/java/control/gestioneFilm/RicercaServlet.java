@@ -1,4 +1,4 @@
-package control;
+package control.gestioneFilm;
 
 import model.film.Film;
 import model.film.FilmDAO;
@@ -30,7 +30,7 @@ public class RicercaServlet extends HttpServlet {
         List<Film> films = filmDao.doRetrieveByWord(inputRicerca);
         request.setAttribute("inputRicerca", inputRicerca);
         request.setAttribute("films", films);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/risultatiRicerca.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
         requestDispatcher.forward(request, response);
     }
 }

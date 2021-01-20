@@ -1,4 +1,4 @@
-package control;
+package control.gestioneRecensione;
 
 import model.segnalazione.Segnalazione;
 import model.segnalazione.SegnalazioneDAO;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "SegnalazioneServlet", urlPatterns = "/Segnala")
-public class SegnalazioneServlet extends HttpServlet {
+public class AggiungiSegnalazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));

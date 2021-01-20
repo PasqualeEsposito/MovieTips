@@ -1,4 +1,4 @@
-package control;
+package control.gestioneUtente;
 
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
@@ -25,7 +25,7 @@ public class ProfiloServlet extends HttpServlet {
         ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveByUsername(username);
         request.setAttribute("profilo", profilo);
         request.setAttribute("recensioni", recensioni);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/profiloUtente.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/profilo.jsp");
         requestDispatcher.forward(request, response);
     }
 

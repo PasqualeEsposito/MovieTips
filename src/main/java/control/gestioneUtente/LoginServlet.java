@@ -1,5 +1,6 @@
-package control;
+package control.gestioneUtente;
 
+import control.MyServletException;
 import model.utente.Utente;
 import model.utente.UtenteDAO;
 

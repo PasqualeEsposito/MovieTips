@@ -1,4 +1,4 @@
-package control;
+package control.gestioneUtente;
 
 import model.utente.UtenteDAO;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "BanServlet", urlPatterns = "/Ban")
-public class BanServlet extends HttpServlet {
+public class ModeraUtenteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");

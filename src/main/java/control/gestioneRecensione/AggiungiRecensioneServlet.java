@@ -1,4 +1,4 @@
-package control;
+package control.gestioneRecensione;
 
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "RecensioneServlet", urlPatterns = "/Recensione")
-public class RecensioneServlet extends HttpServlet {
+public class AggiungiRecensioneServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

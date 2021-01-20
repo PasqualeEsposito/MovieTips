@@ -1,4 +1,4 @@
-package control;
+package control.gestioneRecensione;
 
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
@@ -35,7 +35,7 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
         }
         request.setAttribute("segnalazioni", segnalazioni);
         request.setAttribute("recensioni", recensioni);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioniRecensioni.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioni.jsp");
         requestDispatcher.forward(request, response);
 
     }

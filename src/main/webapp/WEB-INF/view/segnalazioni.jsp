@@ -15,15 +15,16 @@
             <p><b>Voto:</b> ${recensione.valutazione}</p>
             <p>${recensione.testo}</p>
             <div style="display:flex;">
-                <form action="EliminaRecensione">
-                    <input type="hidden" name="idRecensioneE" value="${recensione.idRecensione}">
+                <form action="ModeraRecensione">
+                    <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
+                    <input type="hidden" name="elimina" value="1">
                     <button type="submit"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                         Elimina recensione
                     </button>
                 </form>
-                <form action="IgnoraRecensione">
-                    <input type="hidden" name="idRecensioneI" value="${recensione.idRecensione}">
+                <form action="ModeraRecensione">
+                    <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
                     <button type="submit"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                         Ignora recensione

@@ -1,5 +1,6 @@
-package control;
+package control.gestioneFilm;
 
+import control.MyServletException;
 import model.film.Film;
 import model.film.FilmDAO;
 import model.recensione.Recensione;
