@@ -15,6 +15,7 @@ import java.io.IOException;
 public class RecensioneServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         int valutazione = Integer.parseInt(request.getParameter("valutazione"));
         String testo = request.getParameter("testo");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
