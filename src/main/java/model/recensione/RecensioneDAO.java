@@ -85,7 +85,7 @@ public class RecensioneDAO {
         }
     }
 
-    public void doDeleteByIdRecensione(int idRecensione){
+    public void doDeleteByIdRecensione(int idRecensione) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM Recensione WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);

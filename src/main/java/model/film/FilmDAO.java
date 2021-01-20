@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class FilmDAO {
     /**
-     *
      * @param offset
      * @param limit
      * @return

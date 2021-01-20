@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Servlet che gestisce la corretta visualizzazione della home page inserendo i film nella request
  */
-@WebServlet(name = "Home", urlPatterns = "", loadOnStartup = 1)
+@WebServlet(name = "HomeServlet", urlPatterns = "", loadOnStartup = 1)
 public class HomeServlet extends HttpServlet {
     /**
      * @param request

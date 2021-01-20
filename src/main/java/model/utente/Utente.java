@@ -84,6 +84,7 @@ public class Utente {
      * 'D' amministratore
      * 'E' articolista
      * 'F' moderatore
+     *
      * @param ruolo I ruoli dell'utente
      */
     public void setRuolo(String ruolo) {

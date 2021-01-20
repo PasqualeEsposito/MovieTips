@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "BanServlet", urlPatterns = "/Ban")
+/**
+ * Servlet che permette a un moderatore di bannare un utente
+ */
+@WebServlet(name = "ModeraUtenteServlet", urlPatterns = "/ModeraUtente")
 public class ModeraUtenteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

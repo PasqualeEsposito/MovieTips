@@ -24,12 +24,19 @@ public class MyServletException extends ServletException {
 
     /**
      * Metodo che lancia l'eccezione MyServletException se esiste un attributo "utente" all'interno della sessione
+     *
      * @param request
      * @throws MyServletException
      */
-    public static void checkSession(HttpServletRequest request) throws MyServletException {
+    public static void checkAccount(HttpServletRequest request) throws MyServletException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente != null)
+            throw new MyServletException(("Utente non autorizzato"));
+    }
+
+    public static void checkFilmino(HttpServletRequest request) throws MyServletException {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente != null && !utente.isFilmino())
             throw new MyServletException(("Utente non autorizzato"));
     }
 }

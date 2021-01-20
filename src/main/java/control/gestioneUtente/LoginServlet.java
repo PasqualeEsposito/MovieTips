@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 /**
  * Servlet che gestisce il login inserendo l'utente nella sessione. Lancia l'eccezione MyServletException se i dati inseriti dall'utente non sono validi
  */
@@ -18,6 +19,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteDAO utenteDAO = new UtenteDAO();
+
     public LoginServlet() {
     }
 
@@ -28,7 +30,7 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        MyServletException.checkSession(request);
+        MyServletException.checkAccount(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/login.jsp");
         requestDispatcher.forward(request, response);
     }

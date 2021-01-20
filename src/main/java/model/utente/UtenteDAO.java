@@ -34,7 +34,7 @@ public class UtenteDAO {
         }
     }
 
-    public void doUpdateUtente(String username, String ruolo){
+    public void doUpdateUtente(String username, String ruolo) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE Utente SET ruolo = ? WHERE username = ?");
             ps.setString(1, ruolo);

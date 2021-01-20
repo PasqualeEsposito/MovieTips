@@ -14,7 +14,7 @@
 </header>
 <div class="page-content">
     <% if (check == 1) { %>
-    <form action="Ban">
+    <form action="ModeraUtente">
         <input type="hidden" name="username" value="${profilo.username}">
         <button type="submit"
                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
@@ -38,7 +38,7 @@
                 <p><b>Voto:</b> ${recensione.valutazione}</p>
                 <p>${recensione.testo}</p>
                 <c:if test="${utente.username == profilo.username}">
-                    <form action="EliminaRecensioneProfilo">
+                    <form action="EliminaRecensione">
                         <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
                         <button type="submit"
                                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Servlet che gestisce la corretta visualizzazione della pagina profilo di un utente inserendo i dati dell'utente nella request
+ */
 @WebServlet(name = "ProfiloServlet", urlPatterns = "/Profilo")
 public class ProfiloServlet extends HttpServlet {
     @Override

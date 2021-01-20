@@ -14,23 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Servlet che gestisce la corretta visualizzazione della pagina riservata al moderatore inserendo tutte le recensioni segnalate
+ */
 @WebServlet(name = "GestioneSegnalazioniServlet", urlPatterns = "/GestioneSegnalazioni")
 public class GestioneSegnalazioniServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        SegnalazioneDAO serviceSegnalazione = new SegnalazioneDAO();
+        SegnalazioneDAO segnalazioneDAO = new SegnalazioneDAO();
         ArrayList<Segnalazione> segnalazioni;
-        segnalazioni = serviceSegnalazione.doRetrieveAll();
-        RecensioneDAO serviceRecensioni = new RecensioneDAO();
+        segnalazioni = segnalazioneDAO.doRetrieveAll();
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
         ArrayList<Recensione> recensioni = new ArrayList<>();
-
-        for(int i = 0; i < segnalazioni.size(); i++) {
-            Recensione r = serviceRecensioni.doRetrieveByIdRecensione(segnalazioni.get(i).getIdRecensione());
+        for (int i = 0; i < segnalazioni.size(); i++) {
+            Recensione r = recensioneDAO.doRetrieveByIdRecensione(segnalazioni.get(i).getIdRecensione());
             recensioni.add(r);
         }
         request.setAttribute("segnalazioni", segnalazioni);

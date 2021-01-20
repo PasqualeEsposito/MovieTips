@@ -138,6 +138,9 @@ SELECT id_recensione, COUNT(username_utente)
 FROM Recensione
 GROUP BY id_recensione;
 
-SELECT id_recensione, COUNT(id_recensione) FROM Segnalazione WHERE id_recensione = 1 GROUP BY id_recensione;
+SELECT id_recensione, COUNT(id_recensione)
+FROM Segnalazione
+WHERE id_recensione = 1
+GROUP BY id_recensione;
 
 DROP DATABASE movietipsdb;

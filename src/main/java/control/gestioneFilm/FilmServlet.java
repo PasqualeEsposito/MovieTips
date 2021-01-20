@@ -16,25 +16,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Servlet che gestisce la corretta visaulizzazione della pagina di un film inserendo il film nella request
+ * Servlet che gestisce la corretta visualizzazione della pagina di un film inserendo il film nella request
  */
 
 @WebServlet(name = "FilmServlet", urlPatterns = "/Film")
 public class FilmServlet extends HttpServlet {
-    /**
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDAO = new FilmDAO();
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
         int id = Integer.parseInt(request.getParameter("id"));
         Film film = filmDAO.doRetrieveById(id);
         if (film == null) {
-            throw new MyServletException("Film non trovato");
+            throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
         ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveByIdFilm(id);
         request.setAttribute("film", film);
         request.setAttribute("recensioni", recensioni);
