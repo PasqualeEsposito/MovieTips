@@ -37,7 +37,7 @@ public class SegnalazioneDAO {
 
     public ArrayList<Segnalazione> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT id_recensione, COUNT(id_recensione) FROM Segnalazione GROUP BY id_recensione ORDER BY COUNT(id_recensione) DESC;;");
+            PreparedStatement ps = con.prepareStatement("SELECT id_recensione, COUNT(id_recensione) FROM Segnalazione GROUP BY id_recensione ORDER BY COUNT(id_recensione) DESC;");
             ResultSet rs = ps.executeQuery();
             ArrayList<Segnalazione> list = new ArrayList<>();
             while (rs.next()) {
@@ -82,10 +82,10 @@ public class SegnalazioneDAO {
 
     public void doDeleteByIdRecensione(int idRecensione) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Segnalazione where id_segnalazione = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Segnalazione where id_recensione = ?");
             ps.setInt(1, idRecensione);
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("Delete error");
+            if (ps.executeUpdate() == 0) {
+                throw new RuntimeException("delete ERROR");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

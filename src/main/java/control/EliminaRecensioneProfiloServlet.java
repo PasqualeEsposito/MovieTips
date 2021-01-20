@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "EliminaRecensioneServlet", urlPatterns = "/EliminaRecensioneProfilo")
+@WebServlet(name = "EliminaRecensioneProfiloServlet", urlPatterns = "/EliminaRecensioneProfilo")
 public class EliminaRecensioneProfiloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

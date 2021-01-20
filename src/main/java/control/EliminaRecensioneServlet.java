@@ -18,7 +18,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
+        int idRecensione = Integer.parseInt(request.getParameter("idRecensioneE"));
         RecensioneDAO serviceRecensione = new RecensioneDAO();
         serviceRecensione.doDeleteByIdRecensione(idRecensione);
         response.sendRedirect("./GestioneSegnalazioni");

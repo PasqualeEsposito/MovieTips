@@ -13,7 +13,7 @@ import java.io.IOException;
 public class IgnoraRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
+        int idRecensione = Integer.parseInt(request.getParameter("idRecensioneI"));
         SegnalazioneDAO serviceSegnalazione = new SegnalazioneDAO();
         serviceSegnalazione.doDeleteByIdRecensione(idRecensione);
         response.sendRedirect("./GestioneSegnalazioni");
