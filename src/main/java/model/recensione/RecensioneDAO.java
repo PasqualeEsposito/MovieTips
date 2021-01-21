@@ -58,6 +58,7 @@ public class RecensioneDAO {
                 r.setTesto(rs.getString(3));
                 r.setUsernameUtente(rs.getString(4));
                 r.setIdFilm(rs.getInt(5));
+                r.setSegnalazione(rs.getBoolean(6));
                 recensioni.add(r);
             }
             return recensioni;
@@ -78,6 +79,7 @@ public class RecensioneDAO {
                 r.setTesto(rs.getString(3));
                 r.setUsernameUtente(rs.getString(4));
                 r.setIdFilm(rs.getInt(5));
+                r.setSegnalazione(rs.getBoolean(6));
             }
             return r;
         } catch (SQLException e) {
@@ -97,6 +99,7 @@ public class RecensioneDAO {
                 r.setTesto(rs.getString(3));
                 r.setUsernameUtente(rs.getString(4));
                 r.setIdFilm(rs.getInt(5));
+                r.setSegnalazione(rs.getBoolean(6));
                 list.add(r);
             }
             return list;
