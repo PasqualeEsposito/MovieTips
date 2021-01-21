@@ -18,7 +18,6 @@ import java.util.ArrayList;
 /**
  * Servlet che gestisce la corretta visualizzazione della pagina di un film inserendo il film nella request
  */
-
 @WebServlet(name = "FilmServlet", urlPatterns = "/Film")
 public class FilmServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
