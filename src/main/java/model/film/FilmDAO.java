@@ -117,4 +117,41 @@ public class FilmDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void doSave(Film f) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO Film VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, f.getTitolo());
+            ps.setString(2, f.getProduzione());
+            ps.setString(3, f.getMusiche());
+            ps.setString(4, f.getFotografia());
+            ps.setString(5, f.getSceneggiatura());
+            ps.setString(6, f.getDistribuzione());
+            ps.setInt(7, f.getDurata());
+            ps.setString(8, f.getPaese());
+            ps.setString(9, f.getAttori());
+            ps.setString(10, f.getRegia());
+            ps.setString(11, f.getGenere());
+            ps.setString(12, f.getTrama());
+            ps.setInt(13, f.getAnno());
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("Insert ERROR");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doDeleteById(int id) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Film where id_film = ?");
+            ps.setInt(1, id);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("delete ERROR");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

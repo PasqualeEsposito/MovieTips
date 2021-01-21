@@ -1,28 +1,31 @@
 package dao;
 
+import junit.framework.TestCase;
 import model.film.Film;
 import model.film.FilmDAO;
+import org.junit.After;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class TestFilm {
+public class TestPeriferica extends TestCase {
     private FilmDAO filmDAO;
-    private Film film;
-
+    private Film filmEsistente;
+    private Film filmNonEsistente;
 
     @BeforeEach
-    void setUp() throws Exception {
+    protected void setUp() throws Exception {
         filmDAO = new FilmDAO();
-        film = new Film("Film", "Test", "test", "test", "test", "test", 150, "test", "test", "test", "test", "test", 2000);
-        film.setIdFilm(0);
-        // INSERT INTO `movietipsdb`.`film` (`id_film`, `titolo`, `produzione`, `musiche`, `fotografia`, `sceneggiatura`, `distribuzione`, `durata`, `paese`, `attori`, `regia`, `genere`, `trama`, `anno`) VALUES ('0', 'Test', ' ', ' ', ' ', ' ', ' ', '120', ' ', ' ', ' ', ' ', ' ', ' ')
+        filmEsistente = new Film("TitoloTest", "ProduzioneTest", "MusicheTest", "FotografiaTest", "SceneggiaturaTest", "DistribuzioneTest", 120, "PaeseTest", "AttoriTest", "RegiaTest", "GenereTest", "TramaTest", 2010);
+        perifericaNonEsistente = new PerifericaBean("mouse", "TestNonEsistente", 5, 21);
+
+        dao.doDelete(perifericaNonEsistente.getNome());
+        dao.doDelete(perifericaEsistente.getNome());
+        dao.doSave(perifericaEsistente);
     }
 
     @Test
     public void testRicercaPerifericaEsistente() {
-        assertEquals(film.getIdFilm(), filmDAO.doRetrieveById(film.getIdFilm()).getIdFilm());
+        assertEquals(perifericaEsistente.getNome(), dao.doRetrieveByKey(perifericaEsistente.getNome()).getNome());
     }
 
     @Test
@@ -30,27 +33,16 @@ class TestFilm {
         assertEquals("", dao.doRetrieveByKey(perifericaNonEsistente.getNome()).getNome());
     }
 
-    /*@Test
-    public void testInserimentoPerifericaEsistente() {
-        assertEquals(-1, dao.doSave(perifericaEsistente));
-    }
-    @Test
-    public void testInserimentoPerifericaNonEsistente() {
-        assertEquals(0, dao.doSave(perifericaNonEsistente));
-    }
-    @Test
-    public void testModificaPerifericaEsistente() {
-        assertEquals(true,dao.doUpdate(perifericaEsistente, perifericaEsistente.getNome()));
-    }
-    @Test
-    public void testListaPerifericheEsistentiDivisePerTipi()  {
-        ArrayList<PerifericaBean> collection = new ArrayList<PerifericaBean>();
-        assertNotEquals(collection, dao.doRetrieveAllTipi());
-    }
     @Test
     public void testListaPerifericheEsistenti() {
         ArrayList<PerifericaBean> collection = new ArrayList<PerifericaBean>();
         assertNotEquals(collection, dao.doRetrieveAll());
     }
-*/
+
+    @After
+    @Override
+    protected void tearDown() throws Exception {
+        dao.doDelete(perifericaNonEsistente.getNome());
+        dao.doDelete(perifericaEsistente.getNome());
+    }
 }

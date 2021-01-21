@@ -67,7 +67,7 @@ public class RecensioneDAO {
         }
     }
 
-    public Recensione doRetrieveByIdRecensione(int idRecensione) {
+   /* public Recensione doRetrieveByIdRecensione(int idRecensione) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
@@ -85,7 +85,7 @@ public class RecensioneDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public ArrayList<Recensione> doRetrieveBySegnalazione() {
         try (Connection con = ConPool.getConnection()) {
