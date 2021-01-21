@@ -41,22 +41,11 @@ CREATE TABLE Recensione
     testo           text,
     username_utente VARCHAR(35) NOT NULL,
     id_film         INT         NOT NULL,
+    segnalazione    BOOLEAN DEFAULT false,
     FOREIGN KEY (username_utente) REFERENCES Utente (username)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (id_film) REFERENCES Film (id_film)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-CREATE TABLE Segnalazione
-(
-    id_recensione   INT         NOT NULL,
-    username_utente VARCHAR(35) NOT NULL,
-    FOREIGN KEY (id_recensione) REFERENCES Recensione (id_recensione)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (username_utente) REFERENCES Utente (username)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -128,19 +117,5 @@ INSERT INTO Recensione
 VALUES (1, 4, 'Il film è molto bello', 'fabrizio_cerciello', 5),
        (2, 1, 'Il film non mi è piaciuto per niente', 'franco.ceriello', 5),
        (3, 5, 'Il film è stupendo!!!', 'luca_ciao', 5);
-
-INSERT INTO Segnalazione
-VALUES (1, 'franco.ceriello'),
-       (1, 'luca_ciao'),
-       (2, 'franco.ceriello');
-
-SELECT id_recensione, COUNT(username_utente)
-FROM Recensione
-GROUP BY id_recensione;
-
-SELECT id_recensione, COUNT(id_recensione)
-FROM Segnalazione
-WHERE id_recensione = 1
-GROUP BY id_recensione;
 
 DROP DATABASE movietipsdb;

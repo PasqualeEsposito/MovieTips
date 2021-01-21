@@ -1,7 +1,6 @@
 package control.gestioneRecensione;
 
 import model.recensione.RecensioneDAO;
-import model.segnalazione.SegnalazioneDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +17,13 @@ public class ModeraRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        if (Integer.parseInt(request.getParameter("elimina")) == 1) {
-            RecensioneDAO serviceRecensione = new RecensioneDAO();
+        int elimina = Integer.parseInt(request.getParameter("elimina"));
+        RecensioneDAO serviceRecensione = new RecensioneDAO();
+
+        if (elimina == 1)
             serviceRecensione.doDeleteByIdRecensione(idRecensione);
-        } else {
-            SegnalazioneDAO serviceSegnalazione = new SegnalazioneDAO();
-            serviceSegnalazione.doDeleteByIdRecensione(idRecensione);
-        }
+        else if (elimina == 0)
+            serviceRecensione.doUpdateSegnalazioneFalse(idRecensione);
         response.sendRedirect("./GestioneSegnalazioni");
     }
 }

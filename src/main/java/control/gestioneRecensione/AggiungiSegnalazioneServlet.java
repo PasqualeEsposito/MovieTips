@@ -1,9 +1,7 @@
 package control.gestioneRecensione;
 
 import control.MyServletException;
-import model.segnalazione.Segnalazione;
-import model.segnalazione.SegnalazioneDAO;
-import model.utente.Utente;
+import model.recensione.RecensioneDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +19,8 @@ public class AggiungiSegnalazioneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MyServletException.checkAccount(request);
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        Segnalazione s = new Segnalazione(idRecensione, utente.getUsername());
-        SegnalazioneDAO segnalazioneDAO = new SegnalazioneDAO();
-        segnalazioneDAO.doSave(s);
+        RecensioneDAO service = new RecensioneDAO();
+        service.doUpdateSegnalazioneTrue(idRecensione);
         int idFilm = Integer.parseInt(request.getParameter("idFilm"));
         response.sendRedirect("./Film?id=" + idFilm);
     }
