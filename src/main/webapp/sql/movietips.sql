@@ -113,9 +113,12 @@ VALUES ('fabrizio_cerciello', 'Fabrizio', 'Cerciello', 'fabrizio.cerciello@unisa
        ('franco.ceriello', 'Franco', 'Ceriello', 'franco.ceriello@unisa.it', SHA1('Franco1!'), 'M', '1999-12-30',
         '001000');
 
-INSERT INTO Recensione
+INSERT INTO Recensione (id_recensione, valutazione, testo, username_utente, id_film)
 VALUES (1, 4, 'Il film è molto bello', 'fabrizio_cerciello', 5),
        (2, 1, 'Il film non mi è piaciuto per niente', 'franco.ceriello', 5),
        (3, 5, 'Il film è stupendo!!!', 'luca_ciao', 5);
+
+SELECT * FROM Recensione;
+SELECT * FROM Recensione WHERE segnalazione = true;
 
 DROP DATABASE movietipsdb;
