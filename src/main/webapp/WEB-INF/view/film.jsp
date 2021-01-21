@@ -81,7 +81,7 @@
                             <p>${recensione.testo}</p>
                         </div>
                         <div>
-                            <c:if test="${recensione.segnalazione == 0}">
+                            <c:if test="${recensione.segnalazione eq false}">
                                 <c:if test="${utente != null}">
                                     <form action="Segnala">
                                         <input type="hidden" name="idFilm" value="${film.idFilm}">
