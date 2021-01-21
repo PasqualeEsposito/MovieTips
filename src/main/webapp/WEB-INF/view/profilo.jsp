@@ -24,11 +24,11 @@
     <% } %>
     <div>
         <p><b>Username:</b> ${profilo.username}</p>
-        <p><b>Nome:</b>${profilo.nome}</p>
-        <p><b>Cognome:</b>${profilo.cognome}</p>
-        <p><b>E-mail:</b>${profilo.email}</p>
-        <p><b>Genere:</b>${profilo.genere}</p>
-        <p><b>Data di nascita:</b>${profilo.ddn}</p>
+        <p><b>Nome:</b> ${profilo.nome}</p>
+        <p><b>Cognome:</b> ${profilo.cognome}</p>
+        <p><b>E-mail:</b> ${profilo.email}</p>
+        <p><b>Genere:</b> ${profilo.genere}</p>
+        <p><b>Data di nascita:</b> ${profilo.ddn}</p>
     </div>
     <hr>
     <div>

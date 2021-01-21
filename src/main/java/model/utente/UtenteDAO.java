@@ -92,6 +92,7 @@ public class UtenteDAO {
                 u.setNome(rs.getString(2));
                 u.setCognome(rs.getString(3));
                 u.setEmail(rs.getString(4));
+                u.setPassword(rs.getString(5));
                 u.setGenere(rs.getString(6));
                 u.setDdn(rs.getString(7));
                 u.setRuolo(rs.getString(8));

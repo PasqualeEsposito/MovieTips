@@ -1,6 +1,5 @@
 package control.gestioneUtente;
 
-import control.MyServletException;
 import model.utente.Utente;
 import model.utente.UtenteDAO;
 
@@ -43,17 +42,37 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        //INSERIRE CONTROLLO NEL CASO IN CUI IL CLIENTE è BANNATO
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Utente utente = null;
-        if (email != null && password != null) {
-            utente = utenteDAO.doRetrieveByEmailPassword(email, password);
+        Utente utente;
+        if (email.length() < 8 || email.length() > 255) {
+            request.setAttribute("errorTest", "LE_FAIL");
+        } else {
+            if (!email.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
+                request.setAttribute("errorTest", "FE_FAIL");
+            } else {
+                utente = utenteDAO.doRetrieveByEmail(email);
+                if (utente == null) {
+                    request.setAttribute("errorTest", "EE_FAIL");
+                } else {
+                    if (password.length() < 8 || password.length() > 255) {
+                        request.setAttribute("errorTest", "LP_FAIL");
+                    } else {
+                        if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
+                            request.setAttribute("errorTest", "FP_FAIL");
+                        } else {
+                            utente = utenteDAO.doRetrieveByEmailPassword(email, password);
+                            if (utente == null) {
+                                request.setAttribute("errorTest", "CP_FAIL");
+                            } else {
+                                request.setAttribute("errorTest", "OK");
+                                request.getSession().setAttribute("utente", utente);
+                                response.sendRedirect(".");
+                            }
+                        }
+                    }
+                }
+            }
         }
-        if (utente == null) {
-            throw new MyServletException("Username e/o password non validi");
-        }
-        request.getSession().setAttribute("utente", utente);
-        response.sendRedirect(".");
     }
 }
