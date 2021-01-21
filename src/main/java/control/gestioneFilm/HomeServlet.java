@@ -1,4 +1,4 @@
-package control;
+package control.gestioneFilm;
 
 import model.film.Film;
 import model.film.FilmDAO;

@@ -6,6 +6,7 @@ public class Recensione {
     private String testo;
     private String usernameUtente;
     private int idFilm;
+    private boolean segnalazione;
 
     public Recensione() {
     }
@@ -55,5 +56,13 @@ public class Recensione {
 
     public void setTesto(String testo) {
         this.testo = testo;
+    }
+
+    public boolean isSegnalazione() {
+        return segnalazione;
+    }
+
+    public void setSegnalazione(boolean segnalazione) {
+        this.segnalazione = segnalazione;
     }
 }

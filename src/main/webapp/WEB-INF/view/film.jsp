@@ -81,15 +81,17 @@
                             <p>${recensione.testo}</p>
                         </div>
                         <div>
-                            <c:if test="${utente != null}">
-                                <form action="Segnala">
-                                    <input type="hidden" name="idFilm" value="${film.idFilm}">
-                                    <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
-                                    <button type="submit"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                        Segnala recensione
-                                    </button>
-                                </form>
+                            <c:if test="${recensione.segnalazione == 0}">
+                                <c:if test="${utente != null}">
+                                    <form action="Segnala">
+                                        <input type="hidden" name="idFilm" value="${film.idFilm}">
+                                        <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
+                                        <button type="submit"
+                                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                            Segnala recensione
+                                        </button>
+                                    </form>
+                                </c:if>
                             </c:if>
                         </div>
                     </div>
