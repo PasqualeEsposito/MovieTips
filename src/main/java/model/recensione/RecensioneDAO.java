@@ -66,7 +66,7 @@ public class RecensioneDAO {
             throw new RuntimeException(e);
         }
     }
-
+/*
    /* public Recensione doRetrieveByIdRecensione(int idRecensione) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Recensione WHERE id_recensione = ?");
