@@ -94,6 +94,7 @@ public class TC_AggiungiValutazione extends Mockito {
     @AfterEach
     public void tearDown() {
         utenteDAO.doDeleteByUsername("frank");
+        filmDAO.doDeleteByTitoloAnnoRegia(film.getTitolo(), film.getAnno(), film.getRegia());
         servlet = null;
         request = null;
         response = null;
