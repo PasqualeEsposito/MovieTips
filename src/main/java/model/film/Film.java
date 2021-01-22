@@ -23,22 +23,20 @@ public class Film {
     public Film() {
     }
 
-    public Film(String titolo, String produzione, String musiche, String fotografia, String sceneggiatura,
-                String distribuzione, int durata, String paese, String attori, String regia, String genere,
-                String trama, int anno) {
+    public Film(String titolo, String genere, int anno, String regia, String attori, String paese, int durata, String distribuzione, String sceneggiatura, String fotografia, String musiche, String produzione, String trama) {
         this.titolo = titolo;
-        this.produzione = produzione;
-        this.musiche = musiche;
-        this.fotografia = fotografia;
-        this.sceneggiatura = sceneggiatura;
-        this.distribuzione = distribuzione;
-        this.durata = durata;
-        this.paese = paese;
-        this.attori = attori;
-        this.regia = regia;
         this.genere = genere;
-        this.trama = trama;
         this.anno = anno;
+        this.regia = regia;
+        this.attori = attori;
+        this.paese = paese;
+        this.durata = durata;
+        this.distribuzione = distribuzione;
+        this.sceneggiatura = sceneggiatura;
+        this.fotografia = fotografia;
+        this.musiche = musiche;
+        this.produzione = produzione;
+        this.trama = trama;
     }
 
     /**
