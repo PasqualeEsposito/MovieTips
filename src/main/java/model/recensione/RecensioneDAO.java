@@ -2,10 +2,7 @@ package model.recensione;
 
 import model.connection.ConPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class RecensioneDAO {
@@ -88,10 +85,12 @@ public class RecensioneDAO {
      * @param testo
      * @param usernameUtente
      * @param idFilm
+     * @return
      */
-    public void doSave(int valutazione, String testo, String usernameUtente, int idFilm) {
+    public int doSave(int valutazione, String testo, String usernameUtente, int idFilm) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO recensione (valutazione, testo, username_utente, id_film) VALUES (?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO recensione (valutazione, testo, username_utente, id_film) VALUES (?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, valutazione);
             ps.setString(2, testo);
             ps.setString(3, usernameUtente);
@@ -99,6 +98,9 @@ public class RecensioneDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error");
             }
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -122,30 +124,49 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public void doUpdateSegnalazioneTrue(int idRecensione) {
+    public boolean doUpdateSegnalazioneTrue(int idRecensione) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("UPDATE error");
+            if (ps.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
+
     }
 
     /**
      * @param idRecensione
      */
-    public void doUpdateSegnalazioneFalse(int idRecensione) {
+    public boolean doUpdateSegnalazioneFalse(int idRecensione) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = false WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("UPDATE error");
+            if (ps.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public boolean doDeleteByTestUsernameFilm(String testo, String usernameUtente, int idFilm) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE testo = ? AND username_utente = ? AND id_film = ?");
+            ps.setString(1, testo);
+            ps.setString(2, usernameUtente);
+            ps.setInt(3, idFilm);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

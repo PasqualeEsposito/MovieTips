@@ -11,6 +11,14 @@ public class Recensione {
     public Recensione() {
     }
 
+    public Recensione(int valutazione, String testo,boolean segnalazione, String usernameUtente, int idFilm) {
+        this.valutazione = valutazione;
+        this.testo = testo;
+        this.segnalazione = segnalazione;
+        this.usernameUtente = usernameUtente;
+        this.idFilm = idFilm;
+    }
+
     /**
      * @return
      */
