@@ -13,17 +13,30 @@
 </jsp:include>
 </header>
 <div class="page-content">
-    <% if (check == 1) { %>
-    <form action="ModeraUtente">
-        <input type="hidden" name="username" value="${profilo.username}">
-        <button type="submit"
-                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-            Elimina utente
-        </button>
-    </form>
-    <% } %>
+
+
+    <c:choose>
+        <c:when test="${utente.username != profilo.username}">
+            <% if (check == 1) { %>
+            <div class="submit">
+                <h2>Profilo di ${profilo.username}</h2>
+                <form action="ModeraUtente">
+                    <input type="hidden" name="username" value="${profilo.username}">
+                    <button type="submit"
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                        Elimina utente
+                    </button>
+                </form>
+            </div>
+            <% } else { %>
+            <h2>Profilo di ${profilo.username}</h2>
+            <% } %>
+        </c:when>
+        <c:otherwise>
+            <h2>Profilo di ${profilo.username}</h2>
+        </c:otherwise>
+    </c:choose>
     <div>
-        <h2>Profilo di ${profilo.username}</h2>
         <p><b>Nome:</b> ${profilo.nome}</p>
         <p><b>Cognome:</b> ${profilo.cognome}</p>
         <p><b>E-mail:</b> ${profilo.mail}</p>
@@ -34,7 +47,7 @@
         <c:choose>
             <c:when test="${empty recensioni}">
                 <hr style="visibility: hidden">
-                <h3>Nessun elemento da mostrare...</h3>
+                <h2>Nessuna recensione da mostrare...</h2>
             </c:when>
             <c:otherwise>
                 <hr style="visibility: hidden">
