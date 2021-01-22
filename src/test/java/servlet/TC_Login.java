@@ -30,8 +30,17 @@ public class TC_Login extends Mockito {
     @BeforeEach
     public void setUp() {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Utente WHERE mail = ?");
-            ps.setString(1, "francesco@unisa.it");
+            PreparedStatement ps = con.prepareStatement("SELECT username FROM utente WHERE username = ?");
+            ps.setString(1, "frank");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                try (Connection con1 = ConPool.getConnection()) {
+                    PreparedStatement ps1 = con1.prepareStatement("DELETE FROM Utente WHERE mail = ?");
+                    ps1.setString(1, "francesco@unisa.it");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

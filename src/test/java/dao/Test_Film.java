@@ -1,3 +1,4 @@
+/*
 package dao;
 
 import junit.framework.TestCase;
@@ -24,8 +25,6 @@ public class Test_Film extends TestCase {
         assertEquals(filmEsistente.getIdFilm(), filmDAO.doRetrieveById(filmEsistente.getIdFilm()).getIdFilm());
     }
 
-    */
-/*
     @Test
     public void testRicercaPerifericaNonEsistente() {
         assertEquals("", dao.doRetrieveByKey(perifericaNonEsistente.getNome()).getNome());
@@ -35,12 +34,11 @@ public class Test_Film extends TestCase {
     public void testListaPerifericheEsistenti() {
         ArrayList<PerifericaBean> collection = new ArrayList<PerifericaBean>();
         assertNotEquals(collection, dao.doRetrieveAll());
-    }*//*
-
+    }
 
     @After
     @Override
     protected void tearDown() throws Exception {
 
     }
-}
+}*/
