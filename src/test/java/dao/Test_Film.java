@@ -1,11 +1,15 @@
-/*
 package dao;
 
 import junit.framework.TestCase;
 import model.film.Film;
 import model.film.FilmDAO;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class Test_Film extends TestCase {
     private FilmDAO filmDAO;
@@ -27,18 +31,19 @@ public class Test_Film extends TestCase {
 
     @Test
     public void testRicercaPerifericaNonEsistente() {
-        assertEquals("", dao.doRetrieveByKey(perifericaNonEsistente.getNome()).getNome());
+        assertEquals("", filmDAO.doRetrieveById(filmNonEsistente.getIdFilm()).getTitolo());
     }
 
     @Test
     public void testListaPerifericheEsistenti() {
-        ArrayList<PerifericaBean> collection = new ArrayList<PerifericaBean>();
-        assertNotEquals(collection, dao.doRetrieveAll());
+        ArrayList<Film> collection = new ArrayList<>();
+        assertNotEquals(collection, filmDAO.doRetrieveAll());
     }
 
     @After
     @Override
-    protected void tearDown() throws Exception {
-
+    protected void tearDown() {
+        filmDAO.doDeleteById(filmNonEsistente.getIdFilm());
+        filmDAO.doDeleteById(filmEsistente.getIdFilm());
     }
-}*/
+}
