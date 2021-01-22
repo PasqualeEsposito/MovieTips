@@ -29,22 +29,22 @@
     </button>
 </form>
     <% } %>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <a href="."><img class="mdl-layout-icon" src="./img/logo.png"></a>
-            <div class="mdl-layout-spacer"></div>
-            <form action="Ricerca" method="get">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <a href="."><img class="mdl-layout-icon" src="./img/logo.png"></a>
+                <div class="mdl-layout-spacer"></div>
+                <form action="Ricerca" method="get" accept-charset="utf-8">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                           mdl-textfield--floating-label mdl-textfield--align-right">
-                    <label class="mdl-button mdl-js-button mdl-button--icon"
-                           for="fixed-header-drawer-exp">
-                        <i class="material-icons">search</i>
-                    </label>
-                    <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" name="inputRicerca"
-                               id="fixed-header-drawer-exp">
-                    </div>
+                        <label class="mdl-button mdl-js-button mdl-button--icon"
+                               for="fixed-header-drawer-exp">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" name="inputRicerca"
+                                   id="fixed-header-drawer-exp">
+                        </div>
                 </div>
             </form>
             <nav class="mdl-navigation">
@@ -53,7 +53,7 @@
                         <a class="mdl-navigation__link" href="Login">Accedi</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="Profilo?username=<c:out value="${utente.username}"/>">
+                        <a class="account-navigation" href="Profilo?username=<c:out value="${utente.username}"/>">
                             <span style="color: rgb(255,255,255)" class="material-icons">account_circle</span>
                         </a>
                         <a class="mdl-navigation__link" href="Logout">Disconnetti</a>

@@ -17,15 +17,18 @@ import java.util.ArrayList;
  */
 @WebServlet(name = "GestioneSegnalazioniServlet", urlPatterns = "/GestioneSegnalazioni")
 public class GestioneSegnalazioniServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RecensioneDAO service = new RecensioneDAO();
-        ArrayList<Recensione> recensioni;
-        recensioni = service.doRetrieveBySegnalazione();
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   // Inserire controlli utente
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione();
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioni.jsp");
         requestDispatcher.forward(request, response);
-
     }
 }

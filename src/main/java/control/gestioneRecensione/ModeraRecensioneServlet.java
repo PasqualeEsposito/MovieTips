@@ -2,7 +2,6 @@ package control.gestioneRecensione;
 
 import model.recensione.RecensioneDAO;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,16 +13,21 @@ import java.io.IOException;
  */
 @WebServlet(name = "ModeraRecensioneServlet", urlPatterns = "/ModeraRecensione")
 public class ModeraRecensioneServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { // Inserire controlli utente
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
         int elimina = Integer.parseInt(request.getParameter("elimina"));
-        RecensioneDAO serviceRecensione = new RecensioneDAO();
-
-        if (elimina == 1)
-            serviceRecensione.doDeleteByIdRecensione(idRecensione);
-        else if (elimina == 0)
-            serviceRecensione.doUpdateSegnalazioneFalse(idRecensione);
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        if (elimina == 1) {
+            recensioneDAO.doDeleteByIdRecensione(idRecensione);
+        } else if (elimina == 0) {
+            recensioneDAO.doUpdateSegnalazioneFalse(idRecensione);
+        }
         response.sendRedirect("./GestioneSegnalazioni");
     }
 }

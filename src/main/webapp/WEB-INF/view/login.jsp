@@ -8,9 +8,9 @@
     <div>
         <form class="form" action="Login" method="post" accept-charset="utf-8">
             <div>
-                <label for="email">Email:</label>
+                <label for="mail">Email:</label>
                 <div class="mdl-textfield">
-                    <input class="mdl-textfield__input" name="email" type="text" id="email">
+                    <input class="mdl-textfield__input" name="mail" type="text" id="mail">
                 </div>
             </div>
             <div>

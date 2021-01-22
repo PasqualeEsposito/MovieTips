@@ -23,32 +23,41 @@
     </form>
     <% } %>
     <div>
-        <p><b>Username:</b> ${profilo.username}</p>
+        <h2>Profilo di ${profilo.username}</h2>
         <p><b>Nome:</b> ${profilo.nome}</p>
         <p><b>Cognome:</b> ${profilo.cognome}</p>
-        <p><b>E-mail:</b> ${profilo.email}</p>
+        <p><b>E-mail:</b> ${profilo.mail}</p>
         <p><b>Genere:</b> ${profilo.genere}</p>
-        <p><b>Data di nascita:</b> ${profilo.ddn}</p>
+        <p><b>Data di nascita:</b> ${profilo.dataNascita}</p>
     </div>
-    <hr>
     <div>
-        <c:forEach items="${recensioni}" var="recensione">
-            <div>
-                <b>${recensione.usernameUtente}</b>
-                <p><b>Voto:</b> ${recensione.valutazione}</p>
-                <p>${recensione.testo}</p>
-                <c:if test="${utente.username == profilo.username}">
-                    <form action="EliminaRecensione">
-                        <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
-                        <button type="submit"
-                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                            Elimina recensione
-                        </button>
-                    </form>
-                </c:if>
-            </div>
-            <hr>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${empty recensioni}">
+                <hr style="visibility: hidden">
+                <h3>Nessun elemento da mostrare...</h3>
+            </c:when>
+            <c:otherwise>
+                <hr style="visibility: hidden">
+                <h2>Recensioni di ${profilo.username}</h2>
+                <c:forEach items="${recensioni}" var="recensione">
+                    <div>
+                        <b>${recensione.usernameUtente}</b>
+                        <p><b>Voto:</b> ${recensione.valutazione}</p>
+                        <p>${recensione.testo}</p>
+                        <c:if test="${utente.username == profilo.username}">
+                            <form action="EliminaRecensione">
+                                <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
+                                <button type="submit"
+                                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    Elimina recensione
+                                </button>
+                            </form>
+                        </c:if>
+                    </div>
+                    <hr>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 </body>

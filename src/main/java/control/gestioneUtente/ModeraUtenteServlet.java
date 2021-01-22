@@ -2,7 +2,6 @@ package control.gestioneUtente;
 
 import model.utente.UtenteDAO;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,16 +13,16 @@ import java.io.IOException;
  */
 @WebServlet(name = "ModeraUtenteServlet", urlPatterns = "/ModeraUtente")
 public class ModeraUtenteServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { // Inserire controlli utente
         String username = request.getParameter("username");
-        UtenteDAO serviceUtente = new UtenteDAO();
-        serviceUtente.doUpdateUtente(username, "100000");
+        UtenteDAO utenteDAO = new UtenteDAO();
+        utenteDAO.doUpdateUtente(username, "100000");
         response.sendRedirect(".");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
     }
 }

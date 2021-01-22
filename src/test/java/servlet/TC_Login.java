@@ -1,6 +1,7 @@
 package servlet;
 
 import control.gestioneUtente.LoginServlet;
+import model.connection.ConPool;
 import model.utente.Utente;
 import model.utente.UtenteDAO;
 import org.junit.jupiter.api.AfterEach;
@@ -12,21 +13,53 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TC_Login extends Mockito {
-    private LoginServlet servlet;
-    private UtenteDAO utenteDAO = new UtenteDAO();
-    private Utente utente = new Utente("frank", "Francesco", "Ceriello",
-            "francesco@unisa.it", "Francesco1!", "M", "1985-12-10", "001000");
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
+    private LoginServlet servlet;
+    private UtenteDAO utenteDAO = new UtenteDAO();
+    private Utente utente = new Utente();
 
     @BeforeEach
     public void setUp() {
-        utenteDAO.doDeleteByEmail(utente.getEmail());
-        utenteDAO.doSave(utente);
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Utente WHERE mail = ?");
+            ps.setString(1, "francesco@unisa.it");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO movietipsdb.utente (username, mail, password, nome, cognome, genere, data_nascita, ruolo) VALUES ('frank', 'francesco@unisa.it', SHA1('Francesco1!'), 'Francesco', 'Ceriello', 'Uomo', '1985-12-10', '100000')");
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM utente WHERE username = ?");
+            ps.setString(1, "frank");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                utente.setUsername(rs.getString(1));
+                utente.setMail(rs.getString(2));
+                utente.setPassword(rs.getString(3));
+                utente.setNome(rs.getString(4));
+                utente.setCognome(rs.getString(5));
+                utente.setGenere(rs.getString(6));
+                utente.setDataNascita(rs.getString(7));
+                utente.setRuolo(rs.getString(8));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         servlet = new LoginServlet();
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
@@ -34,7 +67,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TC_Login1() throws ServletException, IOException {
-        request.addParameter("email", "fra.it");
+        request.addParameter("mail", "fra.it");
         request.addParameter("password", "");
         String message = "LE_FAIL";
         servlet.doPost(request, response);
@@ -44,7 +77,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TC_Login2() throws ServletException, IOException {
-        request.addParameter("email", "francesco.it");
+        request.addParameter("mail", "francesco.it");
         request.addParameter("password", "");
         String message = "FE_FAIL";
         servlet.doPost(request, response);
@@ -54,7 +87,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TTC_Login3() throws ServletException, IOException {
-        request.addParameter("email", "franco@unisa.it");
+        request.addParameter("mail", "franco@unisa.it");
         request.addParameter("password", "");
         String message = "EE_FAIL";
         servlet.doPost(request, response);
@@ -64,7 +97,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TC_Login4() throws ServletException, IOException {
-        request.addParameter("email", utente.getEmail());
+        request.addParameter("mail", utente.getMail());
         request.addParameter("password", "fra");
         String message = "LP_FAIL";
         servlet.doPost(request, response);
@@ -74,7 +107,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TC_Login5() throws ServletException, IOException {
-        request.addParameter("email", utente.getEmail());
+        request.addParameter("mail", utente.getMail());
         request.addParameter("password", "Francesco");
         String message = "FP_FAIL";
         servlet.doPost(request, response);
@@ -84,7 +117,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TC_Login6() throws ServletException, IOException {
-        request.addParameter("email", utente.getEmail());
+        request.addParameter("mail", utente.getMail());
         request.addParameter("password", "Francesco1");
         String message = "CP_FAIL";
         servlet.doPost(request, response);
@@ -94,7 +127,7 @@ public class TC_Login extends Mockito {
 
     @Test
     public void TC_Login7() throws ServletException, IOException {
-        request.addParameter("email", utente.getEmail());
+        request.addParameter("mail", utente.getMail());
         request.addParameter("password", "Francesco1!");
         String message = "OK";
         servlet.doPost(request, response);
@@ -104,7 +137,15 @@ public class TC_Login extends Mockito {
 
     @AfterEach
     public void tearDown() {
-        utenteDAO.doDeleteByEmail(utente.getEmail());
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Utente WHERE mail = ?");
+            ps.setString(1, "francesco@unisa.it");
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         servlet = null;
         request = null;
         response = null;

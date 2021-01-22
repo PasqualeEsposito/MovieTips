@@ -1,7 +1,5 @@
 package control.gestioneRecensione;
 
-import control.MyServletException;
-import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
 import model.utente.Utente;
 
@@ -16,17 +14,20 @@ import java.io.IOException;
  */
 @WebServlet(name = "AggiungiRecensioneServlet", urlPatterns = "/AggiungiRecensione")
 public class AggiungiRecensioneServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
-        MyServletException.checkFilmino(request);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {    // Inserire controlli utente
         request.setCharacterEncoding("UTF-8");
         int valutazione = Integer.parseInt(request.getParameter("valutazione"));
         String testo = request.getParameter("testo");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         int idFilm = Integer.parseInt(request.getParameter("idFilm"));
-        Recensione recensione = new Recensione(valutazione, testo, utente.getUsername(), idFilm);
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        recensioneDAO.doSave(recensione);
+        recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
         response.sendRedirect("./Film?id=" + idFilm);
     }
 }

@@ -1,5 +1,6 @@
 package control.gestioneUtente;
 
+import control.MyServletException;
 import model.utente.Utente;
 import model.utente.UtenteDAO;
 
@@ -19,16 +20,18 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteDAO utenteDAO = new UtenteDAO();
 
-    public LoginServlet() {
-    }
-
     /**
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   // Inserire controlli utente
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente != null) {
+            throw new MyServletException("Utente non autorizzato");
+        }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/login.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -36,22 +39,23 @@ public class LoginServlet extends HttpServlet {
     /**
      * @param request
      * @param response
-     * @throws ServletException
      * @throws IOException
+     * @throws MyServletException
      */
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException, MyServletException {    // Inserire controlli utente
         request.setCharacterEncoding("UTF-8");
-        String email = request.getParameter("email");
+        String mail = request.getParameter("mail");
         String password = request.getParameter("password");
         Utente utente;
-        if (email.length() < 8 || email.length() > 255) {
+        if (mail.length() < 8 || mail.length() > 255) {
             request.setAttribute("errorTest", "LE_FAIL");
         } else {
-            if (!email.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
+            if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
                 request.setAttribute("errorTest", "FE_FAIL");
             } else {
-                utente = utenteDAO.doRetrieveByEmail(email);
+                utente = utenteDAO.doRetrieveByMail(mail);
                 if (utente == null) {
                     request.setAttribute("errorTest", "EE_FAIL");
                 } else {
@@ -61,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                         if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
                             request.setAttribute("errorTest", "FP_FAIL");
                         } else {
-                            utente = utenteDAO.doRetrieveByEmailPassword(email, password);
+                            utente = utenteDAO.doRetrieveByMailPassword(mail, password);
                             if (utente == null) {
                                 request.setAttribute("errorTest", "CP_FAIL");
                             } else {

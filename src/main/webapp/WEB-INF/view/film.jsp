@@ -54,8 +54,8 @@
             <form action="AggiungiRecensione" method="post" accept-charset="utf-8">
                 <input type="hidden" name="idFilm" value="${film.idFilm}">
                 <div class="submit">
-                    <input class="mdl-slider mdl-js-slider" type="range"
-                           min="1" max="5" value="1" tabindex="0" name="valutazione">
+                    <input class="mdl-slider mdl-js-slider" type="range" min="1" max="5" value="1" tabindex="0"
+                           name="valutazione">
                     <button type="submit"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                         Aggiungi recensione
@@ -66,8 +66,8 @@
                     <label class="mdl-textfield__label" for="testo">Testo recensione:</label>
                 </div>
             </form>
-                <% } %>
             <hr>
+                        <% } %>
             <div>
                 <c:forEach items="${recensioni}" var="recensione">
                     <div class="recensione">

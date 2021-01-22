@@ -1,9 +1,7 @@
 package control.gestioneRecensione;
 
-import control.MyServletException;
 import model.recensione.RecensioneDAO;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +13,17 @@ import java.io.IOException;
  */
 @WebServlet(name = "AggiungiSegnalazioneServlet", urlPatterns = "/Segnala")
 public class AggiungiSegnalazioneServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        MyServletException.checkAccount(request);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { // Inserire controlli utente
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        RecensioneDAO service = new RecensioneDAO();
-        service.doUpdateSegnalazioneTrue(idRecensione);
         int idFilm = Integer.parseInt(request.getParameter("idFilm"));
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        recensioneDAO.doUpdateSegnalazioneTrue(idRecensione);
         response.sendRedirect("./Film?id=" + idFilm);
     }
 }

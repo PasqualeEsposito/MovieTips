@@ -15,12 +15,18 @@ import java.util.List;
 /**
  * Servlet che gestisce la corretta visualizzazione della pagina dei risultati della ricerca inserendo i film che contengono una determinata parola nel titolo all'interno della request
  */
-
 @WebServlet(name = "RicercaServlet", urlPatterns = "/Ricerca")
 public class RicercaServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FilmDAO filmDao = new FilmDAO();
         request.setCharacterEncoding("UTF-8");
+        FilmDAO filmDao = new FilmDAO();
         String inputRicerca = request.getParameter("inputRicerca");
         List<Film> films = filmDao.doRetrieveByWord(inputRicerca);
         request.setAttribute("inputRicerca", inputRicerca);

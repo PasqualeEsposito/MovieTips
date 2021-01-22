@@ -20,9 +20,16 @@ import java.util.ArrayList;
  */
 @WebServlet(name = "FilmServlet", urlPatterns = "/Film")
 public class FilmServlet extends HttpServlet {
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FilmDAO filmDAO = new FilmDAO();
         int id = Integer.parseInt(request.getParameter("id"));
+        FilmDAO filmDAO = new FilmDAO();
         Film film = filmDAO.doRetrieveById(id);
         if (film == null) {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
