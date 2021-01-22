@@ -20,14 +20,22 @@ public class AggiungiRecensioneServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {    // Inserire controlli utente
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {    // Inserire controlli utente
         request.setCharacterEncoding("UTF-8");
         int valutazione = Integer.parseInt(request.getParameter("valutazione"));
         String testo = request.getParameter("testo");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         int idFilm = Integer.parseInt(request.getParameter("idFilm"));
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
-        response.sendRedirect("./Film?id=" + idFilm);
+
+        if (valutazione < 1 || valutazione > 5) {
+            request.setAttribute("errorTest", "RV1_FAIL");
+        } else if (testo.length() > 255) {
+            request.setAttribute("errorTest", "LT_FAIL");
+        } else {
+            RecensioneDAO recensioneDAO = new RecensioneDAO();
+            recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
+            request.setAttribute("errorTest", "OK");
+            response.sendRedirect("./Film?id=" + idFilm);
+        }
     }
 }
