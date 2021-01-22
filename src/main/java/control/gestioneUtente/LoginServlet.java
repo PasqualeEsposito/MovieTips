@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   // Inserire controlli utente
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente != null) {
             throw new MyServletException("Utente non autorizzato");
@@ -44,11 +44,14 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, MyServletException {    // Inserire controlli utente
+            throws IOException, MyServletException {
         request.setCharacterEncoding("UTF-8");
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente != null) {
+            throw new MyServletException("Utente non autorizzato");
+        }
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
-        Utente utente;
         if (mail.length() < 8 || mail.length() > 255) {
             request.setAttribute("errorTest", "LE_FAIL");
         } else {
@@ -56,6 +59,9 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("errorTest", "FE_FAIL");
             } else {
                 utente = utenteDAO.doRetrieveByMail(mail);
+                if (utente.isBanned()) {
+                    throw new MyServletException("Utente bannato");
+                }
                 if (utente == null) {
                     request.setAttribute("errorTest", "EE_FAIL");
                 } else {
@@ -72,11 +78,13 @@ public class LoginServlet extends HttpServlet {
                                 request.setAttribute("errorTest", "OK");
                                 request.getSession().setAttribute("utente", utente);
                                 response.sendRedirect(".");
+                                return;
                             }
                         }
                     }
                 }
             }
         }
+        throw new MyServletException("Username e/o password non validi");
     }
 }

@@ -1,6 +1,7 @@
 package servlet;
 
-import control.gestioneRecensione.AggiungiRecensioneServlet;
+import control.MyServletException;
+import control.gestioneRecensione.AggiungiValutazioneServlet;
 import model.film.Film;
 import model.film.FilmDAO;
 import model.recensione.RecensioneDAO;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TC_AggiungiValutazione extends Mockito {
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
-    private AggiungiRecensioneServlet servlet;
+    private AggiungiValutazioneServlet servlet;
     Film film;
     private UtenteDAO utenteDAO = new UtenteDAO();
     private FilmDAO filmDAO = new FilmDAO();
@@ -29,20 +30,20 @@ public class TC_AggiungiValutazione extends Mockito {
     public void setUp() {
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
-        servlet = new AggiungiRecensioneServlet();
+        servlet = new AggiungiValutazioneServlet();
         film = new Film("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         filmDAO.doDeleteByTitoloAnnoRegia(film.getTitolo(), film.getAnno(), film.getRegia());
         int idFilm = filmDAO.doSave("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         film.setIdFilm(idFilm);
         utenteDAO.doDeleteByUsername("frank");
-        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "100000");
+        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
     }
 
     @Test
-    public void TC_AggiungiValutazione1() throws IOException {
+    public void TC_AggiungiValutazione1() throws IOException, MyServletException {
         request.addParameter("valutazione", "-1");
         request.addParameter("idFilm", "" + film.getIdFilm());
-        request.getSession().setAttribute("utente", utenteDAO.doRetrieveByUsername("frank"));
+        request.getSession().setAttribute("utente", utenteDAO.doRetrieveByMail("francesco@unisa.it"));
         String message = "RV1_FAIL";
         servlet.doPost(request, response);
         String result = (String) request.getAttribute("errorTest");
@@ -50,10 +51,10 @@ public class TC_AggiungiValutazione extends Mockito {
     }
 
     @Test
-    public void TC_AggiungiValutazione2() throws IOException {
+    public void TC_AggiungiValutazione2() throws IOException, MyServletException {
         request.addParameter("valutazione", "4");
         request.addParameter("idFilm", "" + film.getIdFilm());
-        request.getSession().setAttribute("utente", utenteDAO.doRetrieveByUsername("frank"));
+        request.getSession().setAttribute("utente", utenteDAO.doRetrieveByMail("francesco@unisa.it"));
         request.addParameter("testo", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem " +
                 "accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et" +
                 " quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit," +
@@ -80,11 +81,11 @@ public class TC_AggiungiValutazione extends Mockito {
     }
 
     @Test
-    public void TC_AggiungiValutazione3() throws IOException {
+    public void TC_AggiungiValutazione3() throws IOException, MyServletException {
         request.addParameter("valutazione", "3");
         request.addParameter("testo", "Film mediocre");
         request.addParameter("idFilm", "" + film.getIdFilm());
-        request.getSession().setAttribute("utente", utenteDAO.doRetrieveByUsername("frank"));
+        request.getSession().setAttribute("utente", utenteDAO.doRetrieveByMail("francesco@unisa.it"));
         String message = "OK";
         servlet.doPost(request, response);
         String result = (String) request.getAttribute("errorTest");

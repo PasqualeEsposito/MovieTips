@@ -45,10 +45,10 @@
                             <input class="mdl-textfield__input" type="text" name="inputRicerca"
                                    id="fixed-header-drawer-exp">
                         </div>
-                </div>
-            </form>
-            <nav class="mdl-navigation">
-                <c:choose>
+                    </div>
+                </form>
+                <nav class="mdl-navigation">
+                    <c:choose>
                     <c:when test="${utente == null}">
                         <a class="mdl-navigation__link" href="Login">Accedi</a>
                     </c:when>

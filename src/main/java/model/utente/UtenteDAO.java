@@ -42,12 +42,13 @@ public class UtenteDAO {
      */
     public Utente doRetrieveByMail(String mail) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT username FROM utente WHERE mail = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT username, ruolo FROM utente WHERE mail = ?");
             ps.setString(1, mail);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Utente u = new Utente();
                 u.setUsername(rs.getString(1));
+                u.setRuolo(rs.getString(2));
                 return u;
             }
             return null;

@@ -1,5 +1,7 @@
 package control.gestioneUtente;
 
+import control.MyServletException;
+import model.utente.Utente;
 import model.utente.UtenteDAO;
 
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +19,18 @@ public class ModeraUtenteServlet extends HttpServlet {
      * @param request
      * @param response
      * @throws IOException
+     * @throws MyServletException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { // Inserire controlli utente
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente == null || !utente.isModeratore()) {
+            throw new MyServletException("Utente non autorizzato");
+        }
         String username = request.getParameter("username");
+        if (username.equals(utente.getUsername())) {
+            throw new MyServletException("BAN error");
+        }
         UtenteDAO utenteDAO = new UtenteDAO();
         utenteDAO.doUpdateUtente(username, "100000");
         response.sendRedirect(".");

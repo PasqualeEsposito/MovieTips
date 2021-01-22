@@ -1,5 +1,6 @@
 package control.gestioneRecensione;
 
+import control.MyServletException;
 import model.recensione.RecensioneDAO;
 import model.utente.Utente;
 
@@ -18,11 +19,16 @@ public class EliminaRecensioneServlet extends HttpServlet {
      * @param request
      * @param response
      * @throws IOException
+     * @throws MyServletException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { // Inserire controlli utente
-        int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+        String usernameUtente = request.getParameter("usernameUtente");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente == null || !utente.isFilmino() || usernameUtente.equals(utente.getUsername())) {
+            throw new MyServletException("Utente non autorizzato");
+        }
+        int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
         RecensioneDAO recensioneDAO = new RecensioneDAO();
         recensioneDAO.doDeleteByIdRecensione(idRecensione);
         response.sendRedirect("./Profilo?username=" + utente.getUsername());

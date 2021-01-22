@@ -1,7 +1,9 @@
 package control.gestioneRecensione;
 
+import control.MyServletException;
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
+import model.utente.Utente;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +26,11 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   // Inserire controlli utente
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        if (utente == null || !utente.isModeratore()) {
+            throw new MyServletException("Utente non autorizzato");
+        }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
         ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione();
         request.setAttribute("recensioni", recensioni);
