@@ -26,7 +26,7 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || !utente.isModeratore()) {
             throw new MyServletException("Utente non autorizzato");

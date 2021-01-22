@@ -26,8 +26,8 @@ public class TC_Login extends Mockito {
         response = new MockHttpServletResponse();
         servlet = new LoginServlet();
         utenteDAO.doDeleteByUsername("frank");
-        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-    }
+
+        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");    }
 
     @Test
     public void TC_Login1() throws ServletException, IOException {

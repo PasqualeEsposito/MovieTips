@@ -16,6 +16,16 @@ public class Utente {
     public Utente() {
     }
 
+    public Utente(String username, String mail, String nome, String cognome, String genere, String dataNascita, String ruolo) {
+        this.username = username;
+        this.mail = mail;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.genere = genere;
+        this.dataNascita = dataNascita;
+        this.ruolo = ruolo;
+    }
+
     /**
      * @return
      */
