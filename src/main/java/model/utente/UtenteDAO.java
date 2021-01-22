@@ -88,16 +88,16 @@ public class UtenteDAO {
      * @param username
      * @param ruolo
      */
-    public void doUpdateUtente(String username, String ruolo) {
+    public boolean doUpdateUtente(String username, String ruolo) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE utente SET ruolo = ? WHERE username = ?");
             ps.setString(1, ruolo);
             ps.setString(2, username);
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("UPDATE error");
-            }
+            ps.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
     }
 
