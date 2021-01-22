@@ -16,17 +16,6 @@ public class Utente {
     public Utente() {
     }
 
-    public Utente(String username, String nome, String cognome, String mail, String password, String genere, String dataNascita, String ruolo) {
-        this.username = username;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.mail = mail;
-        setPassword(password);
-        this.genere = genere;
-        this.dataNascita = dataNascita;
-        this.ruolo = ruolo;
-    }
-
     /**
      * @return
      */
