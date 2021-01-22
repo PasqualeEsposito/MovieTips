@@ -16,9 +16,8 @@ public class Test_Film extends TestCase {
     private Film filmNonEsistente;
     private Film filmEsistente;
 
-
     @BeforeEach
-    protected void setUp() throws Exception {
+    protected void setUp() {
         filmDAO = new FilmDAO();
         filmNonEsistente = new Film("TestNonEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         filmEsistente = new Film("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
@@ -29,12 +28,12 @@ public class Test_Film extends TestCase {
     }
 
     @Test
-    public void testEsistenzaFilmEsistente() {
+    public void testRecuperoFilmEsistente() {
         assertEquals(filmEsistente.getIdFilm(), filmDAO.doRetrieveByTitoloAnnoRegia(filmEsistente.getTitolo(), filmEsistente.getAnno(), filmEsistente.getRegia()).getIdFilm());
     }
 
     @Test
-    public void testEsistenzaFilmNonEsistente() {
+    public void testRecuperoFilmNonEsistente() {
         assertEquals(null, filmDAO.doRetrieveByTitoloAnnoRegia(filmNonEsistente.getTitolo(), filmNonEsistente.getAnno(), filmNonEsistente.getRegia()));
     }
 

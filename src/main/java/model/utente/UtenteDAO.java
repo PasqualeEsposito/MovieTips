@@ -93,11 +93,13 @@ public class UtenteDAO {
             PreparedStatement ps = con.prepareStatement("UPDATE utente SET ruolo = ? WHERE username = ?");
             ps.setString(1, ruolo);
             ps.setString(2, username);
-            ps.executeUpdate();
-            return true;
+            if (ps.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         }
     }
 

@@ -174,11 +174,13 @@ public class FilmDAO {
             ps.setString(1, titolo);
             ps.setInt(2, anno);
             ps.setString(3, regia);
-            ps.executeUpdate();
-            return true;
+            if (ps.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         }
     }
 }
