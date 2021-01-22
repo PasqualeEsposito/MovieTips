@@ -2,10 +2,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% Utente utente = (Utente) session.getAttribute("utente");
-    int check = 0;
+    int checkFilmino = 0;
     if (utente != null) {
         if (utente.isFilmino())
-            check = 1;
+            checkFilmino = 1;
+    }
+    int checkActive = 1;
+    if (utente != null) {
+        if (utente.isNotActive())
+            checkActive = 0;
     }
 %>
 <jsp:include page="header.jsp">
@@ -50,7 +55,7 @@
     </section>
     <section class="mdl-layout__tab-panel" id="fixed-tab-2">
         <div class="page-content">
-                <% if (check == 1) { %>
+                <% if (checkFilmino == 1) { %>
             <form action="AggiungiValutazione" method="post" accept-charset="utf-8">
                 <input type="hidden" name="idFilm" value="${film.idFilm}">
                 <div class="submit">
@@ -81,18 +86,18 @@
                             <p>${recensione.testo}</p>
                         </div>
                         <div>
+                            <% if (checkActive == 1) { %>
                             <c:if test="${recensione.segnalazione == false}">
-                                <c:if test="${utente != null}">
-                                    <form action="Segnala">
-                                        <input type="hidden" name="idFilm" value="${film.idFilm}">
-                                        <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
-                                        <button type="submit"
-                                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                            Segnala recensione
-                                        </button>
-                                    </form>
-                                </c:if>
+                                <form action="Segnala">
+                                    <input type="hidden" name="idFilm" value="${film.idFilm}">
+                                    <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
+                                    <button type="submit"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                        Segnala recensione
+                                    </button>
+                                </form>
                             </c:if>
+                            <% } %>
                         </div>
                     </div>
                     <hr>
