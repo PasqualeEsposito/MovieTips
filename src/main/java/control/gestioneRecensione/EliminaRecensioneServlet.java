@@ -25,7 +25,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         String usernameUtente = request.getParameter("usernameUtente");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente == null || !utente.isFilmino() || usernameUtente.equals(utente.getUsername())) {
+        if (utente == null || usernameUtente.equals(utente.getUsername())) {
             throw new MyServletException("Utente non autorizzato");
         }
         int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));

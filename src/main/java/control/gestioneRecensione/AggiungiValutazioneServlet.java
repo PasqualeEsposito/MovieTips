@@ -40,6 +40,7 @@ public class AggiungiValutazioneServlet extends HttpServlet {
             recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
             request.setAttribute("errorTest", "OK");
             response.sendRedirect("./Film?id=" + idFilm);
+            return;
         }
         throw new MyServletException("Valutazione non valida");
     }
