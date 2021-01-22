@@ -18,10 +18,10 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TC_AggiungiValutazione extends Mockito {
+    Film film;
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
     private AggiungiValutazioneServlet servlet;
-    Film film;
     private UtenteDAO utenteDAO = new UtenteDAO();
     private FilmDAO filmDAO = new FilmDAO();
     private RecensioneDAO recensioneDAO = new RecensioneDAO();

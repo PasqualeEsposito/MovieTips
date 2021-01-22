@@ -29,23 +29,23 @@ public class Test_Film extends TestCase {
     }
 
     @Test
-    public void testRecuperoFilmEsistente() {
+    public void testRetrieveFilmEsistente() {
         assertEquals(filmEsistente.getIdFilm(), filmDAO.doRetrieveById(idFilmEsistente).getIdFilm());
     }
 
     @Test
-    public void testRecuperoFilmNonEsistente() {
+    public void testRetrieveFilmNonEsistente() {
         assertEquals(null, filmDAO.doRetrieveByTitoloAnnoRegia(filmNonEsistente.getTitolo(), filmNonEsistente.getAnno(), filmNonEsistente.getRegia()));
     }
 
     @Test
-    public void testListaFilmbyWord() {
+    public void testRetrieveByWordFilms() {
         ArrayList<Film> collection = new ArrayList<>();
         assertNotEquals(collection, filmDAO.doRetrieveByWord("incantata"));
     }
 
     @Test
-    public void testListaFilm() {
+    public void testRetrieveAllFilms() {
         ArrayList<Film> collection = new ArrayList<>();
         assertNotEquals(collection, filmDAO.doRetrieveAll(10));
     }

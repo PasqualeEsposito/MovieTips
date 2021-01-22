@@ -18,42 +18,42 @@ public class Test_Utente extends TestCase {
     }
 
     @Test
-    public void testRecuperoUtenteEsistente() {
+    public void testRetrieveUtenteEsistente() {
         assertEquals("frank", utenteDAO.doRetrieveByUsername("frank").getUsername());
     }
 
     @Test
-    public void testRecuperoUtenteNonEsistente() {
+    public void testRetrieveUtenteNonEsistente() {
         assertEquals(null, utenteDAO.doRetrieveByUsername("ghosts"));
     }
 
     @Test
-    public void testRecuperoUtenteEsistenteByEmail() {
+    public void testRetrieveByEmailUtenteEsistente() {
         assertEquals("frank", utenteDAO.doRetrieveByMail("francesco@unisa.it").getUsername());
     }
 
     @Test
-    public void testRecuperoUtenteNonEsistenteByEmail() {
+    public void testRetrieveByEmailUtenteNonEsistente() {
         assertEquals(null, utenteDAO.doRetrieveByMail("ghosts@unisa.it"));
     }
 
     @Test
-    public void testRecuperoUtenteEsistenteByEmailPassword() {
+    public void testRetrieveByEmailPasswordUtenteEsistente() {
         assertEquals("frank", utenteDAO.doRetrieveByMailPassword("francesco@unisa.it", "Francesco1!").getUsername());
     }
 
     @Test
-    public void testRecuperoUtenteNonEsistenteByEmailPassword() {
+    public void testRetrieveByEmailPasswordUtenteNonEsistente() {
         assertEquals(null, utenteDAO.doRetrieveByMailPassword("ghosts@unisa.it", "Ghosts1!"));
     }
 
     @Test
-    public void testUpdateRuoloEsistente() {
+    public void testUpdateRuoloUtenteEsistente() {
         assertEquals(true, utenteDAO.doUpdateUtente("frank", "001001"));
     }
 
     @Test
-    public void testUpdateRuoloNonEsistente() {
+    public void testUpdateRuoloUtenteNonEsistente() {
         assertEquals(false, utenteDAO.doUpdateUtente("ghost", "001001"));
     }
 

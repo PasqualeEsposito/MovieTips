@@ -45,56 +45,55 @@ public class Test_Recensione extends TestCase {
     }
 
     @Test
-    public void testRicercaPerIdFilm(){
+    public void testRetrieveByIdFilmRecensioni() {
         ArrayList<Film> collection = new ArrayList<>();
         assertNotEquals(collection, recensioneDAO.doRetrieveByIdFilm(film.getIdFilm()));
     }
 
     @Test
-    public void testRicercaPerUsername() {
+    public void testRetrieveByUsernameRecensioni() {
         ArrayList<Film> collection = new ArrayList<>();
         assertNotEquals(collection, recensioneDAO.doRetrieveByUsername("frank"));
     }
 
     @Test
-    public void testRicercaPerSegnalazione() {
+    public void testRetrieveBySegnalazioneRecensioni() {
         ArrayList<Film> collection = new ArrayList<>();
         assertNotEquals(collection, recensioneDAO.doRetrieveBySegnalazione());
     }
 
     @Test
-    public void testInserimentoRecensioneNonEsistente() {
+    public void testSavaRecensioneNonEsistente() {
         assertNotEquals(-1, recensioneDAO.doSave(recensioneNonEsistente.getValutazione(), recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
     }
 
     @Test
-    public void testEliminazioneRecensioneEsistente() {
+    public void testDeleteRecensioneEsistente() {
         assertEquals(true, recensioneDAO.doDeleteByIdRecensione(recensioneEsistente.getIdRecensione()));
     }
 
     @Test
-    public void testEliminazioneRecensioneNonEsistente() {
+    public void testDeleteRecensioneNonEsistente() {
         assertEquals(false, recensioneDAO.doDeleteByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
     }
 
     @Test
-    public void testUpdateSegnalazioneTrueEsistente() {
+    public void testUpdateSegnalazioneTrueRecensioneEsistente() {
         assertEquals(true, recensioneDAO.doUpdateSegnalazioneTrue(recensioneEsistente.getIdRecensione()));
     }
 
     @Test
-    public void testUpdateSegnalazioneTrueNonEsistente() {
+    public void testUpdateSegnalazioneTrueRecensioneNonEsistente() {
         assertEquals(false, recensioneDAO.doUpdateSegnalazioneTrueByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
     }
 
     @Test
-    public void testUpdateSegnalazioneFalseEsistente() {
-
+    public void testUpdateSegnalazioneFalseRecensioneEsistente() {
         assertEquals(true, recensioneDAO.doUpdateSegnalazioneFalse(recensioneEsistente.getIdRecensione()));
     }
 
     @Test
-    public void testUpdateSegnalazioneFalseNonEsistente() {
+    public void testUpdateSegnalazioneFalseRecensioneNonEsistente() {
         assertEquals(false, recensioneDAO.doUpdateSegnalazioneFalseByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
     }
 
