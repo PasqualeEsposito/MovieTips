@@ -15,6 +15,7 @@ public class Test_Film extends TestCase {
     private FilmDAO filmDAO;
     private Film filmNonEsistente;
     private Film filmEsistente;
+    private int idFilmEsistente;
 
     @BeforeEach
     protected void setUp() {
@@ -23,18 +24,24 @@ public class Test_Film extends TestCase {
         filmEsistente = new Film("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         filmDAO.doDeleteByTitoloAnnoRegia(filmNonEsistente.getTitolo(), filmNonEsistente.getAnno(), filmNonEsistente.getRegia());
         filmDAO.doDeleteByTitoloAnnoRegia(filmEsistente.getTitolo(), filmEsistente.getAnno(), filmEsistente.getRegia());
-        int idFilmEsistente = filmDAO.doSave(filmEsistente.getTitolo(), filmEsistente.getGenere(), filmEsistente.getAnno(), filmEsistente.getRegia(), filmEsistente.getAttori(), filmEsistente.getPaese(), filmEsistente.getDurata(), filmEsistente.getDistribuzione(), filmEsistente.getSceneggiatura(), filmEsistente.getFotografia(), filmEsistente.getMusiche(), filmEsistente.getProduzione(), filmEsistente.getTrama());
+        idFilmEsistente = filmDAO.doSave(filmEsistente.getTitolo(), filmEsistente.getGenere(), filmEsistente.getAnno(), filmEsistente.getRegia(), filmEsistente.getAttori(), filmEsistente.getPaese(), filmEsistente.getDurata(), filmEsistente.getDistribuzione(), filmEsistente.getSceneggiatura(), filmEsistente.getFotografia(), filmEsistente.getMusiche(), filmEsistente.getProduzione(), filmEsistente.getTrama());
         filmEsistente.setIdFilm(idFilmEsistente);
     }
 
     @Test
     public void testRecuperoFilmEsistente() {
-        assertEquals(filmEsistente.getIdFilm(), filmDAO.doRetrieveByTitoloAnnoRegia(filmEsistente.getTitolo(), filmEsistente.getAnno(), filmEsistente.getRegia()).getIdFilm());
+        assertEquals(filmEsistente.getIdFilm(), filmDAO.doRetrieveById(idFilmEsistente).getIdFilm());
     }
 
     @Test
     public void testRecuperoFilmNonEsistente() {
         assertEquals(null, filmDAO.doRetrieveByTitoloAnnoRegia(filmNonEsistente.getTitolo(), filmNonEsistente.getAnno(), filmNonEsistente.getRegia()));
+    }
+
+    @Test
+    public void testListaFilmbyWord() {
+        ArrayList<Film> collection = new ArrayList<>();
+        assertNotEquals(collection, filmDAO.doRetrieveByWord("incantata"));
     }
 
     @Test

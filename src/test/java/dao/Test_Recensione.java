@@ -5,9 +5,7 @@ import model.film.Film;
 import model.film.FilmDAO;
 import model.recensione.Recensione;
 import model.recensione.RecensioneDAO;
-import model.utente.Utente;
 import model.utente.UtenteDAO;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,31 +14,34 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class Test_Recensione extends TestCase{
+public class Test_Recensione extends TestCase {
     private FilmDAO filmDAO;
     private Film film;
     private UtenteDAO utenteDAO;
     private RecensioneDAO recensioneDAO;
-    private Recensione recensione;
-    private Utente utente;
+    private Recensione recensioneEsistente;
+    private Recensione recensioneNonEsistente;
 
     @BeforeEach
-    protected void setUp() throws Exception {
-        utenteDAO=new UtenteDAO();
+    protected void setUp() {
+        utenteDAO = new UtenteDAO();
         utenteDAO.doDeleteByUsername("frank");
         utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "100000");
 
-        filmDAO=new FilmDAO();
-        film=new Film("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
+        filmDAO = new FilmDAO();
+        film = new Film("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         filmDAO.doDeleteByTitoloAnnoRegia(film.getTitolo(), film.getAnno(), film.getRegia());
-        int idFilm=filmDAO.doSave("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
+        int idFilm = filmDAO.doSave("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         film.setIdFilm(idFilm);
 
-        recensioneDAO=new RecensioneDAO();
-        recensione=new Recensione(2, "test test test",false, "frank",film.getIdFilm());
-        recensioneDAO.doDeleteByTestUsernameFilm("test test test","frank",film.getIdFilm());//
-        int idRecensione=recensioneDAO.doSave(2, "test test test","frank",film.getIdFilm());
-        recensione.setIdRecensione(idRecensione);
+        recensioneDAO = new RecensioneDAO();
+        recensioneEsistente = new Recensione(5, "TestoEsistenteTest", false, "frank", film.getIdFilm());
+        recensioneNonEsistente = new Recensione(1, "TestoNonEsistenteTest", false, "frank", film.getIdFilm());
+        recensioneDAO.doDeleteByTestoUsernameUtenteIdFilm(recensioneEsistente.getTesto(), recensioneEsistente.getUsernameUtente(), recensioneEsistente.getIdFilm());
+        recensioneDAO.doDeleteByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm());
+        int idRecensione = recensioneDAO.doSave(recensioneEsistente.getValutazione(), recensioneEsistente.getTesto(), recensioneEsistente.getUsernameUtente(), recensioneEsistente.getIdFilm());
+        recensioneEsistente.setIdRecensione(idRecensione);
+        recensioneDAO.doUpdateSegnalazioneTrue(idRecensione);
     }
 
     @Test
@@ -55,29 +56,53 @@ public class Test_Recensione extends TestCase{
         assertNotEquals(collection, recensioneDAO.doRetrieveByUsername("frank"));
     }
 
-
     @Test
-    public void testUpdateSegnalazioneTrue() {
-        assertEquals(true, recensioneDAO.doUpdateSegnalazioneTrue(recensione.getIdRecensione()));
+    public void testRicercaPerSegnalazione() {
+        ArrayList<Film> collection = new ArrayList<>();
+        assertNotEquals(collection, recensioneDAO.doRetrieveBySegnalazione());
     }
 
     @Test
-    public void testUpdateSegnalazioneFalse() {
-
-        assertEquals(true, recensioneDAO.doUpdateSegnalazioneFalse(recensione.getIdRecensione()));
+    public void testInserimentoRecensioneNonEsistente() {
+        assertNotEquals(-1, recensioneDAO.doSave(recensioneNonEsistente.getValutazione(), recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
     }
 
     @Test
-    public void testRicercaPerSegnalazioneTrue() {
-        assertNotEquals(recensione , recensioneDAO.doRetrieveBySegnalazione());
+    public void testEliminazioneRecensioneEsistente() {
+        assertEquals(true, recensioneDAO.doDeleteByIdRecensione(recensioneEsistente.getIdRecensione()));
     }
 
+    @Test
+    public void testEliminazioneRecensioneNonEsistente() {
+        assertEquals(false, recensioneDAO.doDeleteByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
+    }
+
+    @Test
+    public void testUpdateSegnalazioneTrueEsistente() {
+        assertEquals(true, recensioneDAO.doUpdateSegnalazioneTrue(recensioneEsistente.getIdRecensione()));
+    }
+
+    @Test
+    public void testUpdateSegnalazioneTrueNonEsistente() {
+        assertEquals(false, recensioneDAO.doUpdateSegnalazioneTrueByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
+    }
+
+    @Test
+    public void testUpdateSegnalazioneFalseEsistente() {
+
+        assertEquals(true, recensioneDAO.doUpdateSegnalazioneFalse(recensioneEsistente.getIdRecensione()));
+    }
+
+    @Test
+    public void testUpdateSegnalazioneFalseNonEsistente() {
+        assertEquals(false, recensioneDAO.doUpdateSegnalazioneFalseByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm()));
+    }
 
     @AfterEach
     protected void tearDown() {
-        filmDAO.doDeleteByTitoloAnnoRegia(film.getTitolo(),film.getAnno(),film.getRegia());
+        filmDAO.doDeleteByTitoloAnnoRegia(film.getTitolo(), film.getAnno(), film.getRegia());
         utenteDAO.doDeleteByUsername("frank");
-        recensioneDAO.doDeleteByTestUsernameFilm(recensione.getTesto(),"frank",film.getIdFilm());
-
+        recensioneDAO.doDeleteByIdRecensione(recensioneEsistente.getIdRecensione());
+        recensioneDAO.doDeleteByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm());
     }
 }

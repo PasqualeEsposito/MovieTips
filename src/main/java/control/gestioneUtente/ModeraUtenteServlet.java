@@ -29,7 +29,7 @@ public class ModeraUtenteServlet extends HttpServlet {
         }
         String username = request.getParameter("username");
         if (username.equals(utente.getUsername())) {
-            throw new MyServletException("BAN error");
+            throw new MyServletException("Operazione non autorizzata");
         }
         UtenteDAO utenteDAO = new UtenteDAO();
         utenteDAO.doUpdateUtente(username, "100000");

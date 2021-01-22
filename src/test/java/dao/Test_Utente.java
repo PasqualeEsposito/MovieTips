@@ -10,7 +10,7 @@ public class Test_Utente extends TestCase {
     private UtenteDAO utenteDAO;
 
     @BeforeEach
-    protected void setUp() throws Exception {
+    protected void setUp() {
         utenteDAO = new UtenteDAO();
         utenteDAO.doDeleteByUsername("frank");
         utenteDAO.doDeleteByUsername("ghost");
