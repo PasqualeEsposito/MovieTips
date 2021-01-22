@@ -33,14 +33,16 @@ public class AggiungiValutazioneServlet extends HttpServlet {
         int idFilm = Integer.parseInt(request.getParameter("idFilm"));
         if (valutazione < 1 || valutazione > 5) {
             request.setAttribute("errorTest", "RV1_FAIL");
-        } else if (testo.length() > 255) {
-            request.setAttribute("errorTest", "LT_FAIL");
         } else {
-            RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
-            request.setAttribute("errorTest", "OK");
-            response.sendRedirect("./Film?id=" + idFilm);
-            return;
+            if (testo.length() > 255) {
+                request.setAttribute("errorTest", "LT_FAIL");
+            } else {
+                RecensioneDAO recensioneDAO = new RecensioneDAO();
+                recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
+                request.setAttribute("errorTest", "OK");
+                response.sendRedirect("./Film?id=" + idFilm);
+                return;
+            }
         }
         throw new MyServletException("Valutazione non valida");
     }

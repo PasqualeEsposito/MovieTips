@@ -28,8 +28,8 @@ public class TC_Film {
     }
 
     @Test
-    void TC_Film() {
-        Mockito.when(mockedRequest.getParameter("id")).thenReturn("7");
+    void TC_Film1() {
+        Mockito.when(mockedRequest.getParameter("id")).thenReturn("0");
         String message = "Siamo spiacenti, la pagina richiesta non è stata trovata";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));
