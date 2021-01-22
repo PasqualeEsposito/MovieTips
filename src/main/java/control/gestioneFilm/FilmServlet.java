@@ -27,7 +27,7 @@ public class FilmServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         FilmDAO filmDAO = new FilmDAO();
         Film film = filmDAO.doRetrieveById(id);
