@@ -24,17 +24,16 @@ public class TC_EliminaRecensione {
     private HttpSession session;
     private Utente utente;
     private String username;
+
     @BeforeEach
     void setUp() {
         session = Mockito.mock(HttpSession.class);
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         servlet = new ModeraRecensioneServlet();
-        utente=new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-         username="prova";
-
+        utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
+        username = "ghost";
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
-
     }
 
     @Test
@@ -49,9 +48,9 @@ public class TC_EliminaRecensione {
 
     @AfterEach
     void tearDown() {
+        session = null;
         servlet = null;
         mockedRequest = null;
         mockedResponse = null;
-        session=null;
     }
 }
