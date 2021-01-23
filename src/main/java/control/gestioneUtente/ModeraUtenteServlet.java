@@ -22,12 +22,12 @@ public class ModeraUtenteServlet extends HttpServlet {
      * @throws MyServletException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || !utente.isModeratore()) {
             throw new MyServletException("Utente non autorizzato");
         }
-        String username = request.getParameter("username");
+        String username =  request.getParameter("username");
         if (username.equals(utente.getUsername())) {
             throw new MyServletException("Operazione non autorizzata");
         }
