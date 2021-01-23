@@ -22,7 +22,7 @@ public class AggiungiSegnalazioneServlet extends HttpServlet {
      * @throws MyServletException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || utente.isNotActive()) {
             throw new MyServletException("Utente non autorizzato");
