@@ -1,7 +1,6 @@
 package servlet;
 
 import control.MyServletException;
-import control.gestioneFilm.FilmServlet;
 import control.gestioneRecensione.GestioneSegnalazioniServlet;
 import model.utente.Utente;
 import org.junit.jupiter.api.AfterEach;
@@ -24,16 +23,15 @@ public class TC_GestioneSegnalazioniServlet {
     private GestioneSegnalazioniServlet servlet;
     private HttpSession session;
     private Utente utente;
+
     @BeforeEach
     void setUp() {
         session = Mockito.mock(HttpSession.class);
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         servlet = new GestioneSegnalazioniServlet();
-         utente=new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-
+        utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
-
     }
 
     @Test
@@ -47,9 +45,9 @@ public class TC_GestioneSegnalazioniServlet {
 
     @AfterEach
     void tearDown() {
+        session = null;
         servlet = null;
         mockedRequest = null;
         mockedResponse = null;
-        session=null;
     }
 }
