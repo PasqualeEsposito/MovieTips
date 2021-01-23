@@ -2,7 +2,6 @@ package servlet.whitebox;
 
 import control.MyServletException;
 import control.gestioneRecensione.AggiungiValutazioneServlet;
-import control.gestioneRecensione.GestioneSegnalazioniServlet;
 import model.utente.Utente;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TC_AggiungiValutazione {
@@ -32,7 +30,7 @@ public class TC_AggiungiValutazione {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         servlet = new AggiungiValutazioneServlet();
-        utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "000010");
+        utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "000001");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 

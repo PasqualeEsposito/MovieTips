@@ -3,6 +3,7 @@ package servlet.whitebox;
 import control.MyServletException;
 import control.gestioneUtente.LoginServlet;
 import model.utente.Utente;
+import model.utente.UtenteDAO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ public class TC_Login {
     private HttpServletResponse mockedResponse;
     private LoginServlet servlet;
     private HttpSession session;
+    private UtenteDAO utenteDAO;
     private Utente utente;
 
     @BeforeEach
@@ -30,7 +32,9 @@ public class TC_Login {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         servlet = new LoginServlet();
+        utenteDAO = new UtenteDAO();
         utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
+        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "100000");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 
@@ -45,8 +49,8 @@ public class TC_Login {
 
     @Test
     void TC_Login2() {
-        Mockito.when(mockedRequest.getParameter("mail")).thenReturn("francesca.mauro@unisa.it");
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn("Francesca1!");
+        Mockito.when(mockedRequest.getParameter("mail")).thenReturn("francesco@unisa.it");
+        Mockito.when(mockedRequest.getParameter("password")).thenReturn("Francesco1!");
         String message = "Utente bannato";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -55,6 +59,7 @@ public class TC_Login {
 
     @AfterEach
     void tearDown() {
+        utenteDAO.doDeleteByUsername("frank");
         servlet = null;
         mockedRequest = null;
         mockedResponse = null;

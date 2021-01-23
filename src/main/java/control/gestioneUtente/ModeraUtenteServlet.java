@@ -27,7 +27,7 @@ public class ModeraUtenteServlet extends HttpServlet {
         if (utente == null || !utente.isModeratore()) {
             throw new MyServletException("Utente non autorizzato");
         }
-        String username =  request.getParameter("username");
+        String username = request.getParameter("username");
         if (username.equals(utente.getUsername())) {
             throw new MyServletException("Operazione non autorizzata");
         }

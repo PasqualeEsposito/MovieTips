@@ -1,7 +1,6 @@
 package servlet.whitebox;
 
 import control.MyServletException;
-import control.gestioneRecensione.GestioneSegnalazioniServlet;
 import control.gestioneUtente.ModeraUtenteServlet;
 import model.utente.Utente;
 import org.junit.jupiter.api.AfterEach;
@@ -24,8 +23,8 @@ public class TC_ModeraUtente {
     private ModeraUtenteServlet servlet;
     private HttpSession session;
     private Utente utente;
-    private String username;
     private Utente utenteModeratore;
+
     @BeforeEach
     void setUp() {
         session = Mockito.mock(HttpSession.class);
@@ -33,8 +32,7 @@ public class TC_ModeraUtente {
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         servlet = new ModeraUtenteServlet();
         utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-        utenteModeratore = new Utente("moderatore", "moderatore@unisa.it", "Moderatore", "Ceriello", "Uomo", "1985-12-10", "000001");
-        username="moderatore";
+        utenteModeratore = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "000001");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 
@@ -46,15 +44,17 @@ public class TC_ModeraUtente {
                 servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
+
     @Test
     void TC_ModeraUtenteServlet2() {
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utenteModeratore);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username")).thenReturn(utenteModeratore.getUsername());
         String message = "Operazione non autorizzata";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
+
     @AfterEach
     void tearDown() {
         session = null;

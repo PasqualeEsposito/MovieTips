@@ -2,7 +2,6 @@ package servlet.whitebox;
 
 import control.MyServletException;
 import control.gestioneRecensione.AggiungiSegnalazioneServlet;
-import control.gestioneRecensione.ModeraRecensioneServlet;
 import model.utente.Utente;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
