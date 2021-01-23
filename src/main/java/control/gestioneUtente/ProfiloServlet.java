@@ -27,7 +27,7 @@ public class ProfiloServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente profilo = utenteDAO.doRetrieveByUsername(username);
