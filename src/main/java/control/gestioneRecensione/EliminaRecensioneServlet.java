@@ -22,7 +22,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
      * @throws MyServletException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         String usernameUtente = request.getParameter("usernameUtente");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null || !usernameUtente.equals(utente.getUsername())) {
