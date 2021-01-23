@@ -1,4 +1,4 @@
-package servlet;
+package servlet.blackbox;
 
 import control.gestioneUtente.LoginServlet;
 import model.utente.UtenteDAO;

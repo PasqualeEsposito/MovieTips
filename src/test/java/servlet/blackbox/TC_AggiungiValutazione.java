@@ -1,4 +1,4 @@
-package servlet;
+package servlet.blackbox;
 
 import control.MyServletException;
 import control.gestioneRecensione.AggiungiValutazioneServlet;
