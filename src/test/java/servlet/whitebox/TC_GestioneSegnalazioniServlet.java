@@ -1,4 +1,4 @@
-package servlet;
+package servlet.whitebox;
 
 import control.MyServletException;
 import control.gestioneRecensione.GestioneSegnalazioniServlet;

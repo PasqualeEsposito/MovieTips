@@ -1,4 +1,4 @@
-package servlet;
+package servlet.whitebox;
 
 import control.MyServletException;
 import control.gestioneRecensione.ModeraRecensioneServlet;
@@ -17,13 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_EliminaRecensione {
+public class TC_ModeraRecensioneServlet {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private ModeraRecensioneServlet servlet;
     private HttpSession session;
     private Utente utente;
-    private String username;
 
     @BeforeEach
     void setUp() {
@@ -32,14 +31,12 @@ public class TC_EliminaRecensione {
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         servlet = new ModeraRecensioneServlet();
         utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-        username = "ghost";
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 
     @Test
     void TC_ModeraRecensioneServlet1() {
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utente);
-        Mockito.when(mockedRequest.getAttribute("usernameUtente")).thenReturn(username);
         String message = "Utente non autorizzato";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));

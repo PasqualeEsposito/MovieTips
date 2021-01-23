@@ -1,8 +1,7 @@
-package servlet;
+package servlet.whitebox;
 
 import control.MyServletException;
-import control.gestioneRecensione.ModeraRecensioneServlet;
-import model.utente.Utente;
+import control.gestioneFilm.FilmServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,33 +10,27 @@ import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_ModeraRecensioneServlet {
+public class TC_Film {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
-    private ModeraRecensioneServlet servlet;
-    private HttpSession session;
-    private Utente utente;
+    private FilmServlet servlet;
 
     @BeforeEach
     void setUp() {
-        session = Mockito.mock(HttpSession.class);
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
-        servlet = new ModeraRecensioneServlet();
-        utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        servlet = new FilmServlet();
     }
 
     @Test
-    void TC_ModeraRecensioneServlet1() {
-        Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utente);
-        String message = "Utente non autorizzato";
+    void TC_Film1() {
+        Mockito.when(mockedRequest.getParameter("id")).thenReturn("0");
+        String message = "Siamo spiacenti, la pagina richiesta non è stata trovata";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
@@ -45,7 +38,6 @@ public class TC_ModeraRecensioneServlet {
 
     @AfterEach
     void tearDown() {
-        session = null;
         servlet = null;
         mockedRequest = null;
         mockedResponse = null;
