@@ -1,7 +1,7 @@
 package servlet.whitebox;
 
 import control.MyServletException;
-import control.gestioneUtente.ModeraUtenteServlet;
+import control.gestioneRecensione.GestioneSegnalazioniServlet;
 import model.utente.Utente;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,39 +17,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_ModeraUtente {
+public class TC_GestioneSegnalazioni {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
-    private ModeraUtenteServlet servlet;
+    private GestioneSegnalazioniServlet servlet;
     private HttpSession session;
     private Utente utente;
-    private Utente utenteModeratore;
 
     @BeforeEach
     void setUp() {
         session = Mockito.mock(HttpSession.class);
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
-        servlet = new ModeraUtenteServlet();
+        servlet = new GestioneSegnalazioniServlet();
         utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-        utenteModeratore = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "000001");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 
     @Test
-    void TC_ModeraUtenteServlet1() {
+    void TC_GestioneSegnalazioniServlet1() {
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utente);
         String message = "Utente non autorizzato";
-        MyServletException exception = assertThrows(MyServletException.class, () ->
-                servlet.doGet(mockedRequest, mockedResponse));
-        assertEquals(message, exception.getMessage());
-    }
-
-    @Test
-    void TC_ModeraUtenteServlet2() {
-        Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utenteModeratore);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(utenteModeratore.getUsername());
-        String message = "Operazione non autorizzata";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());

@@ -6,7 +6,7 @@
 <div class="page-content" style="place-self: center;">
     <h2 style="text-align: center;">Accedi</h2>
     <div>
-        <form class="form" action="Login" method="post" accept-charset="utf-8">
+        <form class="form" action="Accesso" method="post" accept-charset="utf-8">
             <div>
                 <label for="mail">Email:</label>
                 <div class="mdl-textfield">

@@ -10,8 +10,8 @@ import java.io.IOException;
  * Servlet che gestisce il logout rimuovendo l'utente dalla sessione
  */
 
-@WebServlet(name = "LogoutServlet", urlPatterns = "/Logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "DisconnessioneServlet", urlPatterns = "/Disconnessione")
+public class DisconnessioneServlet extends HttpServlet {
     /**
      * @param request
      * @param response

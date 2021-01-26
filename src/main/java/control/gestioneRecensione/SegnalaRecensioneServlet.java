@@ -13,8 +13,8 @@ import java.io.IOException;
 /**
  * Servlet che permette a un utente di di segnalare la recensione di un altro utente
  */
-@WebServlet(name = "AggiungiSegnalazioneServlet", urlPatterns = "/Segnala")
-public class AggiungiSegnalazioneServlet extends HttpServlet {
+@WebServlet(name = "SegnalaRecensioneServlet", urlPatterns = "/Segnala")
+public class SegnalaRecensioneServlet extends HttpServlet {
     /**
      * @param request
      * @param response

@@ -13,8 +13,8 @@ import java.io.IOException;
 /**
  * Servlet che permette a un moderatore di bannare un utente
  */
-@WebServlet(name = "ModeraUtenteServlet", urlPatterns = "/ModeraUtente")
-public class ModeraUtenteServlet extends HttpServlet {
+@WebServlet(name = "BannaUtenteServlet", urlPatterns = "/BannaUtente")
+public class BannaUtenteServlet extends HttpServlet {
     /**
      * @param request
      * @param response

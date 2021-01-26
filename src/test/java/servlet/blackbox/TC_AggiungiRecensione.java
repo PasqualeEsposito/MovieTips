@@ -1,7 +1,7 @@
 package servlet.blackbox;
 
 import control.MyServletException;
-import control.gestioneRecensione.AggiungiValutazioneServlet;
+import control.gestioneRecensione.AggiungiRecensioneServlet;
 import model.film.Film;
 import model.film.FilmDAO;
 import model.recensione.RecensioneDAO;
@@ -17,11 +17,11 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TC_AggiungiValutazione extends Mockito {
+public class TC_AggiungiRecensione extends Mockito {
     Film film;
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
-    private AggiungiValutazioneServlet servlet;
+    private AggiungiRecensioneServlet servlet;
     private UtenteDAO utenteDAO = new UtenteDAO();
     private FilmDAO filmDAO = new FilmDAO();
     private RecensioneDAO recensioneDAO = new RecensioneDAO();
@@ -30,7 +30,7 @@ public class TC_AggiungiValutazione extends Mockito {
     public void setUp() {
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
-        servlet = new AggiungiValutazioneServlet();
+        servlet = new AggiungiRecensioneServlet();
         film = new Film("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
         filmDAO.doDeleteByTitoloAnnoRegia(film.getTitolo(), film.getAnno(), film.getRegia());
         int idFilm = filmDAO.doSave("TestEsistente", "GenereTest", 2010, "RegiaTest", "AttoriTest", "PaeseTest", 120, "DistribuzioneTest", "SceneggiaturaTest", "FotografiaTest", "MusicheTest", "ProduzioneTest", "TramaTest");
@@ -40,7 +40,7 @@ public class TC_AggiungiValutazione extends Mockito {
     }
 
     @Test
-    public void TC_AggiungiValutazione1() throws IOException, MyServletException {
+    public void TC_AggiungiRecensione1() throws IOException, MyServletException {
         request.addParameter("valutazione", "-1");
         request.addParameter("idFilm", "" + film.getIdFilm());
         request.getSession().setAttribute("utente", utenteDAO.doRetrieveByMail("francesco@unisa.it"));
@@ -51,7 +51,7 @@ public class TC_AggiungiValutazione extends Mockito {
     }
 
     @Test
-    public void TC_AggiungiValutazione2() throws IOException, MyServletException {
+    public void TC_AggiungiRecensione2() throws IOException, MyServletException {
         request.addParameter("valutazione", "4");
         request.addParameter("idFilm", "" + film.getIdFilm());
         request.getSession().setAttribute("utente", utenteDAO.doRetrieveByMail("francesco@unisa.it"));
@@ -81,7 +81,7 @@ public class TC_AggiungiValutazione extends Mockito {
     }
 
     @Test
-    public void TC_AggiungiValutazione3() throws IOException, MyServletException {
+    public void TC_AggiungiRecensione3() throws IOException, MyServletException {
         request.addParameter("valutazione", "3");
         request.addParameter("testo", "Film mediocre");
         request.addParameter("idFilm", "" + film.getIdFilm());

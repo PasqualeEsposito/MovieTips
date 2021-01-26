@@ -13,8 +13,8 @@ import java.io.IOException;
 /**
  * Servlet che permette a un filmino di aggiungere la recensione relativa a un film all’interno del database
  */
-@WebServlet(name = "AggiungiValutazioneServlet", urlPatterns = "/AggiungiValutazione")
-public class AggiungiValutazioneServlet extends HttpServlet {
+@WebServlet(name = "AggiungiRecensioneServlet", urlPatterns = "/AggiungiRecensione")
+public class AggiungiRecensioneServlet extends HttpServlet {
     /**
      * @param request
      * @param response

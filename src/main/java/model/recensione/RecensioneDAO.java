@@ -159,7 +159,7 @@ public class RecensioneDAO {
         }
     }
 
-    public boolean doDeleteByTestoUsernameUtenteIdFilm(String testo, String usernameUtente, int idFilm) {
+    /*public boolean doDeleteByTestoUsernameUtenteIdFilm(String testo, String usernameUtente, int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE testo = ? AND username_utente = ? AND id_film = ?");
             ps.setString(1, testo);
@@ -205,6 +205,5 @@ public class RecensioneDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
+    }*/
 }

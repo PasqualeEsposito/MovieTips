@@ -1,6 +1,6 @@
 package servlet.blackbox;
 
-import control.gestioneUtente.LoginServlet;
+import control.gestioneUtente.AccessoServlet;
 import model.utente.UtenteDAO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,24 +14,24 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TC_Login extends Mockito {
+public class TC_Accesso extends Mockito {
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
-    private LoginServlet servlet;
+    private AccessoServlet servlet;
     private UtenteDAO utenteDAO = new UtenteDAO();
 
     @BeforeEach
     public void setUp() {
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
-        servlet = new LoginServlet();
+        servlet = new AccessoServlet();
         utenteDAO.doDeleteByUsername("frank");
 
         utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
     }
 
     @Test
-    public void TC_Login1() throws ServletException, IOException {
+    public void TC_Accesso1() throws ServletException, IOException {
         request.addParameter("mail", "fra.it");
         request.addParameter("password", "");
         String message = "LE_FAIL";
@@ -41,7 +41,7 @@ public class TC_Login extends Mockito {
     }
 
     @Test
-    public void TC_Login2() throws ServletException, IOException {
+    public void TC_Accesso2() throws ServletException, IOException {
         request.addParameter("mail", "francesco.it");
         request.addParameter("password", "");
         String message = "FE_FAIL";
@@ -51,7 +51,7 @@ public class TC_Login extends Mockito {
     }
 
     @Test
-    public void TC_Login3() throws ServletException, IOException {
+    public void TC_Accesso3() throws ServletException, IOException {
         request.addParameter("mail", "franco@unisa.it");
         request.addParameter("password", "");
         String message = "EE_FAIL";
@@ -61,7 +61,7 @@ public class TC_Login extends Mockito {
     }
 
     @Test
-    public void TC_Login4() throws ServletException, IOException {
+    public void TC_Accesso4() throws ServletException, IOException {
         request.addParameter("mail", "francesco@unisa.it");
         request.addParameter("password", "fra");
         String message = "LP_FAIL";
@@ -71,7 +71,7 @@ public class TC_Login extends Mockito {
     }
 
     @Test
-    public void TC_Login5() throws ServletException, IOException {
+    public void TC_Accesso5() throws ServletException, IOException {
         request.addParameter("mail", "francesco@unisa.it");
         request.addParameter("password", "Francesco");
         String message = "FP_FAIL";
@@ -81,7 +81,7 @@ public class TC_Login extends Mockito {
     }
 
     @Test
-    public void TC_Login6() throws ServletException, IOException {
+    public void TC_Accesso6() throws ServletException, IOException {
         request.addParameter("mail", "francesco@unisa.it");
         request.addParameter("password", "Francesco1");
         String message = "CP_FAIL";
@@ -91,7 +91,7 @@ public class TC_Login extends Mockito {
     }
 
     @Test
-    public void TC_Login7() throws ServletException, IOException {
+    public void TC_Accesso7() throws ServletException, IOException {
         request.addParameter("mail", "francesco@unisa.it");
         request.addParameter("password", "Francesco1!");
         String message = "OK";

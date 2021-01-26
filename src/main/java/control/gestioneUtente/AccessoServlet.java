@@ -15,8 +15,8 @@ import java.io.IOException;
 /**
  * Servlet che gestisce il login inserendo l'utente nella sessione. Lancia l'eccezione MyServletException se i dati inseriti dall'utente non sono validi
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/Login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "AccessoServlet", urlPatterns = "/Accesso")
+public class AccessoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteDAO utenteDAO = new UtenteDAO();
 

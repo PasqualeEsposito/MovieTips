@@ -20,7 +20,7 @@
             <% if (check == 1) { %>
             <div class="submit">
                 <h2>Profilo di ${profilo.username}</h2>
-                <form action="ModeraUtente">
+                <form action="BannaUtente">
                     <input type="hidden" name="username" value="${profilo.username}">
                     <button type="submit"
                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">

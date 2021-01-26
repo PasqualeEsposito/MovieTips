@@ -50,13 +50,13 @@
             <nav class="mdl-navigation">
                 <c:choose>
                     <c:when test="${utente == null}">
-                        <a class="mdl-navigation__link" href="Login">Accedi</a>
+                        <a class="mdl-navigation__link" href="Accesso">Accedi</a>
                     </c:when>
                     <c:otherwise>
                         <a class="account-navigation" href="Profilo?username=<c:out value="${utente.username}"/>">
                             <span style="color: rgb(255,255,255)" class="material-icons">account_circle</span>
                         </a>
-                        <a class="mdl-navigation__link" href="Logout">Disconnetti</a>
+                        <a class="mdl-navigation__link" href="Disconnessione">Disconnetti</a>
                     </c:otherwise>
                 </c:choose>
             </nav>

@@ -1,9 +1,8 @@
 package servlet.whitebox;
 
 import control.MyServletException;
-import control.gestioneUtente.LoginServlet;
+import control.gestioneUtente.BannaUtenteServlet;
 import model.utente.Utente;
-import model.utente.UtenteDAO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,28 +17,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_Login {
+public class TC_BannaUtente {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
-    private LoginServlet servlet;
+    private BannaUtenteServlet servlet;
     private HttpSession session;
-    private UtenteDAO utenteDAO;
     private Utente utente;
+    private Utente utenteModeratore;
 
     @BeforeEach
     void setUp() {
         session = Mockito.mock(HttpSession.class);
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
-        servlet = new LoginServlet();
-        utenteDAO = new UtenteDAO();
+        servlet = new BannaUtenteServlet();
         utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
-        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "100000");
+        utenteModeratore = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "000001");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 
     @Test
-    void TC_Login1() {
+    void TC_BannaUtenteServlet1() {
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utente);
         String message = "Utente non autorizzato";
         MyServletException exception = assertThrows(MyServletException.class, () ->
@@ -48,18 +46,18 @@ public class TC_Login {
     }
 
     @Test
-    void TC_Login2() {
-        Mockito.when(mockedRequest.getParameter("mail")).thenReturn("francesco@unisa.it");
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn("Francesco1!");
-        String message = "Utente bannato";
+    void TC_BannaUtenteServlet2() {
+        Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utenteModeratore);
+        Mockito.when(mockedRequest.getParameter("username")).thenReturn(utenteModeratore.getUsername());
+        String message = "Operazione non autorizzata";
         MyServletException exception = assertThrows(MyServletException.class, () ->
-                servlet.doPost(mockedRequest, mockedResponse));
+                servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
     @AfterEach
     void tearDown() {
-        utenteDAO.doDeleteByUsername("frank");
+        session = null;
         servlet = null;
         mockedRequest = null;
         mockedResponse = null;

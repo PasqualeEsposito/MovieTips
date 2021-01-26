@@ -104,7 +104,7 @@ public class UtenteDAO {
         }
     }
 
-    public void doSave(String username, String mail, String password, String nome, String cognome, String genere, String dataNascita, String ruolo) {
+    /*public void doSave(String username, String mail, String password, String nome, String cognome, String genere, String dataNascita, String ruolo) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO utente (username, mail, password, nome, cognome, genere, data_nascita, ruolo) VALUES (?, ?, SHA1(?), ?, ?, ?, ?, ?)");
@@ -134,5 +134,5 @@ public class UtenteDAO {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 }

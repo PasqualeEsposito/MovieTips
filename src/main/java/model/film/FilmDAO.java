@@ -2,7 +2,10 @@ package model.film;
 
 import model.connection.ConPool;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -91,7 +94,7 @@ public class FilmDAO {
         }
     }
 
-    public Film doRetrieveByTitoloAnnoRegia(String titolo, int anno, String regia) {
+    /*public Film doRetrieveByTitoloAnnoRegia(String titolo, int anno, String regia) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film WHERE titolo = ? AND anno = ? AND regia = ?");
             ps.setString(1, titolo);
@@ -182,5 +185,5 @@ public class FilmDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
