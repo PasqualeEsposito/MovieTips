@@ -16,7 +16,7 @@ import java.util.List;
  * Servlet che gestisce la corretta visualizzazione della pagina dei risultati della ricerca inserendo i film che contengono una determinata parola nel titolo all'interno della request
  */
 @WebServlet(name = "RicercaFilmServlet", urlPatterns = "/Ricerca")
-public class CercaFilmServlet extends HttpServlet {
+public class RicercaFilmServlet extends HttpServlet {
     /**
      * @param request
      * @param response
