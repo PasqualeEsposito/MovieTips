@@ -1,10 +1,10 @@
 package control.gestioneUtente;
 
 import control.MyServletException;
-import model.recensione.Recensione;
-import model.recensione.RecensioneDAO;
-import model.utente.Utente;
-import model.utente.UtenteDAO;
+import model.gestioneRecensione.Recensione;
+import model.gestioneRecensione.RecensioneDAO;
+import model.gestioneUtente.Utente;
+import model.gestioneUtente.UtenteDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

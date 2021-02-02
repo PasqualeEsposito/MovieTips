@@ -1,7 +1,7 @@
 package control.gestioneFilm;
 
-import model.film.Film;
-import model.film.FilmDAO;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

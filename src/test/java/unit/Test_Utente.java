@@ -1,7 +1,7 @@
-package dao;
+package unit;
 
 import junit.framework.TestCase;
-import model.utente.UtenteDAO;
+import model.gestioneUtente.UtenteDAO;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

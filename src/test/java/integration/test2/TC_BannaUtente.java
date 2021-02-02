@@ -1,8 +1,8 @@
-package servlet.whitebox;
+package integration.test2;
 
 import control.MyServletException;
 import control.gestioneUtente.BannaUtenteServlet;
-import model.utente.Utente;
+import model.gestioneUtente.Utente;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

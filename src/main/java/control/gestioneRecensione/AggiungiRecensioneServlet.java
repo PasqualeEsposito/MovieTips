@@ -1,8 +1,8 @@
 package control.gestioneRecensione;
 
 import control.MyServletException;
-import model.recensione.RecensioneDAO;
-import model.utente.Utente;
+import model.gestioneRecensione.RecensioneDAO;
+import model.gestioneUtente.Utente;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

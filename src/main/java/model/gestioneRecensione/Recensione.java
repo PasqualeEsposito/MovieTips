@@ -1,4 +1,4 @@
-package model.recensione;
+package model.gestioneRecensione;
 
 public class Recensione {
     private int idRecensione;

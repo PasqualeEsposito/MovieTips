@@ -1,4 +1,4 @@
-package model.utente;
+package model.gestioneUtente;
 
 /**
  * Classe che rappresenta un utente

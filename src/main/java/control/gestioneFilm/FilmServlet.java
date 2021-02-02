@@ -1,10 +1,10 @@
 package control.gestioneFilm;
 
 import control.MyServletException;
-import model.film.Film;
-import model.film.FilmDAO;
-import model.recensione.Recensione;
-import model.recensione.RecensioneDAO;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
+import model.gestioneRecensione.Recensione;
+import model.gestioneRecensione.RecensioneDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

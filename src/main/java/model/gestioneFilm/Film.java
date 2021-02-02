@@ -1,4 +1,4 @@
-package model.film;
+package model.gestioneFilm;
 
 
 /**

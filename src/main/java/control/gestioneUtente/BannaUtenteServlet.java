@@ -1,8 +1,8 @@
 package control.gestioneUtente;
 
 import control.MyServletException;
-import model.utente.Utente;
-import model.utente.UtenteDAO;
+import model.gestioneUtente.Utente;
+import model.gestioneUtente.UtenteDAO;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

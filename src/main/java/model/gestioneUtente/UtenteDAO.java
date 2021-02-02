@@ -1,4 +1,4 @@
-package model.utente;
+package model.gestioneUtente;
 
 import model.connection.ConPool;
 

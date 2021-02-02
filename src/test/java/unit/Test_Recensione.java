@@ -1,11 +1,11 @@
-package dao;
+package unit;
 
 import junit.framework.TestCase;
-import model.film.Film;
-import model.film.FilmDAO;
-import model.recensione.Recensione;
-import model.recensione.RecensioneDAO;
-import model.utente.UtenteDAO;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
+import model.gestioneRecensione.Recensione;
+import model.gestioneRecensione.RecensioneDAO;
+import model.gestioneUtente.UtenteDAO;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

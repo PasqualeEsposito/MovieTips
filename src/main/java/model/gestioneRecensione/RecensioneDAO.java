@@ -1,4 +1,4 @@
-package model.recensione;
+package model.gestioneRecensione;
 
 import model.connection.ConPool;
 

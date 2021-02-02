@@ -1,11 +1,10 @@
-package servlet.whitebox;
+package integration.test2;
 
 import control.MyServletException;
-import control.gestioneFilm.FilmServlet;
+import control.gestioneUtente.ProfiloServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,22 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_Film {
+public class TC_Profilo {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
-    private FilmServlet servlet;
+    private ProfiloServlet servlet;
 
     @BeforeEach
     void setUp() {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
-        servlet = new FilmServlet();
+        servlet = new ProfiloServlet();
     }
 
     @Test
-    void TC_Film1() {
-        Mockito.when(mockedRequest.getParameter("id")).thenReturn("0");
+    void TC_Profilo1() {
+        Mockito.when(mockedRequest.getAttribute("username")).thenReturn("frank");
         String message = "Siamo spiacenti, la pagina richiesta non è stata trovata";
         MyServletException exception = assertThrows(MyServletException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));

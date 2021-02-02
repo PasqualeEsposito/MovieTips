@@ -1,7 +1,7 @@
-package servlet.blackbox;
+package integration.test1;
 
 import control.gestioneUtente.AccessoServlet;
-import model.utente.UtenteDAO;
+import model.gestioneUtente.UtenteDAO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

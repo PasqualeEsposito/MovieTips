@@ -1,8 +1,8 @@
-package dao;
+package unit;
 
 import junit.framework.TestCase;
-import model.film.Film;
-import model.film.FilmDAO;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

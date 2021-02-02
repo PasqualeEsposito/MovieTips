@@ -1,11 +1,11 @@
-package servlet.blackbox;
+package integration.test1;
 
 import control.MyServletException;
 import control.gestioneRecensione.AggiungiRecensioneServlet;
-import model.film.Film;
-import model.film.FilmDAO;
-import model.recensione.RecensioneDAO;
-import model.utente.UtenteDAO;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
+import model.gestioneRecensione.RecensioneDAO;
+import model.gestioneUtente.UtenteDAO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
