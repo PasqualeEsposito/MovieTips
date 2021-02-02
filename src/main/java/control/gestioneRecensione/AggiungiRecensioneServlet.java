@@ -24,26 +24,30 @@ public class AggiungiRecensioneServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         request.setCharacterEncoding("UTF-8");
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente == null || !utente.isFilmino()) {
-            throw new MyServletException("Utente non autorizzato");
+        int valutazione, idFilm;
+        try {
+            valutazione = Integer.parseInt(request.getParameter("valutazione"));
+            idFilm = Integer.parseInt(request.getParameter("idFilm"));
+        } catch (NumberFormatException e) {
+            throw new MyServletException("Dati non validi");
         }
-        int valutazione = Integer.parseInt(request.getParameter("valutazione"));
         String testo = request.getParameter("testo");
-        int idFilm = Integer.parseInt(request.getParameter("idFilm"));
-        if (valutazione < 1 || valutazione > 5) {
-            request.setAttribute("errorTest", "RV1_FAIL");
-        } else {
-            if (testo.length() > 255) {
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        switch (recensioneDAO.doSave(valutazione, testo, utente, idFilm)) {
+            case -1:
+                throw new MyServletException("Utente non autorizzato");
+            case -2:
+                request.setAttribute("errorTest", "RV1_FAIL");
+                break;
+            case -3:
                 request.setAttribute("errorTest", "LT_FAIL");
-            } else {
-                RecensioneDAO recensioneDAO = new RecensioneDAO();
-                recensioneDAO.doSave(valutazione, testo, utente.getUsername(), idFilm);
+                break;
+            default:
                 request.setAttribute("errorTest", "OK");
                 response.sendRedirect("./Film?id=" + idFilm);
                 return;
-            }
         }
-        throw new MyServletException("Valutazione non valida");
+        throw new MyServletException("Recensione non valida");
     }
 }

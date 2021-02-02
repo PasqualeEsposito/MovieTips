@@ -1,6 +1,7 @@
 package model.gestioneRecensione;
 
 import model.connection.ConPool;
+import model.gestioneUtente.Utente;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class RecensioneDAO {
      * @return
      */
     public ArrayList<Recensione> doRetrieveByIdFilm(int idFilm) {
+
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE id_film = ?");
             ps.setInt(1, idFilm);
@@ -61,7 +63,10 @@ public class RecensioneDAO {
     /**
      * @return
      */
-    public ArrayList<Recensione> doRetrieveBySegnalazione() {
+    public ArrayList<Recensione> doRetrieveBySegnalazione(Utente utente) {
+        if (utente == null || !utente.isModeratore()) {
+            return null;
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT id_recensione, valutazione, testo, username_utente FROM recensione WHERE segnalazione = true");
             ResultSet rs = ps.executeQuery();
@@ -83,17 +88,27 @@ public class RecensioneDAO {
     /**
      * @param valutazione
      * @param testo
-     * @param usernameUtente
+     * @param utente
      * @param idFilm
      * @return
      */
-    public int doSave(int valutazione, String testo, String usernameUtente, int idFilm) {
+    public int doSave(int valutazione, String testo, Utente utente, int idFilm) {
+        if (utente == null || !utente.isFilmino()) {
+            return -1;
+        }
+        if (valutazione < 1 || valutazione > 5) {
+            return -2;
+        } else {
+            if (testo.length() > 255) {
+                return -3;
+            }
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO recensione (valutazione, testo, username_utente, id_film) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, valutazione);
             ps.setString(2, testo);
-            ps.setString(3, usernameUtente);
+            ps.setString(3, utente.getUsername());
             ps.setInt(4, idFilm);
             if (ps.executeUpdate() != 1) {
                 return -1;
@@ -126,20 +141,20 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean doUpdateSegnalazioneTrue(int idRecensione) {
+    public boolean doUpdateSegnalazioneTrue(int idRecensione, Utente utente) {
+        if (utente == null || utente.isNotActive()) {
+            return false;
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
-            if (ps.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-
         }
-
+        return true;
     }
 
     /**

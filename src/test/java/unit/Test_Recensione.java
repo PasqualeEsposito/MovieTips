@@ -1,3 +1,4 @@
+/*
 package unit;
 
 import junit.framework.TestCase;
@@ -104,4 +105,4 @@ public class Test_Recensione extends TestCase {
         recensioneDAO.doDeleteByIdRecensione(recensioneEsistente.getIdRecensione());
         recensioneDAO.doDeleteByTestoUsernameUtenteIdFilm(recensioneNonEsistente.getTesto(), recensioneNonEsistente.getUsernameUtente(), recensioneNonEsistente.getIdFilm());
     }
-}
+}*/

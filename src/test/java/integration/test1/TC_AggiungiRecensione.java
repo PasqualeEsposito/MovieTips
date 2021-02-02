@@ -1,3 +1,4 @@
+/*
 package integration.test1;
 
 import control.MyServletException;
@@ -100,4 +101,4 @@ public class TC_AggiungiRecensione extends Mockito {
         request = null;
         response = null;
     }
-}
+}*/

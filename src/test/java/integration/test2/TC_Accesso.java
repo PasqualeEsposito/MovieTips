@@ -1,3 +1,4 @@
+/*
 package integration.test2;
 
 import control.MyServletException;
@@ -64,4 +65,4 @@ public class TC_Accesso {
         mockedRequest = null;
         mockedResponse = null;
     }
-}
+}*/

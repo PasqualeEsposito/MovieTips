@@ -23,14 +23,18 @@ public class SegnalaRecensioneServlet extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+        int idRecensione, idFilm;
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente == null || utente.isNotActive()) {
+        try {
+            idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
+            idFilm = Integer.parseInt(request.getParameter("idFilm"));
+        } catch (NumberFormatException e) {
+            throw new MyServletException("Dati non validi");
+        }
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        if (recensioneDAO.doUpdateSegnalazioneTrue(idRecensione, utente) == false) {
             throw new MyServletException("Utente non autorizzato");
         }
-        int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        int idFilm = Integer.parseInt(request.getParameter("idFilm"));
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        recensioneDAO.doUpdateSegnalazioneTrue(idRecensione);
         response.sendRedirect("./Film?id=" + idFilm);
     }
 }

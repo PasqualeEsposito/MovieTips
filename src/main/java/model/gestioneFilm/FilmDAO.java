@@ -13,14 +13,12 @@ import java.util.ArrayList;
  */
 public class FilmDAO {
     /**
-     * @param limit
      * @return
      */
-    public ArrayList<Film> doRetrieveAll(int limit) {
+    public ArrayList<Film> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM film ORDER BY id_film LIMIT ?");
-            ps.setInt(1, limit);
+                    con.prepareStatement("SELECT * FROM film ORDER BY id_film LIMIT 10");
             ResultSet rs = ps.executeQuery();
             ArrayList<Film> films = new ArrayList<>();
             while (rs.next()) {

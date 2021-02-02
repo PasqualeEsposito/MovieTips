@@ -28,11 +28,11 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente == null || !utente.isModeratore()) {
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione(utente);
+        if (recensioni == null) {
             throw new MyServletException("Utente non autorizzato");
         }
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione();
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioni.jsp");
         requestDispatcher.forward(request, response);

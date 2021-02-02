@@ -1,3 +1,4 @@
+/*
 package unit;
 
 import junit.framework.TestCase;
@@ -61,4 +62,4 @@ public class Test_Utente extends TestCase {
     protected void tearDown() {
         utenteDAO.doDeleteByUsername("frank");
     }
-}
+}*/

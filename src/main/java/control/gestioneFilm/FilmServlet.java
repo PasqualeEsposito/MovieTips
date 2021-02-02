@@ -28,7 +28,12 @@ public class FilmServlet extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
+        }
         FilmDAO filmDAO = new FilmDAO();
         Film film = filmDAO.doRetrieveById(id);
         if (film == null) {
