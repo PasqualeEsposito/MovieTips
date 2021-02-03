@@ -3,7 +3,10 @@ package model.gestioneRecensione;
 import model.connection.ConPool;
 import model.gestioneUtente.Utente;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecensioneDAO {
@@ -104,18 +107,15 @@ public class RecensioneDAO {
             }
         }
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO recensione (valutazione, testo, username_utente, id_film) VALUES (?, ?, ?, ?)",
-                    Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO recensione (valutazione, testo, username_utente, id_film) VALUES (?, ?, ?, ?)");
             ps.setInt(1, valutazione);
             ps.setString(2, testo);
             ps.setString(3, utente.getUsername());
             ps.setInt(4, idFilm);
             if (ps.executeUpdate() != 1) {
-                return -1;
+                throw new RuntimeException("INSERT error");
             }
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            return rs.getInt(1);
+            return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -124,15 +124,17 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean doDeleteByIdRecensione(int idRecensione) {
+    public boolean doDeleteByIdRecensioneFilmino(int idRecensione, Utente utente, String usernameUtente) {
+        if (utente == null || !usernameUtente.equals(utente.getUsername())) {
+            return false;
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
-            if (ps.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error");
             }
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

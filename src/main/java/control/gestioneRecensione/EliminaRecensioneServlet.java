@@ -23,14 +23,18 @@ public class EliminaRecensioneServlet extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+        int idRecensione;
         String usernameUtente = request.getParameter("usernameUtente");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente == null || !usernameUtente.equals(utente.getUsername())) {
+        try {
+            idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
+        } catch (NumberFormatException e) {
+            throw new MyServletException("Dati non validi");
+        }
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        if (recensioneDAO.doDeleteByIdRecensioneFilmino(idRecensione, utente, usernameUtente) == false) {
             throw new MyServletException("Utente non autorizzato");
         }
-        int idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        recensioneDAO.doDeleteByIdRecensione(idRecensione);
         response.sendRedirect("./Profilo?username=" + utente.getUsername());
     }
 }
