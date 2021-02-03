@@ -1,5 +1,6 @@
 package model.gestioneUtente;
 
+import control.MyServletException;
 import model.connection.ConPool;
 
 import java.sql.Connection;
@@ -40,7 +41,14 @@ public class UtenteDAO {
      * @param mail
      * @return
      */
-    public Utente doRetrieveByMail(String mail) {
+   private int doRetrieveByMail(String mail) {
+        if (mail.length() < 8 || mail.length() > 255) {
+            return -1;
+        } else {
+            if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
+                return -2;
+            }
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT username, ruolo FROM utente WHERE mail = ?");
             ps.setString(1, mail);
@@ -49,9 +57,12 @@ public class UtenteDAO {
                 Utente u = new Utente();
                 u.setUsername(rs.getString(1));
                 u.setRuolo(rs.getString(2));
-                return u;
+                if(u.isBanned()){
+                    return -3;
+                }
+                return 1;
             }
-            return null;
+            return -4;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -62,7 +73,18 @@ public class UtenteDAO {
      * @param password
      * @return
      */
-    public Utente doRetrieveByMailPassword(String mail, String password) {
+    public int doRetrieveByMailPassword(String mail,String password) {
+        int numero=doRetrieveByMail(mail);
+        if(numero != 1){
+            return numero;
+        }
+        if (password.length() < 8 || password.length() > 255) {
+            return -5;
+        } else {
+            if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
+                return -6;
+            }
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita, ruolo FROM utente WHERE mail = ? AND password = SHA1(?)");
             ps.setString(1, mail);
@@ -77,9 +99,9 @@ public class UtenteDAO {
                 u.setGenere(rs.getString(5));
                 u.setDataNascita(rs.getString(6));
                 u.setRuolo(rs.getString(7));
-                return u;
+                return 1;
             }
-            return null;
+            return -7;
         } catch (SQLException e) {
             throw new RuntimeException();
         }
