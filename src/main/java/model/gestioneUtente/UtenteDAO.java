@@ -73,7 +73,7 @@ public class UtenteDAO {
      * @param password
      * @return
      */
-    public int doRetrieveByMailPassword(String mail,String password) {
+    public int doRetrieveByMailPassword(Utente u,String mail,String password) {
         int numero=doRetrieveByMail(mail);
         if(numero != 1){
             return numero;
@@ -91,7 +91,6 @@ public class UtenteDAO {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Utente u = new Utente();
                 u.setUsername(rs.getString(1));
                 u.setMail(rs.getString(2));
                 u.setNome(rs.getString(3));
