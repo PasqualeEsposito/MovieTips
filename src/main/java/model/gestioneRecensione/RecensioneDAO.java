@@ -15,7 +15,6 @@ public class RecensioneDAO {
      * @return
      */
     public ArrayList<Recensione> doRetrieveByIdFilm(int idFilm) {
-
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE id_film = ?");
             ps.setInt(1, idFilm);
@@ -143,6 +142,25 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
+    public boolean doDeleteByIdRecensioneModeratore(int idRecensione, Utente utente) {
+        if (utente == null || !utente.isModeratore()) {
+            return false;
+        }
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE id_recensione = ?");
+            ps.setInt(1, idRecensione);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error");
+            }
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param idRecensione
+     */
     public boolean doUpdateSegnalazioneTrue(int idRecensione, Utente utente) {
         if (utente == null || utente.isNotActive()) {
             return false;
@@ -153,24 +171,26 @@ public class RecensioneDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error");
             }
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return true;
     }
 
     /**
      * @param idRecensione
      */
-    public boolean doUpdateSegnalazioneFalse(int idRecensione) {
+    public boolean doUpdateSegnalazioneFalse(int idRecensione, Utente utente) {
+        if (utente == null || !utente.isModeratore()) {
+            return false;
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = false WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
-            if (ps.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error");
             }
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
