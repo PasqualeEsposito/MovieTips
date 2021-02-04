@@ -5,7 +5,7 @@
 </header>
 <main class="mdl-layout__content">
     <div class="page-content">
-        <h2 style="text-align: center;">Errore ${requestScope['javax.servlet.error.status_code']}</h2>
+        <h2 style="text-align: center;" id="error">Errore ${requestScope['javax.servlet.error.status_code']}</h2>
     </div>
 </main>
 </div>

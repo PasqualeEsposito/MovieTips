@@ -1,7 +1,7 @@
-package integration.test2;
+package OLDintegration.test2;
 
 import control.MyServletException;
-import control.gestioneRecensione.GestioneSegnalazioniServlet;
+import control.gestioneRecensione.ModeraRecensioneServlet;
 import model.gestioneUtente.Utente;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_GestioneSegnalazioni {
+public class TC_ModeraRecensione {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
-    private GestioneSegnalazioniServlet servlet;
+    private ModeraRecensioneServlet servlet;
     private HttpSession session;
     private Utente utente;
 
@@ -29,13 +29,13 @@ public class TC_GestioneSegnalazioni {
         session = Mockito.mock(HttpSession.class);
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
-        servlet = new GestioneSegnalazioniServlet();
+        servlet = new ModeraRecensioneServlet();
         utente = new Utente("frank", "francesco@unisa.it", "Francesco", "Ceriello", "Uomo", "1985-12-10", "001000");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
     }
 
     @Test
-    void TC_GestioneSegnalazioniServlet1() {
+    void TC_ModeraRecensioneServlet1() {
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utente);
         String message = "Utente non autorizzato";
         MyServletException exception = assertThrows(MyServletException.class, () ->

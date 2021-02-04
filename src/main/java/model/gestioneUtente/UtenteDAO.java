@@ -55,20 +55,21 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 u.setRuolo(rs.getString(1));
-                if (u.isBanned()) {
-                    return -3;
-                }
             } else {
-                return -4;
+                return -3;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (password.length() < 8 || password.length() > 255) {
-            return -5;
+        if (u.isBanned()) {
+            return -4;
         } else {
-            if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
-                return -6;
+            if (password.length() < 8 || password.length() > 255) {
+                return -5;
+            } else {
+                if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
+                    return -6;
+                }
             }
         }
         try (Connection con = ConPool.getConnection()) {

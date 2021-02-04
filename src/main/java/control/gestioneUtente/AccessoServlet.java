@@ -61,10 +61,11 @@ public class AccessoServlet extends HttpServlet {
                 request.setAttribute("errorTest", "FE_FAIL");
                 break;
             case -3:
-                throw new MyServletException("Utente bannato");
-            case -4:
                 request.setAttribute("errorTest", "EE_FAIL");
                 break;
+            case -4:
+                request.setAttribute("errorTest", "EB_FAIL");
+                throw new MyServletException("Utente bannato");
             case -5:
                 request.setAttribute("errorTest", "LP_FAIL");
                 break;

@@ -5,7 +5,7 @@
 </header>
 <main class="mdl-layout__content">
     <div class="page-content">
-        <h2 style="text-align: center;"><%= exception.getMessage() %>
+        <h2 style="text-align: center;" id="exception"><%= exception.getMessage() %>
         </h2>
     </div>
 </main>
