@@ -53,7 +53,7 @@ public class AccessoServlet extends HttpServlet {
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
         utente = new Utente();
-        switch (utenteDAO.doRetrieveByMailPassword(utente, mail, password)) {
+        switch (utenteDAO.signIn(mail, password, utente)) {
             case -1:
                 request.setAttribute("errorTest", "LE_FAIL");
                 break;

@@ -28,7 +28,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso1() throws ServletException, IOException {
+    public void testAccesso1() throws ServletException, IOException {
         request.addParameter("mail", "francy");
         request.addParameter("password", "");
         String message = "LE_FAIL";
@@ -38,7 +38,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso2() throws ServletException, IOException {
+    public void testAccesso2() throws ServletException, IOException {
         request.addParameter("mail", "francy.mauro");
         request.addParameter("password", "");
         String message = "FE_FAIL";
@@ -48,7 +48,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso3() throws ServletException, IOException {
+    public void testAccesso3() throws ServletException, IOException {
         request.addParameter("mail", "francy.mauro@unisa.it");
         request.addParameter("password", "");
         String message = "EE_FAIL";
@@ -58,7 +58,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso4() throws ServletException, IOException {
+    public void testAccesso4() throws ServletException, IOException {
         request.addParameter("mail", "francesca.mauro@unisa.it");
         request.addParameter("password", "");
         String message = "EB_FAIL";
@@ -68,7 +68,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso5() throws ServletException, IOException {
+    public void testAccesso5() throws ServletException, IOException {
         request.addParameter("mail", "roberta.esposito@unisa.it");
         request.addParameter("password", "Rob");
         String message = "LP_FAIL";
@@ -78,7 +78,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso6() throws ServletException, IOException {
+    public void testAccesso6() throws ServletException, IOException {
         request.addParameter("mail", "roberta.esposito@unisa.it");
         request.addParameter("password", "Roberta!");
         String message = "FP_FAIL";
@@ -88,7 +88,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso7() throws ServletException, IOException {
+    public void testAccesso7() throws ServletException, IOException {
         request.addParameter("mail", "roberta.esposito@unisa.it");
         request.addParameter("password", "Roberta1");
         String message = "CP_FAIL";
@@ -98,7 +98,7 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void TC_Accesso8() throws ServletException, IOException {
+    public void testAccesso8() throws ServletException, IOException {
         request.addParameter("mail", "roberta.esposito@unisa.it");
         request.addParameter("password", "Roberta1!");
         String message = "OK";

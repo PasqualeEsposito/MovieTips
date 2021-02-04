@@ -41,7 +41,7 @@ public class UtenteDAO {
      * @param password
      * @return
      */
-    public int doRetrieveByMailPassword(Utente u, String mail, String password) {
+    public int signIn(String mail, String password, Utente utente) {
         if (mail.length() < 8 || mail.length() > 255) {
             return -1;
         } else {
@@ -54,14 +54,14 @@ public class UtenteDAO {
             ps.setString(1, mail);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                u.setRuolo(rs.getString(1));
+                utente.setRuolo(rs.getString(1));
             } else {
                 return -3;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (u.isBanned()) {
+        if (utente.isBanned()) {
             return -4;
         } else {
             if (password.length() < 8 || password.length() > 255) {
@@ -78,12 +78,12 @@ public class UtenteDAO {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                u.setUsername(rs.getString(1));
-                u.setMail(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setGenere(rs.getString(5));
-                u.setDataNascita(rs.getString(6));
+                utente.setUsername(rs.getString(1));
+                utente.setMail(rs.getString(2));
+                utente.setNome(rs.getString(3));
+                utente.setCognome(rs.getString(4));
+                utente.setGenere(rs.getString(5));
+                utente.setDataNascita(rs.getString(6));
                 return 1;
             }
             return -7;
