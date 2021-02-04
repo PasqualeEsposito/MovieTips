@@ -100,11 +100,11 @@ public class Test_UtenteDAO extends TestCase {
 
     @Test
     public void testUpdateRuoloUtenteEsistente() {
-        assertEquals(true, utenteDAO.doUpdateUtente("frank", "001001"));
+        assertEquals(true, utenteDAO.banUser("frank", "001001"));
     }
 
     @Test
     public void testUpdateRuoloUtenteNonEsistente() {
-        assertEquals(false, utenteDAO.doUpdateUtente("ghost", "001001"));
+        assertEquals(false, utenteDAO.banUser("ghost", "001001"));
     }
 */

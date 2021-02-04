@@ -48,7 +48,7 @@ public class AccessoServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente != null) {
-            throw new MyServletException("Operazione non autorizzato");
+            throw new MyServletException("Operazione non autorizzata");
         }
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");

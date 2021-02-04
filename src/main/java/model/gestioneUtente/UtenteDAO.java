@@ -94,9 +94,8 @@ public class UtenteDAO {
 
     /**
      * @param username
-     * @param ruolo
      */
-    public int doUpdateUtente(Utente utente, String username, String ruolo) {
+    public int banUser(Utente utente, String username) {
         if (utente == null || !utente.isModeratore()) {
             return -1;
         }
@@ -104,9 +103,8 @@ public class UtenteDAO {
             return -2;
         }
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE utente SET ruolo = ? WHERE username = ?");
-            ps.setString(1, ruolo);
-            ps.setString(2, username);
+            PreparedStatement ps = con.prepareStatement("UPDATE utente SET ruolo = 100000 WHERE username = ?");
+            ps.setString(1, username);
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error");
             }
