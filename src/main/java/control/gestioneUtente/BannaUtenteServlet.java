@@ -24,20 +24,15 @@ public class BannaUtenteServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
-
         UtenteDAO utenteDAO = new UtenteDAO();
         String username = request.getParameter("username");
-
-        switch (utenteDAO.doUpdateUtente(utente,username, "100000")) {
+        switch (utenteDAO.doUpdateUtente(utente, username, "100000")) {
             case -1:
                 throw new MyServletException("Utente non autorizzato");
             case -2:
                 throw new MyServletException("Operazione non autorizzata");
             default:
                 response.sendRedirect(".");
-
         }
-
-
     }
 }

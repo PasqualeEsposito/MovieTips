@@ -1,6 +1,5 @@
 package model.gestioneUtente;
 
-import control.MyServletException;
 import model.connection.ConPool;
 
 import java.sql.Connection;
@@ -41,7 +40,7 @@ public class UtenteDAO {
      * @param mail
      * @return
      */
-   private int doRetrieveByMail(String mail) {
+    private int doRetrieveByMail(String mail) {
         if (mail.length() < 8 || mail.length() > 255) {
             return -1;
         } else {
@@ -57,7 +56,7 @@ public class UtenteDAO {
                 Utente u = new Utente();
                 u.setUsername(rs.getString(1));
                 u.setRuolo(rs.getString(2));
-                if(u.isBanned()){
+                if (u.isBanned()) {
                     return -3;
                 }
                 return 1;
@@ -73,10 +72,28 @@ public class UtenteDAO {
      * @param password
      * @return
      */
-    public int doRetrieveByMailPassword(Utente u,String mail,String password) {
-        int numero=doRetrieveByMail(mail);
-        if(numero != 1){
-            return numero;
+    public int doRetrieveByMailPassword(Utente u, String mail, String password) {
+        if (mail.length() < 8 || mail.length() > 255) {
+            return -1;
+        } else {
+            if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
+                return -2;
+            }
+        }
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT ruolo FROM utente WHERE mail = ?");
+            ps.setString(1, mail);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                u.setRuolo(rs.getString(1));
+                if (u.isBanned()) {
+                    return -3;
+                }
+            } else {
+                return -4;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         if (password.length() < 8 || password.length() > 255) {
             return -5;
@@ -86,7 +103,7 @@ public class UtenteDAO {
             }
         }
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita, ruolo FROM utente WHERE mail = ? AND password = SHA1(?)");
+            PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita FROM utente WHERE mail = ? AND password = SHA1(?)");
             ps.setString(1, mail);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -97,7 +114,6 @@ public class UtenteDAO {
                 u.setCognome(rs.getString(4));
                 u.setGenere(rs.getString(5));
                 u.setDataNascita(rs.getString(6));
-                u.setRuolo(rs.getString(7));
                 return 1;
             }
             return -7;
@@ -110,11 +126,11 @@ public class UtenteDAO {
      * @param username
      * @param ruolo
      */
-    public int doUpdateUtente(Utente utente,String username, String ruolo) {
+    public int doUpdateUtente(Utente utente, String username, String ruolo) {
         if (utente == null || !utente.isModeratore()) {
             return -1;
         }
-        if (username.equals(utente.getUsername())){
+        if (username.equals(utente.getUsername())) {
             return -2;
         }
         try (Connection con = ConPool.getConnection()) {

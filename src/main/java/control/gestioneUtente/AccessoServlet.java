@@ -52,34 +52,34 @@ public class AccessoServlet extends HttpServlet {
         }
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
-        utente=new Utente();
-             switch (utenteDAO.doRetrieveByMailPassword(utente, mail, password)){
-                 case -1:
-                     request.setAttribute("errorTest", "LE_FAIL");
-                     break;
-                 case -2:
-                     request.setAttribute("errorTest", "FE_FAIL");
-                     break;
-                 case -3:
-                     throw new MyServletException("Utente bannato");
-                 case -4:
-                     request.setAttribute("errorTest", "EE_FAIL");
-                     break;
-                 case -5:
-                     request.setAttribute("errorTest", "LP_FAIL");
-                     break;
-                 case -6:
-                     request.setAttribute("errorTest", "FP_FAIL");
-                     break;
-                 case -7:
-                     request.setAttribute("errorTest", "CP_FAIL");
-                     break;
-                 default:
-                         request.setAttribute("errorTest", "OK");
-                         request.getSession().setAttribute("utente", utente);
-                         response.sendRedirect(".");
-                         return;
-             }
-             throw new MyServletException("Username e/o password non validi");
+        utente = new Utente();
+        switch (utenteDAO.doRetrieveByMailPassword(utente, mail, password)) {
+            case -1:
+                request.setAttribute("errorTest", "LE_FAIL");
+                break;
+            case -2:
+                request.setAttribute("errorTest", "FE_FAIL");
+                break;
+            case -3:
+                throw new MyServletException("Utente bannato");
+            case -4:
+                request.setAttribute("errorTest", "EE_FAIL");
+                break;
+            case -5:
+                request.setAttribute("errorTest", "LP_FAIL");
+                break;
+            case -6:
+                request.setAttribute("errorTest", "FP_FAIL");
+                break;
+            case -7:
+                request.setAttribute("errorTest", "CP_FAIL");
+                break;
+            default:
+                request.setAttribute("errorTest", "OK");
+                request.getSession().setAttribute("utente", utente);
+                response.sendRedirect(".");
+                return;
+        }
+        throw new MyServletException("Username e/o password non validi");
     }
 }
