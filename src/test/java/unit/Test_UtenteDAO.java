@@ -1,6 +1,46 @@
 package unit;
 
-public class Test_UtenteDAO {
+import org.dbunit.Assertion;
+import org.dbunit.DatabaseTestCase;
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.database.QueryDataSet;
+import org.dbunit.dataset.DataSetException;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.TimeZone;
+
+public class Test_UtenteDAO extends DatabaseTestCase {
+    private FlatXmlDataSet loadedDataSet;
+
+    protected IDatabaseConnection getConnection() {
+        try {
+            Connection jdbcConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movietipsdb?serverTimezone=" + TimeZone.getDefault().getID(), "root", "MovieTips");
+            return new DatabaseConnection(jdbcConnection);
+        } catch (SQLException | DatabaseUnitException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected IDataSet getDataSet() throws IOException, DataSetException {
+        loadedDataSet = new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("input.xml"));
+        return loadedDataSet;
+    }
+
+    @Test
+    public void testCompareQuery() throws Exception {
+        QueryDataSet queryDataSet = new QueryDataSet(getConnection());
+        queryDataSet.addTable("utente", "SELECT * FROM " + "utente");
+        Assertion.assertEquals(loadedDataSet, queryDataSet);
+    }
 }
 
 /*
