@@ -1,68 +1,34 @@
 package unit;
 
-import org.dbunit.Assertion;
-import org.dbunit.DatabaseTestCase;
-import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.database.QueryDataSet;
-import org.dbunit.dataset.DataSetException;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.TimeZone;
-
-public class Test_UtenteDAO extends DatabaseTestCase {
-    private FlatXmlDataSet loadedDataSet;
-
-    protected IDatabaseConnection getConnection() {
-        try {
-            Connection jdbcConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movietipsdb?serverTimezone=" + TimeZone.getDefault().getID(), "root", "MovieTips");
-            return new DatabaseConnection(jdbcConnection);
-        } catch (SQLException | DatabaseUnitException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    protected IDataSet getDataSet() throws IOException, DataSetException {
-        loadedDataSet = new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("input.xml"));
-        return loadedDataSet;
-    }
-
-    @Test
-    public void testCompareQuery() throws Exception {
-        QueryDataSet queryDataSet = new QueryDataSet(getConnection());
-        queryDataSet.addTable("utente", "SELECT * FROM " + "utente");
-        Assertion.assertEquals(loadedDataSet, queryDataSet);
-    }
-}
-
-/*
-package unit;
-
 import junit.framework.TestCase;
+import model.gestioneUtente.Utente;
 import model.gestioneUtente.UtenteDAO;
+import org.h2.jdbcx.JdbcDataSource;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class Test_Utente extends TestCase {
+public class Test_UtenteDAO extends TestCase {
     private UtenteDAO utenteDAO;
+    private JdbcDataSource dataSource;
 
     @BeforeEach
     protected void setUp() {
         utenteDAO = new UtenteDAO();
-        utenteDAO.doDeleteByUsername("frank");
-        utenteDAO.doDeleteByUsername("ghost");
-        utenteDAO.doSave("frank", "francesco@unisa.it", "Francesco1!", "Francesco", "Ceriello", "Uomo", "1985-12-10", "100000");
     }
 
+    @Test
+    public void TC_Accesso1() {
+        assertEquals(-1, utenteDAO.doRetrieveByMailPassword(new Utente(), "francy", "Francy")); // LE < 8 or LE > 255
+    }
+
+    @AfterEach
+    public void tearDown() {
+        utenteDAO = null;
+    }
+}
+
+/*
     @Test
     public void testRetrieveUtenteEsistente() {
         assertEquals("frank", utenteDAO.doRetrieveByUsername("frank").getUsername());
@@ -103,8 +69,59 @@ public class Test_Utente extends TestCase {
         assertEquals(false, utenteDAO.doUpdateUtente("ghost", "001001"));
     }
 
-    @AfterEach
-    protected void tearDown() {
-        utenteDAO.doDeleteByUsername("frank");
+package unit;
+
+import org.dbunit.Assertion;
+import org.dbunit.DBTestCase;
+import org.dbunit.PropertiesBasedJdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
+import org.junit.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.TimeZone;
+
+public class Test_UtenteDAO extends DBTestCase
+{
+    public Test_UtenteDAO(String name) {
+        super(name);
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "com.mysql.cj.jdbc.Driver" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://localhost:3306/movietipsdb?serverTimezone=" + TimeZone.getDefault().getID());
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "MovieTips" );
     }
-}*/
+
+    protected IDataSet getDataSet() throws Exception
+    {
+        return new FlatXmlDataSetBuilder().build(new FileInputStream("input.xml"));
+    }
+
+    protected DatabaseOperation getSetUpOperation() throws Exception
+    {
+        return DatabaseOperation.REFRESH;
+    }
+
+    protected DatabaseOperation getTearDownOperation() throws Exception
+    {
+        return DatabaseOperation.DELETE_ALL;
+    }
+
+    @Test
+    public void testExample() throws Exception
+    {
+        // Fetch database data after executing your code
+        IDataSet databaseDataSet = getConnection().createDataSet();
+        ITable actualTable = databaseDataSet.getTable("utente");
+
+        // Load expected data from an XML dataset
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("input.xml"));
+        ITable expectedTable = expectedDataSet.getTable("utente");
+
+        // Assert actual database table match expected table
+        Assertion.assertEquals(expectedTable, actualTable);
+    }
+}
+*/

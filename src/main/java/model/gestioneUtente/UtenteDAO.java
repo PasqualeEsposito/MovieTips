@@ -38,37 +38,6 @@ public class UtenteDAO {
 
     /**
      * @param mail
-     * @return
-     */
-    private int doRetrieveByMail(String mail) {
-        if (mail.length() < 8 || mail.length() > 255) {
-            return -1;
-        } else {
-            if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
-                return -2;
-            }
-        }
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT username, ruolo FROM utente WHERE mail = ?");
-            ps.setString(1, mail);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Utente u = new Utente();
-                u.setUsername(rs.getString(1));
-                u.setRuolo(rs.getString(2));
-                if (u.isBanned()) {
-                    return -3;
-                }
-                return 1;
-            }
-            return -4;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * @param mail
      * @param password
      * @return
      */
