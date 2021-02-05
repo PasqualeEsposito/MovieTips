@@ -139,7 +139,7 @@ public class Test_RecensioneDAO extends TestCase {
 
     @Test
     public void testModeraRecensione1() {
-        assertEquals(-1, recensioneDAO.ignoreReporting(1, null)); // Errore: accesso non effettuato
+        assertEquals(-1, recensioneDAO.moderateReview(1, null)); // Errore: accesso non effettuato
     }
 
     @Test
@@ -147,7 +147,7 @@ public class Test_RecensioneDAO extends TestCase {
         Utente utente = new Utente();
         utente.setRuolo("001000");
         utente.setUsername("fabrizio_ceriello");
-        assertEquals(-2, recensioneDAO.ignoreReporting(1, utente)); // Errore: utente non ricopre il ruolo di moderatore
+        assertEquals(-2, recensioneDAO.moderateReview(1, utente)); // Errore: utente non ricopre il ruolo di moderatore
     }
 
     @Test
@@ -155,7 +155,7 @@ public class Test_RecensioneDAO extends TestCase {
         Utente utente = new Utente();
         utente.setRuolo("000001");
         utente.setUsername("marco_bellamico");
-        assertEquals(-3, recensioneDAO.ignoreReporting(5, utente)); // Errore: recensione non esistente
+        assertEquals(-3, recensioneDAO.moderateReview(5, utente)); // Errore: recensione non esistente
     }
 
     @Test
@@ -163,6 +163,6 @@ public class Test_RecensioneDAO extends TestCase {
         Utente utente = new Utente();
         utente.setRuolo("000001");
         utente.setUsername("marco_bellamico");
-        assertEquals(1, recensioneDAO.ignoreReporting(1, utente)); // Ok: moderazione recensione effettuata
+        assertEquals(1, recensioneDAO.moderateReview(1, utente)); // Ok: moderazione recensione effettuata
     }
 }
