@@ -44,10 +44,9 @@ public class UtenteDAO {
     public int signIn(String mail, String password, Utente utente) {
         if (mail.length() < 8 || mail.length() > 255) {
             return -1;
-        } else {
-            if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
-                return -2;
-            }
+        }
+        if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
+            return -2;
         }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT ruolo FROM utente WHERE mail = ?");
@@ -63,14 +62,12 @@ public class UtenteDAO {
         }
         if (utente.isBanned()) {
             return -4;
-        } else {
-            if (password.length() < 8 || password.length() > 255) {
-                return -5;
-            } else {
-                if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
-                    return -6;
-                }
-            }
+        }
+        if (password.length() < 8 || password.length() > 255) {
+            return -5;
+        }
+        if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
+            return -6;
         }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita FROM utente WHERE mail = ? AND password = SHA1(?)");
@@ -110,7 +107,6 @@ public class UtenteDAO {
             ps.setString(1, username);
             if (ps.executeUpdate() != 1) {
                 return -4;
-                //throw new RuntimeException("UPDATE error");
             }
             return 1;
         } catch (SQLException e) {

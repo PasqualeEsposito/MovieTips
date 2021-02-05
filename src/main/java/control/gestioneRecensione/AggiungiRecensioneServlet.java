@@ -22,7 +22,7 @@ public class AggiungiRecensioneServlet extends HttpServlet {
      * @throws MyServletException
      */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         request.setCharacterEncoding("UTF-8");
         int valutazione, idFilm;
         try {

@@ -56,7 +56,7 @@
     <section class="mdl-layout__tab-panel" id="fixed-tab-2">
         <div class="page-content">
                 <% if (checkFilmino == 1) { %>
-            <form action="AggiungiRecensione" method="post" accept-charset="utf-8">
+            <form action="AggiungiRecensione" accept-charset="utf-8">
                 <input type="hidden" name="idFilm" value="${film.idFilm}">
                 <div class="submit">
                     <input class="mdl-slider mdl-js-slider" type="range" min="1" max="5" value="1" tabindex="0"

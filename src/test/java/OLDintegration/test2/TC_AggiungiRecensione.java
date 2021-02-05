@@ -39,7 +39,7 @@ public class TC_AggiungiRecensione {
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(utente);
         String message = "Utente non autorizzato";
         MyServletException exception = assertThrows(MyServletException.class, () ->
-                servlet.doPost(mockedRequest, mockedResponse));
+                servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 

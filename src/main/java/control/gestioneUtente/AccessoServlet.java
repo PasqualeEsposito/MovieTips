@@ -52,35 +52,46 @@ public class AccessoServlet extends HttpServlet {
         }
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
+        String errore;
         utente = new Utente();
         switch (utenteDAO.signIn(mail, password, utente)) {
             case -1:
-                request.setAttribute("errorTest", "LE_FAIL");
+                errore = "Errore: lunghezza e-mail";
+                request.setAttribute("errorTest", errore);
                 break;
             case -2:
-                request.setAttribute("errorTest", "FE_FAIL");
+                errore = "Errore: formato e-mail";
+                request.setAttribute("errorTest", errore);
                 break;
             case -3:
-                request.setAttribute("errorTest", "EE_FAIL");
+                errore = "Errore: e-mail non esistente";
+                request.setAttribute("errorTest", errore);
                 break;
             case -4:
-                request.setAttribute("errorTest", "EB_FAIL");
-                throw new MyServletException("Utente bannato");
+                errore = "Errore: e-mail bannata";
+                request.setAttribute("errorTest", errore);
+                break;
+            //throw new MyServletException("Utente bannato");
             case -5:
-                request.setAttribute("errorTest", "LP_FAIL");
+                errore = "Errore: lunghezza password";
+                request.setAttribute("errorTest", errore);
                 break;
             case -6:
-                request.setAttribute("errorTest", "FP_FAIL");
+                errore = "Errore: formato password";
+                request.setAttribute("errorTest", errore);
                 break;
             case -7:
-                request.setAttribute("errorTest", "CP_FAIL");
+                errore = "Errore: password non corrispondente all’username";
+                request.setAttribute("errorTest", errore);
                 break;
             default:
-                request.setAttribute("errorTest", "OK");
+                errore = "Ok: accesso effettuato";
+                request.setAttribute("errorTest", errore);
                 request.getSession().setAttribute("utente", utente);
-                response.sendRedirect(".");
-                return;
+                //response.sendRedirect(".");
+                //return;
         }
-        throw new MyServletException("Username e/o password non validi");
+        throw new MyServletException(errore);
+        //throw new MyServletException("Username e/o password non validi");
     }
 }
