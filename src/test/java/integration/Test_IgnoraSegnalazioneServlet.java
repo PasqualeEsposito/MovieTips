@@ -38,11 +38,10 @@ public class Test_IgnoraSegnalazioneServlet extends Mockito {
     @Test
     public void testIgnoraSegnalazione2() throws ServletException, IOException {
         Utente utente = new Utente();
-        utente.setUsername("roberta_esposito");
+        utente.setUsername("fabrizio_ceriello");
         utente.setRuolo("001000");
         request.addParameter("idRecensione", "3");
         request.getSession().setAttribute("utente", utente);
-        request.addParameter("username", "roberta_esposito");
         String message = "Errore: utente non ricopre il ruolo di moderatore";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
@@ -52,23 +51,22 @@ public class Test_IgnoraSegnalazioneServlet extends Mockito {
     @Test
     public void testIgnoraSegnalazione3() throws ServletException, IOException {
         Utente utente = new Utente();
-        utente.setUsername("roberta_esposito");
+        utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
         request.addParameter("idRecensione", "100");
-        request.addParameter("username", "roberta_esposito");
         request.getSession().setAttribute("utente", utente);
         String message = "Errore: recensione non presente nel database";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
     }
+
     @Test
     public void testIgnoraSegnalazione4() throws ServletException, IOException {
         Utente utente = new Utente();
-        utente.setUsername("roberta_esposito");
+        utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
         request.addParameter("idRecensione", "1");
-        request.addParameter("username", "roberta_esposito");
         request.getSession().setAttribute("utente", utente);
         String message = "Ok: recensione ignorata";
         servlet.doGet(request, response);

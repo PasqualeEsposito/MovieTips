@@ -107,4 +107,62 @@ public class Test_RecensioneDAO extends TestCase {
         utente.setUsername("fabrizio_ceriello");
         assertEquals(1, recensioneDAO.reportReview(1, utente)); // OK
     }
+
+    @Test
+    public void testIgnoraSegnalazione1() {
+        assertEquals(-1, recensioneDAO.ignoreReporting(1, null)); // L’utente non ha effettuato l’accesso
+    }
+
+    @Test
+    public void testIgnoraSegnalazione2() {
+        Utente utente = new Utente();
+        utente.setRuolo("001000");
+        utente.setUsername("fabrizio_ceriello");
+        assertEquals(-2, recensioneDAO.ignoreReporting(1, utente)); // L’utente non ricopre il ruolo di moderatore
+    }
+
+    @Test
+    public void testIgnoraSegnalazione3() {
+        Utente utente = new Utente();
+        utente.setRuolo("000001");
+        utente.setUsername("marco_bellamico");
+        assertEquals(-3, recensioneDAO.ignoreReporting(5, utente)); // Errore: recensione non presente nel database
+    }
+
+    @Test
+    public void testIgnoraSegnalazione4() {
+        Utente utente = new Utente();
+        utente.setRuolo("000001");
+        utente.setUsername("marco_bellamico");
+        assertEquals(1, recensioneDAO.ignoreReporting(1, utente)); // OK
+    }
+
+    @Test
+    public void testModeraRecensione1() {
+        assertEquals(-1, recensioneDAO.ignoreReporting(1, null)); // Errore: accesso non effettuato
+    }
+
+    @Test
+    public void testModeraRecensione2() {
+        Utente utente = new Utente();
+        utente.setRuolo("001000");
+        utente.setUsername("fabrizio_ceriello");
+        assertEquals(-2, recensioneDAO.ignoreReporting(1, utente)); // Errore: utente non ricopre il ruolo di moderatore
+    }
+
+    @Test
+    public void testModeraRecensione3() {
+        Utente utente = new Utente();
+        utente.setRuolo("000001");
+        utente.setUsername("marco_bellamico");
+        assertEquals(-3, recensioneDAO.ignoreReporting(5, utente)); // Errore: recensione non esistente
+    }
+
+    @Test
+    public void testModeraRecensione4() {
+        Utente utente = new Utente();
+        utente.setRuolo("000001");
+        utente.setUsername("marco_bellamico");
+        assertEquals(1, recensioneDAO.ignoreReporting(1, utente)); // Ok: moderazione recensione effettuata
+    }
 }
