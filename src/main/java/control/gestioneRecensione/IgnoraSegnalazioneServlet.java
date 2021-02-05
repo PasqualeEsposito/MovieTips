@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet che permette a un moderatore di eliminare una recensione segnalata
+ * Servlet che permette a un moderatore di ignorare una recensione segnalata
  */
-@WebServlet(name = "ModeraRecensioneServlet", urlPatterns = "/ModeraRecensione")
-public class ModeraRecensioneServlet extends HttpServlet {
+@WebServlet(name = "IgnoraSegnalazioneServlet", urlPatterns = "/IgnoraSegnalazione")
+public class IgnoraSegnalazioneServlet extends HttpServlet {
     /**
      * @param request
      * @param response
@@ -31,7 +31,7 @@ public class ModeraRecensioneServlet extends HttpServlet {
             throw new MyServletException("Dati non validi");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        if (recensioneDAO.moderateReview(idRecensione, utente) == false)
+        if (recensioneDAO.ignoreReporting(idRecensione, utente) == false)
             throw new MyServletException("Utente non autorizzato");
         response.sendRedirect("./GestioneSegnalazioni");
     }
