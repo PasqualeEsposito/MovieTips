@@ -89,20 +89,22 @@ public class Test_RecensioneDAO extends TestCase {
 
     @Test
     public void testSegnalaRecensione1() {
-        assertEquals(-1, recensioneDAO.deleteReview(1, null)); // L’utente non ha effettuato l’accesso
+        assertEquals(-1, recensioneDAO.reportReview(1, null)); // L’utente non ha effettuato l’accesso
     }
 
     @Test
     public void testSegnalaRecensione2() {
         Utente utente = new Utente();
+        utente.setRuolo("010000");
         utente.setUsername("roberta_esposito");
-        assertEquals(-2, recensioneDAO.deleteReview(1, utente)); // L’utente non ha attivato l’account
+        assertEquals(-2, recensioneDAO.reportReview(1, utente)); // L’utente non ha attivato l’account
     }
 
     @Test
     public void testSegnalaRecensione3() {
         Utente utente = new Utente();
+        utente.setRuolo("001000");
         utente.setUsername("fabrizio_ceriello");
-        assertEquals(1, recensioneDAO.deleteReview(1, utente)); // OK
+        assertEquals(1, recensioneDAO.reportReview(1, utente)); // OK
     }
 }

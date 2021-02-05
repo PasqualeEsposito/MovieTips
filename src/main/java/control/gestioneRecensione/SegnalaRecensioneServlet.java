@@ -31,10 +31,23 @@ public class SegnalaRecensioneServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new MyServletException("Dati non validi");
         }
+        String errore = "";
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        if (recensioneDAO.reportReview(idRecensione, utente) == -1) {
-            throw new MyServletException("Utente non autorizzato");
+        switch(recensioneDAO.reportReview(idRecensione, utente)) {
+            case -1:
+                errore = "Errore: accesso non effettuato";
+                request.setAttribute("errorTest", errore);
+                break;
+            case -2:
+                errore = "Errore: e-mail utente non convalidata";
+                request.setAttribute("errorTest", errore);
+                break;
+            case 1:
+                errore = "Ok: recensione segnalata";
+                request.setAttribute("errorTest", errore);
+                response.sendRedirect("./Film?id=" + idFilm);
+                return;
         }
-        response.sendRedirect("./Film?id=" + idFilm);
+        //throw new MyServletException(errore);
     }
 }
