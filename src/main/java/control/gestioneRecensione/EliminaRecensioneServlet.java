@@ -32,7 +32,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
             throw new MyServletException("Dati non validi");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        if (recensioneDAO.doDeleteByIdRecensioneFilmino(idRecensione, utente, usernameUtente) == false) {
+        if (recensioneDAO.deleteReview(idRecensione, utente, usernameUtente) == false) {
             throw new MyServletException("Utente non autorizzato");
         }
         response.sendRedirect("./Profilo?username=" + utente.getUsername());

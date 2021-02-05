@@ -94,7 +94,7 @@ public class RecensioneDAO {
      * @param idFilm
      * @return
      */
-    public int doSave(int valutazione, String testo, Utente utente, int idFilm) {
+    public int addReview(int valutazione, String testo, Utente utente, int idFilm) {
         if (utente == null || !utente.isFilmino()) {
             return -1;
         }
@@ -123,7 +123,7 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean doDeleteByIdRecensioneFilmino(int idRecensione, Utente utente, String usernameUtente) {
+    public boolean deleteReview(int idRecensione, Utente utente, String usernameUtente) {
         if (utente == null || !usernameUtente.equals(utente.getUsername())) {
             return false;
         }
@@ -142,7 +142,7 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean doDeleteByIdRecensioneModeratore(int idRecensione, Utente utente) {
+    public boolean moderateReview(int idRecensione, Utente utente) {
         if (utente == null || !utente.isModeratore()) {
             return false;
         }
@@ -161,7 +161,7 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean doUpdateSegnalazioneTrue(int idRecensione, Utente utente) {
+    public boolean reportReview(int idRecensione, Utente utente) {
         if (utente == null || utente.isNotActive()) {
             return false;
         }
@@ -180,7 +180,7 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean doUpdateSegnalazioneFalse(int idRecensione, Utente utente) {
+    public boolean ignoreReporting(int idRecensione, Utente utente) {
         if (utente == null || !utente.isModeratore()) {
             return false;
         }

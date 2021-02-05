@@ -33,10 +33,10 @@ public class ModeraRecensioneServlet extends HttpServlet {
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
         if (elimina == 1) {
-            if (recensioneDAO.doDeleteByIdRecensioneModeratore(idRecensione, utente) == false)
+            if (recensioneDAO.moderateReview(idRecensione, utente) == false)
                 throw new MyServletException("Utente non autorizzato");
         } else if (elimina == 0) {
-            if (recensioneDAO.doUpdateSegnalazioneFalse(idRecensione, utente) == false)
+            if (recensioneDAO.ignoreReporting(idRecensione, utente) == false)
                 throw new MyServletException("Utente non autorizzato");
         }
         response.sendRedirect("./GestioneSegnalazioni");

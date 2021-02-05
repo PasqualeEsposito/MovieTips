@@ -34,7 +34,7 @@ public class AggiungiRecensioneServlet extends HttpServlet {
         String testo = request.getParameter("testo");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        switch (recensioneDAO.doSave(valutazione, testo, utente, idFilm)) {
+        switch (recensioneDAO.addReview(valutazione, testo, utente, idFilm)) {
             case -1:
                 throw new MyServletException("Utente non autorizzato");
             case -2:
