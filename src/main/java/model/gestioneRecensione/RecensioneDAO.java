@@ -165,9 +165,12 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean reportReview(int idRecensione, Utente utente) {
-        if (utente == null || utente.isNotActive()) {
-            return false;
+    public int reportReview(int idRecensione, Utente utente) {
+        if (utente == null) {
+            return -1;
+        }
+        if(utente.isNotActive()) {
+            return -2;
         }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE id_recensione = ?");
@@ -175,7 +178,7 @@ public class RecensioneDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error");
             }
-            return true;
+            return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

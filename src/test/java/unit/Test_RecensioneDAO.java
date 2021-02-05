@@ -86,4 +86,23 @@ public class Test_RecensioneDAO extends TestCase {
         utente.setUsername("fabrizio_ceriello");
         assertEquals(1, recensioneDAO.deleteReview(1, utente)); // OK
     }
+
+    @Test
+    public void testSegnalaRecensione1() {
+        assertEquals(-1, recensioneDAO.deleteReview(1, null)); // L’utente non ha effettuato l’accesso
+    }
+
+    @Test
+    public void testSegnalaRecensione2() {
+        Utente utente = new Utente();
+        utente.setUsername("roberta_esposito");
+        assertEquals(-2, recensioneDAO.deleteReview(1, utente)); // L’utente non ha attivato l’account
+    }
+
+    @Test
+    public void testSegnalaRecensione3() {
+        Utente utente = new Utente();
+        utente.setUsername("fabrizio_ceriello");
+        assertEquals(1, recensioneDAO.deleteReview(1, utente)); // OK
+    }
 }

@@ -32,7 +32,7 @@ public class SegnalaRecensioneServlet extends HttpServlet {
             throw new MyServletException("Dati non validi");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        if (recensioneDAO.reportReview(idRecensione, utente) == false) {
+        if (recensioneDAO.reportReview(idRecensione, utente) == -1) {
             throw new MyServletException("Utente non autorizzato");
         }
         response.sendRedirect("./Film?id=" + idFilm);
