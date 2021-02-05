@@ -2,30 +2,24 @@ package integration;
 
 import control.gestioneUtente.BannaUtenteServlet;
 import model.gestioneUtente.Utente;
-import model.gestioneUtente.UtenteDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Test_BannaUtenteServlet {
+public class Test_BannaUtenteServlet extends Mockito {
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
     private BannaUtenteServlet servlet;
-    private HttpSession session;
-    private UtenteDAO utenteDAO = new UtenteDAO();
 
     @BeforeEach
     public void setUp() {
-        session = Mockito.mock(HttpSession.class);
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
         servlet = new BannaUtenteServlet();
@@ -44,7 +38,7 @@ public class Test_BannaUtenteServlet {
     public void testBanUtente2() throws ServletException, IOException {
         Utente utente = new Utente();
         utente.setRuolo("001000");
-        Mockito.when(request.getSession().getAttribute("utente")).thenReturn(utente);
+        request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "roberta_esposito");
         String message = "RM_FAIL";
         servlet.doGet(request, response);
