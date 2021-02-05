@@ -34,7 +34,7 @@
                             <input type="hidden" name="elimina" value="1">
                             <button type="submit"
                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                Elimina recensione
+                                Modera recensione
                             </button>
                         </form>
                         <form action="ModeraRecensione">
@@ -42,7 +42,7 @@
                             <input type="hidden" name="elimina" value="0">
                             <button type="submit"
                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                Ignora recensione
+                                Ignora segnalazione
                             </button>
                         </form>
                     </div>

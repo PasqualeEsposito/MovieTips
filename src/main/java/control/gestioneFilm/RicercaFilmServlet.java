@@ -28,7 +28,7 @@ public class RicercaFilmServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         FilmDAO filmDao = new FilmDAO();
         String inputRicerca = request.getParameter("inputRicerca");
-        List<Film> films = filmDao.doRetrieveByWord(inputRicerca);
+        List<Film> films = filmDao.searchFilms(inputRicerca);
         request.setAttribute("inputRicerca", inputRicerca);
         request.setAttribute("films", films);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");

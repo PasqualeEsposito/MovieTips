@@ -69,7 +69,7 @@ public class FilmDAO {
      * @param ricerca
      * @return
      */
-    public ArrayList<Film> doRetrieveByWord(String ricerca) {
+    public ArrayList<Film> searchFilms(String ricerca) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film");
             ResultSet rs = ps.executeQuery();
