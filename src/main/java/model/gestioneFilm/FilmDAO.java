@@ -70,6 +70,9 @@ public class FilmDAO {
      * @return
      */
     public ArrayList<Film> searchFilms(String ricerca) {
+        if (ricerca.length() < 1 || ricerca.length() > 255) {
+            return null;
+        }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film");
             ResultSet rs = ps.executeQuery();
