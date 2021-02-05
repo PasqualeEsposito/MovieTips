@@ -96,17 +96,21 @@ public class UtenteDAO {
      * @param username
      */
     public int banUser(Utente utente, String username) {
-        if (utente == null || !utente.isModeratore()) {
+        if (utente == null) {
             return -1;
         }
-        if (username.equals(utente.getUsername())) {
+        if(!utente.isModeratore()) {
             return -2;
+        }
+        if (username.equals(utente.getUsername())) {
+            return -3;
         }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE utente SET ruolo = 100000 WHERE username = ?");
             ps.setString(1, username);
             if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("UPDATE error");
+                return -4;
+                //throw new RuntimeException("UPDATE error");
             }
             return 1;
         } catch (SQLException e) {

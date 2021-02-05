@@ -55,6 +55,42 @@ public class Test_UtenteDAO extends TestCase {
         assertEquals(1, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1!", new Utente())); // OK
     }
 
+   @Test
+    public void testBan1() {
+        assertEquals(-1, utenteDAO.banUser(null, "roberta_esposito"));  // L’utente non ha effettuato l’accesso
+    }
+
+    @Test
+    public void testBan2() {
+        Utente utente = new Utente();
+        utente.setRuolo("001000");
+        assertEquals(-2, utenteDAO.banUser(utente, "roberta_esposito"));  // L’utente non ricopre il ruolo di moderatore
+    }
+
+    @Test
+    public void testBan3() {
+        Utente utente = new Utente();
+        utente.setUsername("marco_bellamico");
+        utente.setRuolo("000001");
+        assertEquals(-3, utenteDAO.banUser(utente, "marco_bellamico"));  // L'username  corrisponde al proprio username
+    }
+
+    @Test
+    public void testBan4() {
+        Utente utente = new Utente();
+        utente.setUsername("marco_bellamico");
+        utente.setRuolo("000001");
+        assertEquals(-4, utenteDAO.banUser(utente, "marcobellamico"));  // L’username non esiste nel database
+    }
+
+    @Test
+    public void testBan5() {
+        Utente utente = new Utente();
+        utente.setUsername("marco_bellamico");
+        utente.setRuolo("000001");
+        assertEquals(1, utenteDAO.banUser(utente, "roberta_esposito"));  // OK
+    }
+
     @After
     protected void tearDown() {
     }

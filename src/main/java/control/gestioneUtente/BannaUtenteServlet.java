@@ -28,10 +28,23 @@ public class BannaUtenteServlet extends HttpServlet {
         String username = request.getParameter("username");
         switch (utenteDAO.banUser(utente, username)) {
             case -1:
-                throw new MyServletException("Utente non autorizzato");
+                request.setAttribute("errorTest", "AE_FAIL");
+                break;
+                //throw new MyServletException("Utente non autorizzato");
             case -2:
-                throw new MyServletException("Operazione non autorizzata");
+                request.setAttribute("errorTest", "RM_FAIL");
+                break;
+                //throw new MyServletException("Utente non autorizzato");
+            case -3:
+                request.setAttribute("errorTest", "CR_FAIL");
+                break;
+                //throw new MyServletException("Operazione non autorizzata");
+            case -4:
+                request.setAttribute("errorTest", "EU_FAIL");
+                break;
+                //throw new MyServletException("Operazione non riuscita");
             default:
+                request.setAttribute("errorTest", "OK");
                 response.sendRedirect(".");
         }
     }
