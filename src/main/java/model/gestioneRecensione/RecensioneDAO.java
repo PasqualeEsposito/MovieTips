@@ -179,7 +179,7 @@ public class RecensioneDAO {
             PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
             if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("UPDATE error");
+                return -3;
             }
             return 1;
         } catch (SQLException e) {
