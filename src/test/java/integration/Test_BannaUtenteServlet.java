@@ -51,6 +51,7 @@ public class Test_BannaUtenteServlet extends Mockito {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
+        request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "marco_bellamico");
         String message = "CR_FAIL";
         servlet.doGet(request, response);
@@ -63,6 +64,7 @@ public class Test_BannaUtenteServlet extends Mockito {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
+        request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "marcobellamico");
         String message = "EU_FAIL";
         servlet.doGet(request, response);
@@ -75,7 +77,7 @@ public class Test_BannaUtenteServlet extends Mockito {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        Mockito.when(request.getSession().getAttribute("utente")).thenReturn(utente);
+        request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "roberta_esposito");
         String message = "OK";
         servlet.doGet(request, response);
