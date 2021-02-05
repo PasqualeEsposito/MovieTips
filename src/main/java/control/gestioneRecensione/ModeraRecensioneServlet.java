@@ -46,7 +46,7 @@ public class ModeraRecensioneServlet extends HttpServlet {
                 request.setAttribute("errorTest", errore);
                 break;
             case 1:
-                errore = "Ok: moderazione recensione effettuata ";
+                errore = "Ok: segnalazione ignorata";
                 request.setAttribute("errorTest", errore);
                 response.sendRedirect("./GestioneSegnalazioni");
                 return;

@@ -68,7 +68,7 @@ public class Test_ModeraRecensioneServlet extends Mockito {
         utente.setRuolo("000001");
         request.addParameter("idRecensione", "1");
         request.getSession().setAttribute("utente", utente);
-        String message = "Ok: segnalazione ignorata ";
+        String message = "Ok: segnalazione ignorata";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
