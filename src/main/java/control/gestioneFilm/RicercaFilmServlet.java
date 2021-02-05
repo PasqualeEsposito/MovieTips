@@ -24,11 +24,15 @@ public class RicercaFilmServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        FilmDAO filmDao = new FilmDAO();
+        FilmDAO filmDAO = new FilmDAO();
         String inputRicerca = request.getParameter("inputRicerca");
-        List<Film> films = filmDao.searchFilms(inputRicerca);
+        List<Film> films = filmDAO.searchFilms(inputRicerca);
+        if (films == null)
+            request.setAttribute("errorTest", "LR_FAIL");
+        else
+            request.setAttribute("errorTest", "OK");
         request.setAttribute("inputRicerca", inputRicerca);
         request.setAttribute("films", films);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
