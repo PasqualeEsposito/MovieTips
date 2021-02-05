@@ -47,7 +47,6 @@ public class EliminaRecensioneServlet extends HttpServlet {
                 response.sendRedirect("./Profilo?username=" + utente.getUsername());
                 return;
         }
-
         //throw new MyServletException(errore);
     }
 }

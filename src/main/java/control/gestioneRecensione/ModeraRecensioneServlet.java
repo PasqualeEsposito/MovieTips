@@ -30,9 +30,26 @@ public class ModeraRecensioneServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new MyServletException("Dati non validi");
         }
+        String errore = "";
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        if (recensioneDAO.moderateReview(idRecensione, utente) == false)
-            throw new MyServletException("Utente non autorizzato");
-        response.sendRedirect("./GestioneSegnalazioni");
+        switch (recensioneDAO.moderateReview(idRecensione, utente)) {
+            case -1:
+                errore = "Errore: accesso non effettuato";
+                request.setAttribute("errorTest", errore);
+                break;
+            case -2:
+                errore = "Errore: utente non ricopre il ruolo di moderatore";
+                request.setAttribute("errorTest", errore);
+                break;
+            case -3:
+                errore = "Errore: recensione non esistente";
+                request.setAttribute("errorTest", errore);
+                break;
+            case 1:
+                errore = "Ok: moderazione recensione effettuata ";
+                response.sendRedirect("./GestioneSegnalazioni");
+                return;
+        }
+        //throw new MyServletException(errore);
     }
 }
