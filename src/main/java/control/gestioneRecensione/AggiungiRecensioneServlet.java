@@ -34,20 +34,30 @@ public class AggiungiRecensioneServlet extends HttpServlet {
         String testo = request.getParameter("testo");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
+        String errore = "";
         switch (recensioneDAO.addReview(valutazione, testo, utente, idFilm)) {
             case -1:
-                throw new MyServletException("Utente non autorizzato");
+                errore = "Errore: accesso non effettuato";
+                request.setAttribute("errorTest", errore);
+                break;
             case -2:
-                request.setAttribute("errorTest", "RV1_FAIL");
+                errore = "Errore: utente non ricopre il ruolo di filmino";
+                request.setAttribute("errorTest", errore);
                 break;
             case -3:
-                request.setAttribute("errorTest", "LT_FAIL");
+                errore = "Errore: range valutazione";
+                request.setAttribute("errorTest", errore);
+                break;
+            case -4:
+                errore = "Errore: lunghezza testo";
+                request.setAttribute("errorTest", errore);
                 break;
             default:
-                request.setAttribute("errorTest", "OK");
+                errore = "Ok: recensione effettuata";
+                request.setAttribute("errorTest", errore);
                 response.sendRedirect("./Film?id=" + idFilm);
                 return;
         }
-        throw new MyServletException("Recensione non valida");
+        //throw new MyServletException(errore);
     }
 }

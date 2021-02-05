@@ -24,17 +24,30 @@ public class EliminaRecensioneServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         int idRecensione;
-        String usernameUtente = request.getParameter("usernameUtente");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         try {
             idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
         } catch (NumberFormatException e) {
             throw new MyServletException("Dati non validi");
         }
+        String errore = "";
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        if (recensioneDAO.deleteReview(idRecensione, utente, usernameUtente) == false) {
-            throw new MyServletException("Utente non autorizzato");
+        switch (recensioneDAO.deleteReview(idRecensione, utente)) {
+            case -1:
+                errore = "Errore: accesso non effettuato";
+                request.setAttribute("errorTest", errore);
+                break;
+            case -2:
+                errore = "Errore: utente non può eliminare la recensione di un altro utente";
+                request.setAttribute("errorTest", errore);
+                break;
+            case 1:
+                errore = "Ok: recensione eliminata";
+                request.setAttribute("errorTest", errore);
+                response.sendRedirect("./Profilo?username=" + utente.getUsername());
+                return;
         }
-        response.sendRedirect("./Profilo?username=" + utente.getUsername());
+
+        //throw new MyServletException(errore);
     }
 }

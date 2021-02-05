@@ -27,7 +27,7 @@ public class Test_RicercaFilmServlet extends Mockito {
     @Test
     public void testRicercaFilm1() throws ServletException, IOException {
         request.setParameter("inputRicerca", "");
-        String message = "LR_FAIL";
+        String message = "Errore: lunghezza ricerca";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
@@ -36,7 +36,7 @@ public class Test_RicercaFilmServlet extends Mockito {
     @Test
     public void testRicercaFilm2() throws ServletException, IOException {
         request.setParameter("inputRicerca", "ta");
-        String message = "OK";
+        String message = "Ok: ricerca effettuata";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);

@@ -80,6 +80,7 @@ public class Test_UtenteDAO extends TestCase {
     public void testBan2() {
         Utente utente = new Utente();
         utente.setRuolo("001000");
+        utente.setUsername("roberta_esposito");
         assertEquals(-2, utenteDAO.banUser(utente, "roberta_esposito"));  // L’utente non ricopre il ruolo di moderatore
     }
 

@@ -67,7 +67,7 @@ public class Test_FilmDAO extends TestCase {
                 flag = 0;
         }
 
-        assertEquals(1, flag);
+        assertEquals(1, flag);  // OK
     }
 
 }

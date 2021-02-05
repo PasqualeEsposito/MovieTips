@@ -59,7 +59,6 @@
                         <p>${recensione.testo}</p>
                         <c:if test="${utente.username == profilo.username}">
                             <form action="EliminaRecensione">
-                                <input type="hidden" name="usernameUtente" value="${recensione.usernameUtente}">
                                 <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
                                 <button type="submit"
                                         class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">

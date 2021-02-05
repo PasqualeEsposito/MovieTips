@@ -91,7 +91,7 @@ public class AccessoServlet extends HttpServlet {
                 //response.sendRedirect(".");
                 //return;
         }
-        throw new MyServletException(errore);
+        //throw new MyServletException(errore);
         //throw new MyServletException("Username e/o password non validi");
     }
 }

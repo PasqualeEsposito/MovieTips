@@ -26,26 +26,30 @@ public class BannaUtenteServlet extends HttpServlet {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         UtenteDAO utenteDAO = new UtenteDAO();
         String username = request.getParameter("username");
+        String errore;
         switch (utenteDAO.banUser(utente, username)) {
             case -1:
-                request.setAttribute("errorTest", "AE_FAIL");
+                errore = "Errore: accesso non effettuato";
+                request.setAttribute("errorTest", errore);
                 break;
-                //throw new MyServletException("Utente non autorizzato");
             case -2:
-                request.setAttribute("errorTest", "RM_FAIL");
+                errore = "Errore: utente non ricopre il ruolo di moderatore";
+                request.setAttribute("errorTest", errore);
                 break;
-                //throw new MyServletException("Utente non autorizzato");
             case -3:
-                request.setAttribute("errorTest", "CR_FAIL");
+                errore = "Errore: utente non può autoeliminarsi";
+                request.setAttribute("errorTest", errore);
                 break;
-                //throw new MyServletException("Operazione non autorizzata");
             case -4:
-                request.setAttribute("errorTest", "EU_FAIL");
+                errore = "Errore: username non esistente";
+                request.setAttribute("errorTest", errore);
                 break;
-                //throw new MyServletException("Operazione non riuscita");
             default:
-                request.setAttribute("errorTest", "OK");
+                errore = "Ok: utente bannato";
+                request.setAttribute("errorTest", errore);
                 response.sendRedirect(".");
+                return;
         }
+        //throw new MyServletException(errore);
     }
 }

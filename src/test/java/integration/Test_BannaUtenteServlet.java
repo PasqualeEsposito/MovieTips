@@ -26,60 +26,61 @@ public class Test_BannaUtenteServlet extends Mockito {
     }
 
     @Test
-    public void testBanUtente1() throws ServletException, IOException {
+    public void testBan1() throws ServletException, IOException {
         request.addParameter("username", "roberta_esposito");
-        String message = "AE_FAIL";
+        String message = "Errore: accesso non effettuato";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
     }
 
     @Test
-    public void testBanUtente2() throws ServletException, IOException {
+    public void testBan2() throws ServletException, IOException {
         Utente utente = new Utente();
+        utente.setUsername("roberta_esposito");
         utente.setRuolo("001000");
         request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "roberta_esposito");
-        String message = "RM_FAIL";
+        String message = "Errore: utente non ricopre il ruolo di moderatore";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
     }
 
     @Test
-    public void testBanUtente3() throws ServletException, IOException {
+    public void testBan3() throws ServletException, IOException {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
         request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "marco_bellamico");
-        String message = "CR_FAIL";
+        String message = "Errore: utente non può autoeliminarsi";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
     }
 
     @Test
-    public void testBanUtente4() throws ServletException, IOException {
+    public void testBan4() throws ServletException, IOException {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
         request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "marcobellamico");
-        String message = "EU_FAIL";
+        String message = "Errore: username non esistente";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
     }
 
     @Test
-    public void testBanUtente5() throws ServletException, IOException {
+    public void testBan5() throws ServletException, IOException {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
         request.getSession().setAttribute("utente", utente);
         request.addParameter("username", "roberta_esposito");
-        String message = "OK";
+        String message = "Ok: utente bannato";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);

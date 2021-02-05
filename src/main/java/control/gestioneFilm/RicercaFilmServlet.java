@@ -1,5 +1,6 @@
 package control.gestioneFilm;
 
+import control.MyServletException;
 import model.gestioneFilm.Film;
 import model.gestioneFilm.FilmDAO;
 
@@ -29,13 +30,19 @@ public class RicercaFilmServlet extends HttpServlet {
         FilmDAO filmDAO = new FilmDAO();
         String inputRicerca = request.getParameter("inputRicerca");
         List<Film> films = filmDAO.searchFilms(inputRicerca);
-        if (films == null)
-            request.setAttribute("errorTest", "LR_FAIL");
-        else
-            request.setAttribute("errorTest", "OK");
-        request.setAttribute("inputRicerca", inputRicerca);
-        request.setAttribute("films", films);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
-        requestDispatcher.forward(request, response);
+        String errore = "";
+        if (films == null) {
+            errore = "Errore: lunghezza ricerca";
+            request.setAttribute("errorTest", errore);
+        } else {
+            errore = "Ok: ricerca effettuata";
+            request.setAttribute("errorTest", errore);
+            request.setAttribute("inputRicerca", inputRicerca);
+            request.setAttribute("films", films);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/ricerca.jsp");
+            requestDispatcher.forward(request, response);
+            return;
+        }
+        //throw new MyServletException(errore);
     }
 }

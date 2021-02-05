@@ -95,14 +95,17 @@ public class RecensioneDAO {
      * @return
      */
     public int addReview(int valutazione, String testo, Utente utente, int idFilm) {
-        if (utente == null || !utente.isFilmino()) {
+        if (utente == null) {
             return -1;
         }
-        if (valutazione < 1 || valutazione > 5) {
+        if(!utente.isFilmino()) {
             return -2;
+        }
+        if (valutazione < 1 || valutazione > 5) {
+            return -3;
         } else {
             if (testo.length() > 255) {
-                return -3;
+                return -4;
             }
         }
         try (Connection con = ConPool.getConnection()) {
@@ -123,17 +126,18 @@ public class RecensioneDAO {
     /**
      * @param idRecensione
      */
-    public boolean deleteReview(int idRecensione, Utente utente, String usernameUtente) {
-        if (utente == null || !usernameUtente.equals(utente.getUsername())) {
-            return false;
+    public int deleteReview(int idRecensione, Utente utente) {
+        if (utente == null) {
+            return -1;
         }
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE id_recensione = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE id_recensione = ? AND username_utente = ?");
             ps.setInt(1, idRecensione);
+            ps.setString(2, utente.getUsername());
             if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("DELETE error");
+                return -2;
             }
-            return true;
+            return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
