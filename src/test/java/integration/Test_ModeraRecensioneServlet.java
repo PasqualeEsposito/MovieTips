@@ -1,7 +1,9 @@
 package integration;
 
 import control.gestioneRecensione.ModeraRecensioneServlet;
+import model.connection.TestConPool;
 import model.gestioneUtente.Utente;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -9,7 +11,10 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import javax.servlet.ServletException;
-import java.io.IOException;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +25,12 @@ public class Test_ModeraRecensioneServlet extends Mockito {
     private ModeraRecensioneServlet servlet;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws SQLException, FileNotFoundException {
+        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+        Connection con = TestConPool.getConnection();
+        ScriptRunner sr = new ScriptRunner(con);
+        Reader reader = new BufferedReader(new FileReader("src/test/java/testmovietips.sql"));
+        sr.runScript(reader);
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
         servlet = new ModeraRecensioneServlet();
@@ -37,10 +47,10 @@ public class Test_ModeraRecensioneServlet extends Mockito {
 
     @Test
     public void testModeraRecensione2() throws ServletException, IOException {
-        Utente utente = new Utente();
-        utente.setUsername("fabrizio_ceriello");
-        utente.setRuolo("001000");
         request.addParameter("idRecensione", "1");
+        Utente utente = new Utente();
+        utente.setUsername("roberta_esposito");
+        utente.setRuolo("010000");
         request.getSession().setAttribute("utente", utente);
         String message = "Errore: utente non ricopre il ruolo di moderatore";
         servlet.doGet(request, response);
@@ -50,10 +60,10 @@ public class Test_ModeraRecensioneServlet extends Mockito {
 
     @Test
     public void testModeraRecensione3() throws ServletException, IOException {
+        request.addParameter("idRecensione", "5");
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        request.addParameter("idRecensione", "5");
         request.getSession().setAttribute("utente", utente);
         String message = "Errore: recensione non esistente";
         servlet.doGet(request, response);
@@ -63,10 +73,10 @@ public class Test_ModeraRecensioneServlet extends Mockito {
 
     @Test
     public void testModeraRecensione4() throws ServletException, IOException {
+        request.addParameter("idRecensione", "1");
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        request.addParameter("idRecensione", "1");
         request.getSession().setAttribute("utente", utente);
         String message = "Ok: moderazione recensione effettuata";
         servlet.doGet(request, response);

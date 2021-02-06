@@ -13,29 +13,9 @@ import java.util.ArrayList;
  */
 public class FilmDAO {
     /**
+     * @param id
      * @return
      */
-    public ArrayList<Film> doRetrieveAll() {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM film ORDER BY id_film LIMIT 10");
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Film> films = new ArrayList<>();
-            while (rs.next()) {
-                Film f = new Film();
-                f.setIdFilm(rs.getInt(1));
-                f.setTitolo(rs.getString(2));
-                f.setGenere(rs.getString(3));
-                f.setAnno(rs.getInt(4));
-                f.setRegia(rs.getString(5));
-                films.add(f);
-            }
-            return films;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public Film doRetrieveById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film WHERE id_film = ?");
@@ -60,6 +40,30 @@ public class FilmDAO {
                 return f;
             }
             return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Film> doRetrieveAll() {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM film ORDER BY id_film DESC LIMIT 10");
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Film> films = new ArrayList<>();
+            while (rs.next()) {
+                Film f = new Film();
+                f.setIdFilm(rs.getInt(1));
+                f.setTitolo(rs.getString(2));
+                f.setGenere(rs.getString(3));
+                f.setAnno(rs.getInt(4));
+                f.setRegia(rs.getString(5));
+                films.add(f);
+            }
+            return films;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

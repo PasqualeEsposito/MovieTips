@@ -24,14 +24,14 @@ public class ModeraRecensioneServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
         int idRecensione;
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
         try {
             idRecensione = Integer.parseInt(request.getParameter("idRecensione"));
         } catch (NumberFormatException e) {
             throw new MyServletException("Dati non validi");
         }
-        String errore = "";
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
+        String errore = "";
         switch (recensioneDAO.moderateReview(idRecensione, utente)) {
             case -1:
                 errore = "Errore: accesso non effettuato";
@@ -51,6 +51,6 @@ public class ModeraRecensioneServlet extends HttpServlet {
                 response.sendRedirect("./GestioneSegnalazioni");
                 return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

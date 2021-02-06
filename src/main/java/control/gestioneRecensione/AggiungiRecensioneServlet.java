@@ -35,7 +35,7 @@ public class AggiungiRecensioneServlet extends HttpServlet {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
         String errore = "";
-        switch (recensioneDAO.addReview(valutazione, testo, utente, idFilm)) {
+        switch (recensioneDAO.addReview(valutazione, testo, idFilm, utente)) {
             case -1:
                 errore = "Errore: accesso non effettuato";
                 request.setAttribute("errorTest", errore);
@@ -58,6 +58,6 @@ public class AggiungiRecensioneServlet extends HttpServlet {
                 response.sendRedirect("./Film?id=" + idFilm);
                 return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

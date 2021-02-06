@@ -8,7 +8,7 @@
     <div>
         <form class="form" action="Accesso" method="post" accept-charset="utf-8">
             <div>
-                <label for="mail">Email:</label>
+                <label for="mail">E-mail:</label>
                 <div class="mdl-textfield">
                     <input class="mdl-textfield__input" name="mail" type="text" id="mail">
                 </div>

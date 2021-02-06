@@ -9,7 +9,7 @@
     }
 %>
 <jsp:include page="header.jsp">
-    <jsp:param name="pageTitle" value=""/>
+    <jsp:param name="pageTitle" value="Segnalazioni"/>
 </jsp:include>
 </header>
 <div class="page-content">

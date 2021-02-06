@@ -23,11 +23,11 @@ public class BannaUtenteServlet extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+        String username = request.getParameter("username");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         UtenteDAO utenteDAO = new UtenteDAO();
-        String username = request.getParameter("username");
-        String errore;
-        switch (utenteDAO.banUser(utente, username)) {
+        String errore = "";
+        switch (utenteDAO.banUser(username, utente)) {
             case -1:
                 errore = "Errore: accesso non effettuato";
                 request.setAttribute("errorTest", errore);
@@ -50,6 +50,6 @@ public class BannaUtenteServlet extends HttpServlet {
                 response.sendRedirect(".");
                 return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

@@ -43,6 +43,6 @@ public class RicercaFilmServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
             return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

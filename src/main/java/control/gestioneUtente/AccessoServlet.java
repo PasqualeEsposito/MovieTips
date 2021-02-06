@@ -52,8 +52,8 @@ public class AccessoServlet extends HttpServlet {
         }
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
-        String errore;
         utente = new Utente();
+        String errore = "";
         switch (utenteDAO.signIn(mail, password, utente)) {
             case -1:
                 errore = "Errore: lunghezza e-mail";
@@ -70,8 +70,8 @@ public class AccessoServlet extends HttpServlet {
             case -4:
                 errore = "Errore: e-mail bannata";
                 request.setAttribute("errorTest", errore);
+                //throw new MyServletException("Utente bannato");
                 break;
-            //throw new MyServletException("Utente bannato");
             case -5:
                 errore = "Errore: lunghezza password";
                 request.setAttribute("errorTest", errore);
@@ -88,10 +88,10 @@ public class AccessoServlet extends HttpServlet {
                 errore = "Ok: accesso effettuato";
                 request.setAttribute("errorTest", errore);
                 request.getSession().setAttribute("utente", utente);
-                //response.sendRedirect(".");
-                //return;
+                response.sendRedirect(".");
+                return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
         //throw new MyServletException("Username e/o password non validi");
     }
 }

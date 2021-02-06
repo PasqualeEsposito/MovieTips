@@ -1,20 +1,20 @@
 <%@ page import="model.gestioneUtente.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% Utente utente = (Utente) session.getAttribute("utente");
+<%
+    Utente utente = (Utente) session.getAttribute("utente");
+    Utente profilo = (Utente) request.getAttribute("profilo");
     int check = 0;
-    if (utente != null) {
+    if (utente != null && !profilo.isBanned()) {
         if (utente.isModeratore())
             check = 1;
     }
 %>
 <jsp:include page="header.jsp">
-    <jsp:param name="pageTitle" value=""/>
+    <jsp:param name="pageTitle" value="${profilo.username}"/>
 </jsp:include>
 </header>
 <div class="page-content">
-
-
     <c:choose>
         <c:when test="${utente.username != profilo.username}">
             <% if (check == 1) { %>

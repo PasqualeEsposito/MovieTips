@@ -1,20 +1,21 @@
 <%@ page import="model.gestioneUtente.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% Utente utente = (Utente) session.getAttribute("utente");
+<%
+    Utente utente = (Utente) session.getAttribute("utente");
     int checkFilmino = 0;
     if (utente != null) {
         if (utente.isFilmino())
             checkFilmino = 1;
     }
-    int checkActive = 1;
+    int checkActive = 0;
     if (utente != null) {
-        if (utente.isNotActive())
-            checkActive = 0;
+        if (!utente.isNotActive())
+            checkActive = 1;
     }
 %>
 <jsp:include page="header.jsp">
-    <jsp:param name="pageTitle" value=""/>
+    <jsp:param name="pageTitle" value="${film.titolo} (${film.anno})"/>
 </jsp:include>
 <div style="justify-content: space-around;" class="mdl-layout__tab-bar mdl-js-ripple-effect">
     <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Trama e cast</a>

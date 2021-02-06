@@ -5,18 +5,18 @@ public class Recensione {
     private int valutazione;
     private String testo;
     private boolean segnalazione;
-    private String usernameUtente;
     private int idFilm;
+    private String usernameUtente;
 
     public Recensione() {
     }
 
-    public Recensione(int valutazione, String testo, boolean segnalazione, String usernameUtente, int idFilm) {
+    public Recensione(int valutazione, String testo, boolean segnalazione, int idFilm, String usernameUtente) {
         this.valutazione = valutazione;
         this.testo = testo;
         this.segnalazione = segnalazione;
-        this.usernameUtente = usernameUtente;
         this.idFilm = idFilm;
+        this.usernameUtente = usernameUtente;
     }
 
     /**
@@ -78,20 +78,6 @@ public class Recensione {
     /**
      * @return
      */
-    public String getUsernameUtente() {
-        return usernameUtente;
-    }
-
-    /**
-     * @param usernameUtente
-     */
-    public void setUsernameUtente(String usernameUtente) {
-        this.usernameUtente = usernameUtente;
-    }
-
-    /**
-     * @return
-     */
     public int getIdFilm() {
         return idFilm;
     }
@@ -101,5 +87,19 @@ public class Recensione {
      */
     public void setIdFilm(int idFilm) {
         this.idFilm = idFilm;
+    }
+
+    /**
+     * @return
+     */
+    public String getUsernameUtente() {
+        return usernameUtente;
+    }
+
+    /**
+     * @param usernameUtente
+     */
+    public void setUsernameUtente(String usernameUtente) {
+        this.usernameUtente = usernameUtente;
     }
 }

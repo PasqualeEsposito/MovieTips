@@ -50,14 +50,14 @@ CREATE TABLE recensione
     valutazione     int         NOT NULL,
     testo           text,
     segnalazione    tinyint     NOT NULL DEFAULT '0',
-    username_utente varchar(35) NOT NULL,
     id_film         int         NOT NULL,
+    username_utente varchar(35) NOT NULL,
     PRIMARY KEY (id_recensione),
     UNIQUE KEY id_recensione_UNIQUE (id_recensione),
-    KEY username_utente (username_utente),
     KEY id_film (id_film),
-    CONSTRAINT recensione_ibfk_1 FOREIGN KEY (username_utente) REFERENCES utente (username) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT recensione_ibfk_2 FOREIGN KEY (id_film) REFERENCES film (id_film) ON DELETE CASCADE ON UPDATE CASCADE
+    KEY username_utente (username_utente),
+    CONSTRAINT recensione_ibfk_1 FOREIGN KEY (id_film) REFERENCES film (id_film) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT recensione_ibfk_2 FOREIGN KEY (username_utente) REFERENCES utente (username) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -170,8 +170,8 @@ VALUES ('Parasite', 'Drammatico', 2019, 'Bong Joon Ho',
 INSERT INTO movietipsdb.recensione
 (valutazione,
  testo,
- username_utente,
- id_film)
-VALUES (4, 'Film molto bello', 'fabrizio_ceriello', 1),
-       (2, 'Non mi è piaciuto', 'fabrizio_ceriello', 5),
-       (5, 'Film stupendo!', 'luca_ciao', 3);
+ id_film,
+ username_utente)
+VALUES (4, 'Film molto bello', 1, 'fabrizio_ceriello'),
+       (2, 'Non mi è piaciuto', 5, 'fabrizio_ceriello'),
+       (5, 'Film stupendo!', 3, 'luca_ciao');

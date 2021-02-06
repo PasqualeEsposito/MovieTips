@@ -1,7 +1,8 @@
 package integration;
 
 import control.gestioneUtente.AccessoServlet;
-import model.gestioneUtente.UtenteDAO;
+import model.connection.TestConPool;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,10 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import javax.servlet.ServletException;
-import java.io.IOException;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,10 +22,14 @@ public class Test_AccessoServlet extends Mockito {
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
     private AccessoServlet servlet;
-    private UtenteDAO utenteDAO = new UtenteDAO();
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws SQLException, FileNotFoundException {
+        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+        Connection con = TestConPool.getConnection();
+        ScriptRunner sr = new ScriptRunner(con);
+        Reader reader = new BufferedReader(new FileReader("src/test/java/testmovietips.sql"));
+        sr.runScript(reader);
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
         servlet = new AccessoServlet();

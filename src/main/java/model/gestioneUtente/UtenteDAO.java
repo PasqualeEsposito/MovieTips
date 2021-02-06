@@ -12,33 +12,9 @@ import java.sql.SQLException;
  */
 public class UtenteDAO {
     /**
-     * @param username
-     * @return
-     */
-    public Utente doRetrieveByUsername(String username) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita FROM utente WHERE username = ?");
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Utente u = new Utente();
-                u.setUsername(rs.getString(1));
-                u.setMail(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setGenere(rs.getString(5));
-                u.setDataNascita(rs.getString(6));
-                return u;
-            }
-            return null;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * @param mail
      * @param password
+     * @param utente
      * @return
      */
     public int signIn(String mail, String password, Utente utente) {
@@ -91,12 +67,14 @@ public class UtenteDAO {
 
     /**
      * @param username
+     * @param utente
+     * @return
      */
-    public int banUser(Utente utente, String username) {
+    public int banUser(String username, Utente utente) {
         if (utente == null) {
             return -1;
         }
-        if(!utente.isModeratore()) {
+        if (!utente.isModeratore()) {
             return -2;
         }
         if (username.equals(utente.getUsername())) {
@@ -109,6 +87,32 @@ public class UtenteDAO {
                 return -4;
             }
             return 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param username
+     * @return
+     */
+    public Utente doRetrieveByUsername(String username) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita, ruolo FROM utente WHERE username = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Utente u = new Utente();
+                u.setUsername(rs.getString(1));
+                u.setMail(rs.getString(2));
+                u.setNome(rs.getString(3));
+                u.setCognome(rs.getString(4));
+                u.setGenere(rs.getString(5));
+                u.setDataNascita(rs.getString(6));
+                u.setRuolo(rs.getString(7));
+                return u;
+            }
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

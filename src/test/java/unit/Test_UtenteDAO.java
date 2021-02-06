@@ -1,12 +1,10 @@
 package unit;
 
 import junit.framework.TestCase;
-import model.connection.ConPool;
+import model.connection.TestConPool;
 import model.gestioneUtente.Utente;
 import model.gestioneUtente.UtenteDAO;
 import org.apache.ibatis.jdbc.ScriptRunner;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -23,12 +21,12 @@ public class Test_UtenteDAO extends TestCase {
 
     @BeforeEach
     protected void setUp() throws SQLException, FileNotFoundException {
-        utenteDAO = new UtenteDAO();
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        Connection con = ConPool.getConnection();
+        Connection con = TestConPool.getConnection();
         ScriptRunner sr = new ScriptRunner(con);
-        Reader reader = new BufferedReader(new FileReader("src/test/java/movietips.sql"));
+        Reader reader = new BufferedReader(new FileReader("src/test/java/testmovietips.sql"));
         sr.runScript(reader);
+        utenteDAO = new UtenteDAO();
     }
 
     @Test
@@ -38,17 +36,17 @@ public class Test_UtenteDAO extends TestCase {
 
     @Test
     public void testAccesso2() {
-        assertEquals(-2, utenteDAO.signIn("francy.mauro", "", new Utente())); // Non rispetta il formato
+        assertEquals(-2, utenteDAO.signIn("francy.mauro", "", new Utente())); // L’e-mail non rispetta il formato
     }
 
     @Test
     public void testAccesso3() {
-        assertEquals(-3, utenteDAO.signIn("francy.mauro@unisa.it", "", new Utente())); // Non esiste nel database
+        assertEquals(-3, utenteDAO.signIn("francy.mauro@unisa.it", "", new Utente())); // L’e-mail non esiste nel database
     }
 
     @Test
     public void testAccesso4() {
-        assertEquals(-4, utenteDAO.signIn("francesca.mauro@unisa.it", "", new Utente())); // isBanned
+        assertEquals(-4, utenteDAO.signIn("francesca.mauro@unisa.it", "", new Utente())); // L'e-mail è stata bannata
     }
 
     @Test
@@ -58,30 +56,30 @@ public class Test_UtenteDAO extends TestCase {
 
     @Test
     public void testAccesso6() {
-        assertEquals(-6, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta!", new Utente())); // Non rispetta il formato
+        assertEquals(-6, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta!", new Utente())); // La password non rispetta il formato
     }
 
     @Test
     public void testAccesso7() {
-        assertEquals(-7, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1", new Utente())); // Non corrisponde la password
+        assertEquals(-7, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1", new Utente())); // La password non corrisponde all’username
     }
 
     @Test
     public void testAccesso8() {
-        assertEquals(1, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1!", new Utente())); // OK
+        assertEquals(1, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1!", new Utente())); // Ok: accesso effettuato
     }
 
-   @Test
+    @Test
     public void testBan1() {
-        assertEquals(-1, utenteDAO.banUser(null, "roberta_esposito"));  // L’utente non ha effettuato l’accesso
+        assertEquals(-1, utenteDAO.banUser("roberta_esposito", null));  // L’utente non ha effettuato l’accesso
     }
 
     @Test
     public void testBan2() {
         Utente utente = new Utente();
+        utente.setUsername("fabrizio_ceriello");
         utente.setRuolo("001000");
-        utente.setUsername("roberta_esposito");
-        assertEquals(-2, utenteDAO.banUser(utente, "roberta_esposito"));  // L’utente non ricopre il ruolo di moderatore
+        assertEquals(-2, utenteDAO.banUser("roberta_esposito", utente));  // L’utente non ricopre il ruolo di moderatore
     }
 
     @Test
@@ -89,7 +87,7 @@ public class Test_UtenteDAO extends TestCase {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        assertEquals(-3, utenteDAO.banUser(utente, "marco_bellamico"));  // L'username  corrisponde al proprio username
+        assertEquals(-3, utenteDAO.banUser("marco_bellamico", utente));  // L'username corrisponde all’username dell’utente
     }
 
     @Test
@@ -97,7 +95,7 @@ public class Test_UtenteDAO extends TestCase {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        assertEquals(-4, utenteDAO.banUser(utente, "marcobellamico"));  // L’username non esiste nel database
+        assertEquals(-4, utenteDAO.banUser("robertaesposito", utente));  // L’username non esiste nel database
     }
 
     @Test
@@ -105,6 +103,6 @@ public class Test_UtenteDAO extends TestCase {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        assertEquals(1, utenteDAO.banUser(utente, "roberta_esposito"));  // OK
+        assertEquals(1, utenteDAO.banUser("roberta_esposito", utente));  // Ok: utente bannato
     }
 }
