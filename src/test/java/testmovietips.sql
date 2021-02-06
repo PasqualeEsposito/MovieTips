@@ -130,4 +130,4 @@ INSERT INTO testmovietipsdb.recensione
  id_film,
  username_utente)
 VALUES (4, 'Film molto bello', 1, 'fabrizio_ceriello'),
-       (2, 'Non mi è piaciuto', 5, 'fabrizio_ceriello');
+       (2, 'Non mi è piaciuto', 3, 'fabrizio_ceriello');
