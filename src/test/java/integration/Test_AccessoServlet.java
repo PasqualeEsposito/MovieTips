@@ -1,7 +1,7 @@
 package integration;
 
 import control.gestioneUtente.AccessoServlet;
-import model.connection.TestConPool;
+import model.connection.ConPool;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ public class Test_AccessoServlet extends Mockito {
     @BeforeEach
     public void setUp() throws SQLException, FileNotFoundException {
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        Connection con = TestConPool.getConnection();
+        Connection con = ConPool.getConnection();
         ScriptRunner sr = new ScriptRunner(con);
         Reader reader = new BufferedReader(new FileReader("src/test/java/testmovietips.sql"));
         sr.runScript(reader);

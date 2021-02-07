@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Servlet che gestisce la corretta visualizzazione della pagina di un film inserendo il film nella request
+ * Servlet che gestisce la corretta visualizzazione della pagina di un film
  */
 @WebServlet(name = "FilmServlet", urlPatterns = "/Film")
 public class FilmServlet extends HttpServlet {

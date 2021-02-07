@@ -70,8 +70,8 @@ public class AccessoServlet extends HttpServlet {
             case -4:
                 errore = "Errore: e-mail bannata";
                 request.setAttribute("errorTest", errore);
-                //throw new MyServletException("Utente bannato");
-                break;
+                throw new MyServletException("Utente bannato");
+                //break;
             case -5:
                 errore = "Errore: lunghezza password";
                 request.setAttribute("errorTest", errore);
@@ -91,7 +91,7 @@ public class AccessoServlet extends HttpServlet {
                 response.sendRedirect(".");
                 return;
         }
-        throw new MyServletException(errore);
-        //throw new MyServletException("Username e/o password non validi");
+        throw new MyServletException("Username e/o password non validi");
+        //throw new MyServletException(errore);
     }
 }

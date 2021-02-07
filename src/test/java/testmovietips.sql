@@ -127,7 +127,8 @@ VALUES ('Ratatouille', 'Animazione', 2007, 'Brad Bird', 'Patton Oswalt, Lou Roma
 INSERT INTO testmovietipsdb.recensione
 (valutazione,
  testo,
+ segnalazione,
  id_film,
  username_utente)
-VALUES (4, 'Film molto bello', 1, 'fabrizio_ceriello'),
-       (2, 'Non mi è piaciuto', 3, 'fabrizio_ceriello');
+VALUES (4, 'Film molto bello', true, 1, 'fabrizio_ceriello'),
+       (2, 'Non mi è piaciuto', true, 3, 'fabrizio_ceriello');

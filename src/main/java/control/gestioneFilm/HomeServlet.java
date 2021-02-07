@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Servlet che gestisce la corretta visualizzazione della home page inserendo i film nella request
+ * Servlet che gestisce la corretta visualizzazione della homepage
  */
 @WebServlet(name = "HomeServlet", urlPatterns = "", loadOnStartup = 1)
 public class HomeServlet extends HttpServlet {

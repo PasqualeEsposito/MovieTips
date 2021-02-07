@@ -42,11 +42,11 @@ public class IgnoraSegnalazioneServlet extends HttpServlet {
                 request.setAttribute("errorTest", errore);
                 break;
             case -3:
-                errore = "Errore: recensione non presente nel database";
+                errore = "Errore: recensione non esistente";
                 request.setAttribute("errorTest", errore);
                 break;
             case 1:
-                errore = "Ok: recensione ignorata";
+                errore = "Ok: segnalazione ignorata";
                 request.setAttribute("errorTest", errore);
                 response.sendRedirect("./GestioneSegnalazioni");
                 return;

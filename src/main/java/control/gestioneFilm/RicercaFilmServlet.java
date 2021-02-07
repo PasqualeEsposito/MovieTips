@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Servlet che gestisce la corretta visualizzazione della pagina dei risultati della ricerca inserendo i film che contengono una determinata parola nel titolo all'interno della request
+ * Servlet che gestisce la corretta visualizzazione della pagina dei risultati della ricerca
  */
 @WebServlet(name = "RicercaFilmServlet", urlPatterns = "/Ricerca")
 public class RicercaFilmServlet extends HttpServlet {

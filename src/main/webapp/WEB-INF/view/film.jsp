@@ -88,16 +88,14 @@
                         </div>
                         <div>
                             <% if (checkActive == 1) { %>
-                            <c:if test="${recensione.segnalazione == false}">
-                                <form action="Segnala">
-                                    <input type="hidden" name="idFilm" value="${film.idFilm}">
-                                    <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
-                                    <button type="submit"
-                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                        Segnala recensione
-                                    </button>
-                                </form>
-                            </c:if>
+                            <form action="Segnala">
+                                <input type="hidden" name="idFilm" value="${film.idFilm}">
+                                <input type="hidden" name="idRecensione" value="${recensione.idRecensione}">
+                                <button type="submit"
+                                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    Segnala recensione
+                                </button>
+                            </form>
                             <% } %>
                         </div>
                     </div>

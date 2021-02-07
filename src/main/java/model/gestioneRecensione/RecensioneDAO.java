@@ -105,7 +105,7 @@ public class RecensioneDAO {
         if (valutazione < 1 || valutazione > 5) {
             return -3;
         } else {
-            if (testo.length() > 255) {
+            if (testo.length() < 1 || testo.length() > 255) {
                 return -4;
             }
         }
@@ -207,7 +207,7 @@ public class RecensioneDAO {
             return -2;
         }
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE id_recensione = ? AND segnalazione = false");
+            PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE id_recensione = ?");
             ps.setInt(1, idRecensione);
             if (ps.executeUpdate() != 1) {
                 return -3;

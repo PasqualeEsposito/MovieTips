@@ -1,9 +1,10 @@
 package integration;
 
 import control.gestioneRecensione.ModeraRecensioneServlet;
-import model.connection.TestConPool;
+import model.connection.ConPool;
 import model.gestioneUtente.Utente;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,7 +28,7 @@ public class Test_ModeraRecensioneServlet extends Mockito {
     @BeforeEach
     public void setUp() throws SQLException, FileNotFoundException {
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        Connection con = TestConPool.getConnection();
+        Connection con = ConPool.getConnection();
         ScriptRunner sr = new ScriptRunner(con);
         Reader reader = new BufferedReader(new FileReader("src/test/java/testmovietips.sql"));
         sr.runScript(reader);
@@ -82,5 +83,12 @@ public class Test_ModeraRecensioneServlet extends Mockito {
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        servlet = null;
+        request = null;
+        response = null;
     }
 }
