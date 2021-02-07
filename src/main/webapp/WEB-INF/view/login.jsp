@@ -16,7 +16,7 @@
             <div>
                 <label for="password">Password:</label>
                 <div class="mdl-textfield " data-upgraded=",MaterialTextfield">
-                    <input class="mdl-textfield__input" name="password" type="text" id="password">
+                    <input class="mdl-textfield__input" name="password" type="password" id="password">
                 </div>
             </div>
             <div class="submit">
