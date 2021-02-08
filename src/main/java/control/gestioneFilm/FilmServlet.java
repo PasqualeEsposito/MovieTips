@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servlet che gestisce la corretta visualizzazione della pagina di un film
@@ -41,7 +42,7 @@ public class FilmServlet extends HttpServlet {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveByIdFilm(id);
+        List<Recensione> recensioni = recensioneDAO.doRetrieveByIdFilm(id);
         request.setAttribute("film", film);
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/film.jsp");

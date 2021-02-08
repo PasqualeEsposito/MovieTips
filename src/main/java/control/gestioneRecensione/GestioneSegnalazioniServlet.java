@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servlet che gestisce la corretta visualizzazione della pagina riservata al moderatore inserendo tutte le recensioni segnalate
@@ -29,7 +30,7 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione(utente);
+        List<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione(utente);
         if (recensioni == null) {
             throw new MyServletException("Utente non autorizzato");
         }

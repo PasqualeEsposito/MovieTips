@@ -8,18 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecensioneDAO {
     /**
      * @param idFilm
      * @return
      */
-    public ArrayList<Recensione> doRetrieveByIdFilm(int idFilm) {
+    public List<Recensione> doRetrieveByIdFilm(int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE id_film = ?");
             ps.setInt(1, idFilm);
             ResultSet rs = ps.executeQuery();
-            ArrayList<Recensione> recensioni = new ArrayList<>();
+            List<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
                 Recensione r = new Recensione();
                 r.setIdRecensione(rs.getInt(1));
@@ -40,12 +41,12 @@ public class RecensioneDAO {
      * @param username
      * @return
      */
-    public ArrayList<Recensione> doRetrieveByUsername(String username) {
+    public List<Recensione> doRetrieveByUsername(String username) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE username_utente = ?");
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            ArrayList<Recensione> recensioni = new ArrayList<>();
+            List<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
                 Recensione r = new Recensione();
                 r.setIdRecensione(rs.getInt(1));
@@ -66,14 +67,14 @@ public class RecensioneDAO {
      * @param utente
      * @return
      */
-    public ArrayList<Recensione> doRetrieveBySegnalazione(Utente utente) {
+    public List<Recensione> doRetrieveBySegnalazione(Utente utente) {
         if (utente == null || !utente.isModeratore()) {
             return null;
         }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT id_recensione, valutazione, testo, username_utente FROM recensione WHERE segnalazione = true");
             ResultSet rs = ps.executeQuery();
-            ArrayList<Recensione> recensioni = new ArrayList<>();
+            List<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
                 Recensione r = new Recensione();
                 r.setIdRecensione(rs.getInt(1));

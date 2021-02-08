@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe che gestisce le interazioni con la tabella del database Film
@@ -48,12 +49,12 @@ public class FilmDAO {
     /**
      * @return
      */
-    public ArrayList<Film> doRetrieveAll() {
+    public List<Film> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM film ORDER BY id_film DESC LIMIT 10");
             ResultSet rs = ps.executeQuery();
-            ArrayList<Film> films = new ArrayList<>();
+            List<Film> films = new ArrayList<>();
             while (rs.next()) {
                 Film f = new Film();
                 f.setIdFilm(rs.getInt(1));
@@ -73,14 +74,14 @@ public class FilmDAO {
      * @param ricerca
      * @return
      */
-    public ArrayList<Film> searchFilms(String ricerca) {
+    public List<Film> searchFilms(String ricerca) {
         if (ricerca.length() < 1 || ricerca.length() > 255) {
             return null;
         }
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film");
             ResultSet rs = ps.executeQuery();
-            ArrayList<Film> films = new ArrayList<>();
+            List<Film> films = new ArrayList<>();
             while (rs.next()) {
                 String titolo = rs.getString(2).toLowerCase();
                 if (titolo.contains(ricerca.toLowerCase())) {

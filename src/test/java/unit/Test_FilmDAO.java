@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Test_FilmDAO extends TestCase {
     private FilmDAO filmDAO;
@@ -50,10 +51,10 @@ public class Test_FilmDAO extends TestCase {
         film2.setGenere("Animazione");
         film2.setAnno(2007);
         film2.setRegia("Brad Bird");
-        ArrayList<Film> films = new ArrayList<>();
+        List<Film> films = new ArrayList<>();
         films.add(film1);
         films.add(film2);
-        ArrayList<Film> output = filmDAO.searchFilms("ta");
+        List<Film> output = filmDAO.searchFilms("ta");
         int flag = 1;
         if (output.size() != films.size()) {
             flag = 0;

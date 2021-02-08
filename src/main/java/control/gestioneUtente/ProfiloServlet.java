@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servlet che gestisce la corretta visualizzazione della pagina profilo di un utente
@@ -36,7 +37,7 @@ public class ProfiloServlet extends HttpServlet {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        ArrayList<Recensione> recensioni = recensioneDAO.doRetrieveByUsername(username);
+        List<Recensione> recensioni = recensioneDAO.doRetrieveByUsername(username);
         request.setAttribute("profilo", profilo);
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/profilo.jsp");
