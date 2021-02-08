@@ -32,6 +32,10 @@ public class ProfiloServlet extends HttpServlet {
         String username = request.getParameter("username");
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente profilo = utenteDAO.doRetrieveByUsername(username);
+        /*if(profilo == null)
+            request.setAttribute("errorTest", "Errore: utente non esistente");
+        else
+            request.setAttribute("errorTest", "Ok: utente esistente");*/
         if (profilo == null) {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }

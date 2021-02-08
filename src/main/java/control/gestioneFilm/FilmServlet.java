@@ -37,6 +37,10 @@ public class FilmServlet extends HttpServlet {
         }
         FilmDAO filmDAO = new FilmDAO();
         Film film = filmDAO.doRetrieveById(id);
+        /*if (film == null)
+            request.setAttribute("errorTest", "Errore: film non presente nel database");
+        else
+            request.setAttribute("errorTest", "Ok: film presente nel database");*/
         if (film == null) {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }

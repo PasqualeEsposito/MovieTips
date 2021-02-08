@@ -67,14 +67,14 @@ public class RecensioneDAO {
      * @param utente
      * @return
      */
-    public List<Recensione> doRetrieveBySegnalazione(Utente utente) {
-        if (utente == null || !utente.isModeratore()) {
-            return null;
-        }
+    public int getReportedReviews(Utente utente, List<Recensione> recensioni) {
+        if (utente == null)
+            return -1;
+        if(!utente.isModeratore())
+            return -2;
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT id_recensione, valutazione, testo, username_utente FROM recensione WHERE segnalazione = true");
             ResultSet rs = ps.executeQuery();
-            List<Recensione> recensioni = new ArrayList<>();
             while (rs.next()) {
                 Recensione r = new Recensione();
                 r.setIdRecensione(rs.getInt(1));
@@ -83,7 +83,7 @@ public class RecensioneDAO {
                 r.setUsernameUtente(rs.getString(4));
                 recensioni.add(r);
             }
-            return recensioni;
+            return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

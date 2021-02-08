@@ -2,6 +2,7 @@ package unit;
 
 import junit.framework.TestCase;
 import model.connection.ConPool;
+import model.gestioneRecensione.Recensione;
 import model.gestioneRecensione.RecensioneDAO;
 import model.gestioneUtente.Utente;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -16,6 +17,8 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test_RecensioneDAO extends TestCase {
     private RecensioneDAO recensioneDAO;
@@ -164,6 +167,119 @@ public class Test_RecensioneDAO extends TestCase {
         utente.setRuolo("001000");
         assertEquals(1, recensioneDAO.reportReview(1, utente)); // Ok: recensione segnalata
     }
+
+    @Test
+    public void testDoRetrieveByIdFilm1() {
+        List<Recensione> recensioni = new ArrayList<>();
+        List<Recensione> output;
+        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
+        output = recensioneDAO.doRetrieveByIdFilm(0);
+        int flag = 1;
+        if (recensioni.size() != output.size())
+            flag = 0;
+        else
+            for (int i = 0; i < output.size(); i++) {
+                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
+                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
+                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
+                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
+                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
+                    flag = 0;
+            }
+        assertEquals(0, flag);
+    }
+
+    @Test
+    public void testDoRetrieveByIdFilm2() {
+        List<Recensione> recensioni = new ArrayList<>();
+        List<Recensione> output;
+        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
+        output = recensioneDAO.doRetrieveByIdFilm(1);
+        int flag = 1;
+        if (recensioni.size() != output.size())
+            flag = 0;
+        else
+            for (int i = 0; i < output.size(); i++) {
+                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
+                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
+                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
+                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
+                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
+                    flag = 0;
+            }
+        assertEquals(1, flag);
+    }
+
+    @Test
+    public void testDoRetrieveByUsername1() {
+        String username = "Saverio";
+        List<Recensione> recensioni = new ArrayList<>();
+        List<Recensione> output;
+        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
+        recensioni.add(new Recensione(2, "Non mi è piaciuto", true, 3, "fabrizio_ceriello"));
+        output = recensioneDAO.doRetrieveByUsername(username);
+        int flag = 1;
+        if (recensioni.size() != output.size())
+            flag = 0;
+        else
+            for (int i = 0; i < output.size(); i++) {
+                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
+                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
+                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
+                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
+                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
+                    flag = 0;
+            }
+        assertEquals(0, flag);
+    }
+
+    @Test
+    public void testDoRetrieveByUsername2() {
+        String username = "fabrizio_ceriello";
+        List<Recensione> recensioni = new ArrayList<>();
+        List<Recensione> output;
+        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
+        recensioni.add(new Recensione(2, "Non mi è piaciuto", true, 3, "fabrizio_ceriello"));
+        output = recensioneDAO.doRetrieveByUsername(username);
+        int flag = 1;
+        if (recensioni.size() != output.size())
+            flag = 0;
+        else
+            for (int i = 0; i < output.size(); i++) {
+                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
+                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
+                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
+                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
+                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
+                    flag = 0;
+            }
+        assertEquals(1, flag);
+    }
+
+    @Test
+    public void testVisualizzaSegnalazioni1() {
+        List<Recensione> list = new ArrayList<>();
+        assertEquals(-1, recensioneDAO.getReportedReviews(null, list)); // L’utente non ha effettuato l’accesso
+    }
+
+    @Test
+    public void testVisualizzaSegnalazioni2() {
+        List<Recensione> list = new ArrayList<>();
+        Utente utente = new Utente();
+        utente.setUsername("fabrizio_ceriello");
+        utente.setRuolo("001000");
+        assertEquals(-2, recensioneDAO.getReportedReviews(utente, list)); // L’utente non ricopre il ruolo di moderatore
+    }
+
+    @Test
+    public void testVisualizzaSegnalazioni3() {
+        List<Recensione> list = new ArrayList<>();
+        Utente utente = new Utente();
+        utente.setUsername("marco_bellamico");
+        utente.setRuolo("000001");
+        assertEquals(1, recensioneDAO.getReportedReviews(utente, list)); // L’utente ricopre il ruolo di moderatore
+    }
+
 
     @AfterEach
     public void tearDown() {

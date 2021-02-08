@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,12 +30,26 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        List<Recensione> recensioni = recensioneDAO.doRetrieveBySegnalazione(utente);
-        if (recensioni == null) {
-            throw new MyServletException("Utente non autorizzato");
+        List<Recensione> recensioni = new ArrayList<>();
+        int i = recensioneDAO.getReportedReviews(utente, recensioni);
+        String errore = "";
+        switch (i) {
+            case -1:
+                errore = "Errore: accesso non effettuato";
+                request.setAttribute("errorTest", errore);
+                break;
+            case -2:
+                errore = "Errore: utente non riveste il ruolo di moderatore";
+                request.setAttribute("errorTest", errore);
+                break;
+            case 1:
+                errore = "Ok: pagina segnalazioni visualizzata";
+                request.setAttribute("errorTest", errore);
+                request.setAttribute("recensioni", recensioni);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioni.jsp");
+                requestDispatcher.forward(request, response);
+                return;
         }
-        request.setAttribute("recensioni", recensioni);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/segnalazioni.jsp");
-        requestDispatcher.forward(request, response);
+        //throw new MyServletException("Utente non autorizzato");
     }
 }

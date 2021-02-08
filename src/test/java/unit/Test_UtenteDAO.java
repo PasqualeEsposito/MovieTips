@@ -92,6 +92,29 @@ public class Test_UtenteDAO extends TestCase {
         assertEquals(1, utenteDAO.banUser("roberta_esposito", utente));  // Ok: utente bannato
     }
 
+    @Test
+    public void testProfiloUtente1() {
+        String username = "Saverio";
+        assertEquals(null, utenteDAO.doRetrieveByUsername(username));
+    }
+
+    @Test
+    public void testProfiloUtente2() {
+        String username = "fabrizio_ceriello";
+        Utente utente1 = new Utente("fabrizio_ceriello", "fabrizio.ceriello@unisa.it", "Fabrizio", "Ceriello", "Uomo", "1999-12-30", "001000");
+        Utente utente2 = utenteDAO.doRetrieveByUsername(username);
+        int flag = 1;
+        if(!(utente1.getUsername().equals(utente2.getUsername())
+                && utente1.getMail().equals(utente2.getMail())
+                && utente1.getNome().equals(utente2.getNome())
+                && utente1.getCognome().equals(utente2.getCognome())
+                && utente1.getGenere().equals(utente2.getGenere())
+                && utente1.getDataNascita().equals(utente2.getDataNascita())
+                && utente1.getRuolo().equals(utente2.getRuolo())))
+            flag = 0;
+        assertEquals(1, flag);
+    }
+
     @AfterEach
     public void tearDown() {
         utenteDAO = null;
