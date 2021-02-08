@@ -1,14 +1,19 @@
 package control.gestioneUtente;
 
 import control.MyServletException;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
 import model.gestioneUtente.Utente;
 import model.gestioneUtente.UtenteDAO;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Servlet che permette a un moderatore di bannare un utente
@@ -22,7 +27,7 @@ public class BannaUtenteServlet extends HttpServlet {
      * @throws MyServletException
      */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, MyServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         UtenteDAO utenteDAO = new UtenteDAO();
@@ -47,8 +52,11 @@ public class BannaUtenteServlet extends HttpServlet {
             default:
                 errore = "Ok: utente bannato";
                 request.setAttribute("errorTest", errore);
-                response.sendRedirect(".");
-                return;
+                FilmDAO filmDAO = new FilmDAO();
+                List<Film> films = filmDAO.doRetrieveLastTen();
+                request.setAttribute("films", films);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/homePage.jsp");
+                requestDispatcher.forward(request, response);
         }
         throw new MyServletException(errore);
     }

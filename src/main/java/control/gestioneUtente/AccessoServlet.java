@@ -1,6 +1,8 @@
 package control.gestioneUtente;
 
 import control.MyServletException;
+import model.gestioneFilm.Film;
+import model.gestioneFilm.FilmDAO;
 import model.gestioneUtente.Utente;
 import model.gestioneUtente.UtenteDAO;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Servlet che gestisce il login inserendo l'utente nella sessione. Lancia l'eccezione MyServletException se i dati inseriti dall'utente non sono validi
@@ -44,7 +47,7 @@ public class AccessoServlet extends HttpServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, MyServletException {
+            throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente != null) {
@@ -67,10 +70,13 @@ public class AccessoServlet extends HttpServlet {
                 errore = "Ok: accesso effettuato";
                 request.setAttribute("errorTest", errore);
                 request.getSession().setAttribute("utente", utente);
-                response.sendRedirect(".");
-                return;
+                FilmDAO filmDAO = new FilmDAO();
+                List<Film> films = filmDAO.doRetrieveLastTen();
+                request.setAttribute("films", films);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/homePage.jsp");
+                requestDispatcher.forward(request, response);
         }
-        throw new MyServletException("Username e/o password non validi");
-        //throw new MyServletException(errore);
+        //throw new MyServletException("Username e/o password non validi");
+        throw new MyServletException(errore);
     }
 }

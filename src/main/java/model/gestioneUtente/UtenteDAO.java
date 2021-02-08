@@ -25,7 +25,7 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 utente.setRuolo(rs.getString(7));
-                if(utente.isBanned())
+                if (utente.isBanned())
                     return -2;
                 utente.setUsername(rs.getString(1));
                 utente.setMail(rs.getString(2));

@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class FilmDAO {
     /**
-     * @param id
+     * @param idFilm
      * @return
      */
-    public Film doRetrieveById(int id) {
+    public Film doRetrieveById(int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film WHERE id_film = ?");
-            ps.setInt(1, id);
+            ps.setInt(1, idFilm);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Film f = new Film();
@@ -49,7 +49,7 @@ public class FilmDAO {
     /**
      * @return
      */
-    public List<Film> doRetrieveAll() {
+    public List<Film> doRetrieveLastTen() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM film ORDER BY id_film DESC LIMIT 10");
