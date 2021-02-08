@@ -32,41 +32,26 @@ public class Test_UtenteDAO extends TestCase {
 
     @Test
     public void testAccesso1() {
-        assertEquals(-1, utenteDAO.signIn("francy", "", new Utente())); // LE < 8 or LE > 255
+        assertEquals(-1, utenteDAO.signIn("francy", "", new Utente())); // L’e-mail non esiste nel database
     }
 
     @Test
     public void testAccesso2() {
-        assertEquals(-2, utenteDAO.signIn("francy.mauro", "", new Utente())); // L’e-mail non rispetta il formato
+        assertEquals(-1, utenteDAO.signIn("francesca.mauro@unisa.it", "", new Utente())); // La password non corrisponde all’username
     }
 
     @Test
     public void testAccesso3() {
-        assertEquals(-3, utenteDAO.signIn("francy.mauro@unisa.it", "", new Utente())); // L’e-mail non esiste nel database
+        assertEquals(-2, utenteDAO.signIn("francesca.mauro@unisa.it", "Francesca1!", new Utente())); // L'e-mail è stata bannata
     }
 
     @Test
     public void testAccesso4() {
-        assertEquals(-4, utenteDAO.signIn("francesca.mauro@unisa.it", "", new Utente())); // L'e-mail è stata bannata
+        assertEquals(-1, utenteDAO.signIn("roberta.esposito@unisa.it", "Rob", new Utente())); // La password non corrisponde all’username
     }
 
     @Test
     public void testAccesso5() {
-        assertEquals(-5, utenteDAO.signIn("roberta.esposito@unisa.it", "Rob", new Utente())); // LP < 8 or LP > 255
-    }
-
-    @Test
-    public void testAccesso6() {
-        assertEquals(-6, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta!", new Utente())); // La password non rispetta il formato
-    }
-
-    @Test
-    public void testAccesso7() {
-        assertEquals(-7, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1", new Utente())); // La password non corrisponde all’username
-    }
-
-    @Test
-    public void testAccesso8() {
         assertEquals(1, utenteDAO.signIn("roberta.esposito@unisa.it", "Roberta1!", new Utente())); // Ok: accesso effettuato
     }
 

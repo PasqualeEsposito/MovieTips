@@ -56,35 +56,14 @@ public class AccessoServlet extends HttpServlet {
         String errore = "";
         switch (utenteDAO.signIn(mail, password, utente)) {
             case -1:
-                errore = "Errore: lunghezza e-mail";
-                request.setAttribute("errorTest", errore);
-                break;
-            case -2:
-                errore = "Errore: formato e-mail";
-                request.setAttribute("errorTest", errore);
-                break;
-            case -3:
-                errore = "Errore: e-mail non esistente";
-                request.setAttribute("errorTest", errore);
-                break;
-            case -4:
-                errore = "Errore: e-mail bannata";
-                request.setAttribute("errorTest", errore);
-                throw new MyServletException("Utente bannato");
-                //break;
-            case -5:
-                errore = "Errore: lunghezza password";
-                request.setAttribute("errorTest", errore);
-                break;
-            case -6:
-                errore = "Errore: formato password";
-                request.setAttribute("errorTest", errore);
-                break;
-            case -7:
                 errore = "Errore: password non corrispondente all’username";
                 request.setAttribute("errorTest", errore);
                 break;
-            default:
+            case -2:
+                errore = "Errore: e-mail bannata";
+                request.setAttribute("errorTest", errore);
+                break;
+            case 1:
                 errore = "Ok: accesso effettuato";
                 request.setAttribute("errorTest", errore);
                 request.getSession().setAttribute("utente", utente);

@@ -18,39 +18,15 @@ public class UtenteDAO {
      * @return
      */
     public int signIn(String mail, String password, Utente utente) {
-        if (mail.length() < 8 || mail.length() > 255) {
-            return -1;
-        }
-        if (!mail.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
-            return -2;
-        }
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT ruolo FROM utente WHERE mail = ?");
-            ps.setString(1, mail);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                utente.setRuolo(rs.getString(1));
-            } else {
-                return -3;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        if (utente.isBanned()) {
-            return -4;
-        }
-        if (password.length() < 8 || password.length() > 255) {
-            return -5;
-        }
-        if (password.toUpperCase().equals(password) || password.toLowerCase().equals(password) || !password.matches(".*[0-9].*")) {
-            return -6;
-        }
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita FROM utente WHERE mail = ? AND password = SHA1(?)");
+            PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita, ruolo FROM utente WHERE mail = ? AND password = SHA1(?)");
             ps.setString(1, mail);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                utente.setRuolo(rs.getString(7));
+                if(utente.isBanned())
+                    return -2;
                 utente.setUsername(rs.getString(1));
                 utente.setMail(rs.getString(2));
                 utente.setNome(rs.getString(3));
@@ -59,7 +35,7 @@ public class UtenteDAO {
                 utente.setDataNascita(rs.getString(6));
                 return 1;
             }
-            return -7;
+            return -1;
         } catch (SQLException e) {
             throw new RuntimeException();
         }

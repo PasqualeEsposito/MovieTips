@@ -39,66 +39,6 @@ public class Test_AccessoServlet extends Mockito {
     public void testAccesso1() throws ServletException, IOException {
         request.addParameter("mail", "francy");
         request.addParameter("password", "");
-        String message = "Errore: lunghezza e-mail";
-        servlet.doPost(request, response);
-        String result = (String) request.getAttribute("errorTest");
-        assertEquals(message, result);
-    }
-
-    @Test
-    public void testAccesso2() throws ServletException, IOException {
-        request.addParameter("mail", "francy.mauro");
-        request.addParameter("password", "");
-        String message = "Errore: formato e-mail";
-        servlet.doPost(request, response);
-        String result = (String) request.getAttribute("errorTest");
-        assertEquals(message, result);
-    }
-
-    @Test
-    public void testAccesso3() throws ServletException, IOException {
-        request.addParameter("mail", "francy.mauro@unisa.it");
-        request.addParameter("password", "");
-        String message = "Errore: e-mail non esistente";
-        servlet.doPost(request, response);
-        String result = (String) request.getAttribute("errorTest");
-        assertEquals(message, result);
-    }
-
-    @Test
-    public void testAccesso4() throws ServletException, IOException {
-        request.addParameter("mail", "francesca.mauro@unisa.it");
-        request.addParameter("password", "");
-        String message = "Errore: e-mail bannata";
-        servlet.doPost(request, response);
-        String result = (String) request.getAttribute("errorTest");
-        assertEquals(message, result);
-    }
-
-    @Test
-    public void testAccesso5() throws ServletException, IOException {
-        request.addParameter("mail", "roberta.esposito@unisa.it");
-        request.addParameter("password", "Rob");
-        String message = "Errore: lunghezza password";
-        servlet.doPost(request, response);
-        String result = (String) request.getAttribute("errorTest");
-        assertEquals(message, result);
-    }
-
-    @Test
-    public void testAccesso6() throws ServletException, IOException {
-        request.addParameter("mail", "roberta.esposito@unisa.it");
-        request.addParameter("password", "Roberta!");
-        String message = "Errore: formato password";
-        servlet.doPost(request, response);
-        String result = (String) request.getAttribute("errorTest");
-        assertEquals(message, result);
-    }
-
-    @Test
-    public void testAccesso7() throws ServletException, IOException {
-        request.addParameter("mail", "roberta.esposito@unisa.it");
-        request.addParameter("password", "Roberta1");
         String message = "Errore: password non corrispondente all’username";
         servlet.doPost(request, response);
         String result = (String) request.getAttribute("errorTest");
@@ -106,7 +46,37 @@ public class Test_AccessoServlet extends Mockito {
     }
 
     @Test
-    public void testAccesso8() throws ServletException, IOException {
+    public void testAccesso2() throws ServletException, IOException {
+        request.addParameter("mail", "francesca.mauro@unisa.it");
+        request.addParameter("password", "");
+        String message = "Errore: password non corrispondente all’username";
+        servlet.doPost(request, response);
+        String result = (String) request.getAttribute("errorTest");
+        assertEquals(message, result);
+    }
+
+    @Test
+    public void testAccesso3() throws ServletException, IOException {
+        request.addParameter("mail", "francesca.mauro@unisa.it");
+        request.addParameter("password", "Francesca1!");
+        String message = "Errore: e-mail bannata";
+        servlet.doPost(request, response);
+        String result = (String) request.getAttribute("errorTest");
+        assertEquals(message, result);
+    }
+
+    @Test
+    public void testAccesso4() throws ServletException, IOException {
+        request.addParameter("mail", "roberta.esposito@unisa.it");
+        request.addParameter("password", "Rob");
+        String message = "Errore: password non corrispondente all’username";
+        servlet.doPost(request, response);
+        String result = (String) request.getAttribute("errorTest");
+        assertEquals(message, result);
+    }
+
+    @Test
+    public void testAccesso5() throws ServletException, IOException {
         request.addParameter("mail", "roberta.esposito@unisa.it");
         request.addParameter("password", "Roberta1!");
         String message = "Ok: accesso effettuato";
