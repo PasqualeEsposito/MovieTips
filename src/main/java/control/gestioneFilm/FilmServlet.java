@@ -36,7 +36,7 @@ public class FilmServlet extends HttpServlet {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }
         FilmDAO filmDAO = new FilmDAO();
-        Film film = filmDAO.doRetrieveById(id);
+        Film film = filmDAO.getFilm(id);
         /*if (film == null)
             request.setAttribute("errorTest", "Errore: film non presente nel database");
         else
@@ -45,7 +45,7 @@ public class FilmServlet extends HttpServlet {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        List<Recensione> recensioni = recensioneDAO.doRetrieveByIdFilm(id);
+        List<Recensione> recensioni = recensioneDAO.getReviewsByFilm(id);
         request.setAttribute("film", film);
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/film.jsp");

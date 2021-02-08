@@ -72,7 +72,7 @@ public class UtenteDAO {
      * @param username
      * @return
      */
-    public Utente doRetrieveByUsername(String username) {
+    public Utente getUser(String username) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT username, mail, nome, cognome, genere, data_nascita, ruolo FROM utente WHERE username = ?");
             ps.setString(1, username);

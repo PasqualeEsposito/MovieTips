@@ -117,7 +117,7 @@ public class Test_FilmDAO extends TestCase {
 
     @Test
     public void testDoRetrieveById1() {
-        Film film = filmDAO.doRetrieveById(0);
+        Film film = filmDAO.getFilm(0);
         assertEquals(null, film);
     }
 
@@ -151,7 +151,7 @@ public class Test_FilmDAO extends TestCase {
                 " è una ragazzina capricciosa e viziata, imparerà il valore dell'amore, dell'amicizia e della " +
                 "solidarietà, affrontando come un'adulta le difficoltà e le scelte che le si presenteranno, cercando " +
                 "di tornare a casa senza dimenticare chi è.");
-        Film film2 = filmDAO.doRetrieveById(1);
+        Film film2 = filmDAO.getFilm(1);
         int flag = 1;
         if (!(film1.getIdFilm() == film2.getIdFilm()
                 && film1.getTitolo().equals(film2.getTitolo())

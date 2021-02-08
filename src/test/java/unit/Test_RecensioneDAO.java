@@ -173,7 +173,7 @@ public class Test_RecensioneDAO extends TestCase {
         List<Recensione> recensioni = new ArrayList<>();
         List<Recensione> output;
         recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
-        output = recensioneDAO.doRetrieveByIdFilm(0);
+        output = recensioneDAO.getReviewsByFilm(0);
         int flag = 1;
         if (recensioni.size() != output.size())
             flag = 0;
@@ -194,7 +194,7 @@ public class Test_RecensioneDAO extends TestCase {
         List<Recensione> recensioni = new ArrayList<>();
         List<Recensione> output;
         recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
-        output = recensioneDAO.doRetrieveByIdFilm(1);
+        output = recensioneDAO.getReviewsByFilm(1);
         int flag = 1;
         if (recensioni.size() != output.size())
             flag = 0;
@@ -217,7 +217,7 @@ public class Test_RecensioneDAO extends TestCase {
         List<Recensione> output;
         recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
         recensioni.add(new Recensione(2, "Non mi è piaciuto", true, 3, "fabrizio_ceriello"));
-        output = recensioneDAO.doRetrieveByUsername(username);
+        output = recensioneDAO.getReviewsByUser(username);
         int flag = 1;
         if (recensioni.size() != output.size())
             flag = 0;
@@ -240,7 +240,7 @@ public class Test_RecensioneDAO extends TestCase {
         List<Recensione> output;
         recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
         recensioni.add(new Recensione(2, "Non mi è piaciuto", true, 3, "fabrizio_ceriello"));
-        output = recensioneDAO.doRetrieveByUsername(username);
+        output = recensioneDAO.getReviewsByUser(username);
         int flag = 1;
         if (recensioni.size() != output.size())
             flag = 0;

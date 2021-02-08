@@ -15,7 +15,7 @@ public class RecensioneDAO {
      * @param idFilm
      * @return
      */
-    public List<Recensione> doRetrieveByIdFilm(int idFilm) {
+    public List<Recensione> getReviewsByFilm(int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE id_film = ?");
             ps.setInt(1, idFilm);
@@ -41,7 +41,7 @@ public class RecensioneDAO {
      * @param username
      * @return
      */
-    public List<Recensione> doRetrieveByUsername(String username) {
+    public List<Recensione> getReviewsByUser(String username) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE username_utente = ?");
             ps.setString(1, username);

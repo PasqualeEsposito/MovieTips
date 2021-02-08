@@ -95,14 +95,14 @@ public class Test_UtenteDAO extends TestCase {
     @Test
     public void testProfiloUtente1() {
         String username = "Saverio";
-        assertEquals(null, utenteDAO.doRetrieveByUsername(username));
+        assertEquals(null, utenteDAO.getUser(username));
     }
 
     @Test
     public void testProfiloUtente2() {
         String username = "fabrizio_ceriello";
         Utente utente1 = new Utente("fabrizio_ceriello", "fabrizio.ceriello@unisa.it", "Fabrizio", "Ceriello", "Uomo", "1999-12-30", "001000");
-        Utente utente2 = utenteDAO.doRetrieveByUsername(username);
+        Utente utente2 = utenteDAO.getUser(username);
         int flag = 1;
         if(!(utente1.getUsername().equals(utente2.getUsername())
                 && utente1.getMail().equals(utente2.getMail())

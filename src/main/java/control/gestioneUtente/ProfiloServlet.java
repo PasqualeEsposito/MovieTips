@@ -31,7 +31,7 @@ public class ProfiloServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         UtenteDAO utenteDAO = new UtenteDAO();
-        Utente profilo = utenteDAO.doRetrieveByUsername(username);
+        Utente profilo = utenteDAO.getUser(username);
         /*if(profilo == null)
             request.setAttribute("errorTest", "Errore: utente non esistente");
         else
@@ -40,7 +40,7 @@ public class ProfiloServlet extends HttpServlet {
             throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
         }
         RecensioneDAO recensioneDAO = new RecensioneDAO();
-        List<Recensione> recensioni = recensioneDAO.doRetrieveByUsername(username);
+        List<Recensione> recensioni = recensioneDAO.getReviewsByUser(username);
         request.setAttribute("profilo", profilo);
         request.setAttribute("recensioni", recensioni);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/profilo.jsp");

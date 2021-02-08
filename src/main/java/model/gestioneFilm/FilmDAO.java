@@ -17,7 +17,7 @@ public class FilmDAO {
      * @param idFilm
      * @return
      */
-    public Film doRetrieveById(int idFilm) {
+    public Film getFilm(int idFilm) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM film WHERE id_film = ?");
             ps.setInt(1, idFilm);
