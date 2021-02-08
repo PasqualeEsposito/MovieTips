@@ -50,6 +50,6 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 return;
         }
-        //throw new MyServletException("Utente non autorizzato");
+        throw new MyServletException("Utente non autorizzato");
     }
 }
