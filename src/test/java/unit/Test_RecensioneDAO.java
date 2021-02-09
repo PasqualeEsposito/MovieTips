@@ -110,7 +110,7 @@ public class Test_RecensioneDAO extends TestCase {
         Utente utente = new Utente();
         utente.setUsername("marco_bellamico");
         utente.setRuolo("000001");
-        assertEquals(1, recensioneDAO.getReportedReviews(utente, list)); // L’utente ricopre il ruolo di moderatore
+        assertEquals(1, recensioneDAO.getReportedReviews(utente, list)); // Ok: pagina segnalazioni visualizzata
     }
 
     @Test

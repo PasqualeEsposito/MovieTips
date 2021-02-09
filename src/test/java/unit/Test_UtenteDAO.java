@@ -32,7 +32,7 @@ public class Test_UtenteDAO extends TestCase {
 
     @Test
     public void testAccesso1() {
-        assertEquals(-1, utenteDAO.signIn("francy", "", new Utente())); // L’e-mail non esiste nel database
+        assertEquals(-1, utenteDAO.signIn("francy", "", new Utente())); // La password non corrisponde all’username
     }
 
     @Test
@@ -95,7 +95,7 @@ public class Test_UtenteDAO extends TestCase {
     @Test
     public void testVisualizzazioneProfiloUtente1() {
         String username = "Saverio";
-        assertEquals(null, utenteDAO.getUser(username));
+        assertEquals(null, utenteDAO.getUser(username)); // L’username non è presente nel database
     }
 
     @Test
@@ -112,7 +112,7 @@ public class Test_UtenteDAO extends TestCase {
                 && utente1.getDataNascita().equals(utente2.getDataNascita())
                 && utente1.getRuolo().equals(utente2.getRuolo())))
             flag = 0;
-        assertEquals(1, flag);
+        assertEquals(1, flag);  // Ok: profilo utente visualizzato
     }
 
     @AfterEach

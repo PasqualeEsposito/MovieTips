@@ -35,7 +35,7 @@ public class Test_FilmDAO extends TestCase {
     @Test
     public void testVisualizzazionePaginaFilm1() {
         Film film = filmDAO.getFilm(0);
-        assertEquals(null, film);
+        assertEquals(null, film); // Il film non è presente nel database
     }
 
     @Test
@@ -84,7 +84,7 @@ public class Test_FilmDAO extends TestCase {
                 && film1.getProduzione().equals(film2.getProduzione())
                 && film1.getTrama().equals(film2.getTrama())))
             flag = 0;
-        assertEquals(1, flag);
+        assertEquals(1, flag); // Ok: pagina film visualizzata
     }
 
     @Test
