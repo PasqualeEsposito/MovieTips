@@ -42,6 +42,7 @@ public class FilmServlet extends HttpServlet {
             errore = "Errore: film non esistente";
             request.setAttribute("errorTest", errore);
         } else {
+            errore = "Ok: pagina film visualizzata";
             request.setAttribute("errorTest", errore);
             RecensioneDAO recensioneDAO = new RecensioneDAO();
             List<Recensione> recensioni = recensioneDAO.getReviewsByFilm(id);
@@ -51,6 +52,6 @@ public class FilmServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
             return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

@@ -1,5 +1,6 @@
 package control.gestioneUtente;
 
+import control.MyServletException;
 import model.gestioneRecensione.Recensione;
 import model.gestioneRecensione.RecensioneDAO;
 import model.gestioneUtente.Utente;
@@ -46,6 +47,6 @@ public class ProfiloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
             return;
         }
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

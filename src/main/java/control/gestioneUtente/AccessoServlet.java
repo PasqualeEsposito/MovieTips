@@ -77,7 +77,6 @@ public class AccessoServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 return;
         }
-        throw new MyServletException("Username e/o password non validi");
-        //throw new MyServletException(errore);
+        throw new MyServletException(errore);
     }
 }

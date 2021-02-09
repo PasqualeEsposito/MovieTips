@@ -34,6 +34,48 @@ public class Test_RecensioneDAO extends TestCase {
     }
 
     @Test
+    public void testVisualizzazionePaginaFilm1() {
+        List<Recensione> recensioni = new ArrayList<>();
+        List<Recensione> output;
+        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
+        output = recensioneDAO.getReviewsByFilm(0);
+        int flag = 1;
+        if (recensioni.size() != output.size())
+            flag = 0;
+        else
+            for (int i = 0; i < output.size(); i++) {
+                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
+                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
+                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
+                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
+                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
+                    flag = 0;
+            }
+        assertEquals(0, flag);  // Il film non è presente nel database
+    }
+
+    @Test
+    public void testVisualizzazionePaginaFilm2() {
+        List<Recensione> recensioni = new ArrayList<>();
+        List<Recensione> output;
+        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
+        output = recensioneDAO.getReviewsByFilm(1);
+        int flag = 1;
+        if (recensioni.size() != output.size())
+            flag = 0;
+        else
+            for (int i = 0; i < output.size(); i++) {
+                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
+                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
+                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
+                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
+                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
+                    flag = 0;
+            }
+        assertEquals(1, flag);  // Ok: pagina film visualizzata
+    }
+
+    @Test
     public void testAggiungiRecensione1() {
         assertEquals(-1, recensioneDAO.addReview(5, "Test", 1, null));  // L’utente non ha effettuato l’accesso
     }
@@ -193,49 +235,7 @@ public class Test_RecensioneDAO extends TestCase {
     }
 
     @Test
-    public void testDoRetrieveByIdFilm1() {
-        List<Recensione> recensioni = new ArrayList<>();
-        List<Recensione> output;
-        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
-        output = recensioneDAO.getReviewsByFilm(0);
-        int flag = 1;
-        if (recensioni.size() != output.size())
-            flag = 0;
-        else
-            for (int i = 0; i < output.size(); i++) {
-                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
-                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
-                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
-                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
-                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
-                    flag = 0;
-            }
-        assertEquals(0, flag);
-    }
-
-    @Test
-    public void testDoRetrieveByIdFilm2() {
-        List<Recensione> recensioni = new ArrayList<>();
-        List<Recensione> output;
-        recensioni.add(new Recensione(4, "Film molto bello", true, 1, "fabrizio_ceriello"));
-        output = recensioneDAO.getReviewsByFilm(1);
-        int flag = 1;
-        if (recensioni.size() != output.size())
-            flag = 0;
-        else
-            for (int i = 0; i < output.size(); i++) {
-                if (!(recensioni.get(i).getValutazione() == output.get(i).getValutazione()
-                        && recensioni.get(i).getTesto().equals(output.get(i).getTesto())
-                        && recensioni.get(i).isSegnalazione() == output.get(i).isSegnalazione()
-                        && recensioni.get(i).getIdFilm() == output.get(i).getIdFilm()
-                        && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
-                    flag = 0;
-            }
-        assertEquals(1, flag);
-    }
-
-    @Test
-    public void testDoRetrieveByUsername1() {
+    public void testVisualizzazioneProfiloUtente1() {
         String username = "Saverio";
         List<Recensione> recensioni = new ArrayList<>();
         List<Recensione> output;
@@ -254,11 +254,11 @@ public class Test_RecensioneDAO extends TestCase {
                         && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
                     flag = 0;
             }
-        assertEquals(0, flag);
+        assertEquals(0, flag);  // L’username non è presente nel database
     }
 
     @Test
-    public void testDoRetrieveByUsername2() {
+    public void testVisualizzazioneProfiloUtente2() {
         String username = "fabrizio_ceriello";
         List<Recensione> recensioni = new ArrayList<>();
         List<Recensione> output;
@@ -277,7 +277,7 @@ public class Test_RecensioneDAO extends TestCase {
                         && recensioni.get(i).getUsernameUtente().equals(output.get(i).getUsernameUtente())))
                     flag = 0;
             }
-        assertEquals(1, flag);
+        assertEquals(1, flag);  // Ok: profilo utente visualizzato
     }
 
     @AfterEach
