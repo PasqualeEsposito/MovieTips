@@ -1,7 +1,6 @@
 package integration;
 
 import control.gestioneFilm.FilmServlet;
-import control.gestioneRecensione.IgnoraSegnalazioneServlet;
 import model.connection.ConPool;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.jupiter.api.AfterEach;
@@ -39,7 +38,7 @@ public class Test_FilmServlet extends Mockito {
     @Test
     public void testFilmEsistente1() throws ServletException, IOException {
         request.addParameter("id", "0");
-        String message = "Errore: film non presente nel database";
+        String message = "Errore: film non esistente";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);
@@ -48,7 +47,7 @@ public class Test_FilmServlet extends Mockito {
     @Test
     public void testFilmEsistente2() throws ServletException, IOException {
         request.addParameter("id", "1");
-        String message = "Ok: film presente nel database";
+        String message = "Ok: pagina film visualizzata";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);

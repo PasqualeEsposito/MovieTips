@@ -1,6 +1,5 @@
 package control.gestioneRecensione;
 
-import control.MyServletException;
 import model.gestioneRecensione.Recensione;
 import model.gestioneRecensione.RecensioneDAO;
 import model.gestioneUtente.Utente;
@@ -31,15 +30,14 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         RecensioneDAO recensioneDAO = new RecensioneDAO();
         List<Recensione> recensioni = new ArrayList<>();
-        int i = recensioneDAO.getReportedReviews(utente, recensioni);
         String errore = "";
-        switch (i) {
+        switch (recensioneDAO.getReportedReviews(utente, recensioni)) {
             case -1:
                 errore = "Errore: accesso non effettuato";
                 request.setAttribute("errorTest", errore);
                 break;
             case -2:
-                errore = "Errore: utente non riveste il ruolo di moderatore";
+                errore = "Errore: utente non ricopre il ruolo di moderatore";
                 request.setAttribute("errorTest", errore);
                 break;
             case 1:
@@ -50,6 +48,6 @@ public class GestioneSegnalazioniServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 return;
         }
-        throw new MyServletException("Utente non autorizzato");
+        //throw new MyServletException(errore);
     }
 }

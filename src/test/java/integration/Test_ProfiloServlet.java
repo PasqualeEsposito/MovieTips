@@ -47,7 +47,7 @@ public class Test_ProfiloServlet extends Mockito {
     @Test
     public void testProfiloUtente2() throws ServletException, IOException {
         request.addParameter("username", "fabrizio_ceriello");
-        String message = "Ok: utente esistente";
+        String message = "Ok: profilo utente visualizzato";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);

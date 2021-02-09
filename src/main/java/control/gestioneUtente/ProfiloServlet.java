@@ -1,6 +1,5 @@
 package control.gestioneUtente;
 
-import control.MyServletException;
 import model.gestioneRecensione.Recensione;
 import model.gestioneRecensione.RecensioneDAO;
 import model.gestioneUtente.Utente;
@@ -32,18 +31,21 @@ public class ProfiloServlet extends HttpServlet {
         String username = request.getParameter("username");
         UtenteDAO utenteDAO = new UtenteDAO();
         Utente profilo = utenteDAO.getUser(username);
-        /*if(profilo == null)
-            request.setAttribute("errorTest", "Errore: utente non esistente");
-        else
-            request.setAttribute("errorTest", "Ok: utente esistente");*/
+        String errore = "";
         if (profilo == null) {
-            throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
+            errore = "Errore: utente non esistente";
+            request.setAttribute("errorTest", errore);
+        } else {
+            errore = "Ok: profilo utente visualizzato";
+            request.setAttribute("errorTest", errore);
+            RecensioneDAO recensioneDAO = new RecensioneDAO();
+            List<Recensione> recensioni = recensioneDAO.getReviewsByUser(username);
+            request.setAttribute("profilo", profilo);
+            request.setAttribute("recensioni", recensioni);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/profilo.jsp");
+            requestDispatcher.forward(request, response);
+            return;
         }
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        List<Recensione> recensioni = recensioneDAO.getReviewsByUser(username);
-        request.setAttribute("profilo", profilo);
-        request.setAttribute("recensioni", recensioni);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/profilo.jsp");
-        requestDispatcher.forward(request, response);
+        //throw new MyServletException(errore);
     }
 }

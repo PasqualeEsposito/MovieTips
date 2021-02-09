@@ -38,58 +38,6 @@ public class RecensioneDAO {
     }
 
     /**
-     * @param username
-     * @return
-     */
-    public List<Recensione> getReviewsByUser(String username) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE username_utente = ?");
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            List<Recensione> recensioni = new ArrayList<>();
-            while (rs.next()) {
-                Recensione r = new Recensione();
-                r.setIdRecensione(rs.getInt(1));
-                r.setValutazione(rs.getInt(2));
-                r.setTesto(rs.getString(3));
-                r.setSegnalazione(rs.getBoolean(4));
-                r.setIdFilm(rs.getInt(5));
-                r.setUsernameUtente(rs.getString(6));
-                recensioni.add(r);
-            }
-            return recensioni;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * @param utente
-     * @return
-     */
-    public int getReportedReviews(Utente utente, List<Recensione> recensioni) {
-        if (utente == null)
-            return -1;
-        if(!utente.isModeratore())
-            return -2;
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT id_recensione, valutazione, testo, username_utente FROM recensione WHERE segnalazione = true");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Recensione r = new Recensione();
-                r.setIdRecensione(rs.getInt(1));
-                r.setValutazione(rs.getInt(2));
-                r.setTesto(rs.getString(3));
-                r.setUsernameUtente(rs.getString(4));
-                recensioni.add(r);
-            }
-            return 1;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * @param valutazione
      * @param testo
      * @param idFilm
@@ -140,6 +88,33 @@ public class RecensioneDAO {
             ps.setString(2, utente.getUsername());
             if (ps.executeUpdate() != 1) {
                 return -2;
+            }
+            return 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param utente
+     * @param recensioni
+     * @return
+     */
+    public int getReportedReviews(Utente utente, List<Recensione> recensioni) {
+        if (utente == null)
+            return -1;
+        if (!utente.isModeratore())
+            return -2;
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT id_recensione, valutazione, testo, username_utente FROM recensione WHERE segnalazione = true");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Recensione r = new Recensione();
+                r.setIdRecensione(rs.getInt(1));
+                r.setValutazione(rs.getInt(2));
+                r.setTesto(rs.getString(3));
+                r.setUsernameUtente(rs.getString(4));
+                recensioni.add(r);
             }
             return 1;
         } catch (SQLException e) {
@@ -219,51 +194,29 @@ public class RecensioneDAO {
         }
     }
 
-    /*public boolean doDeleteByTestoUsernameUtenteIdFilm(String testo, String usernameUtente, int idFilm) {
+    /**
+     * @param username
+     * @return
+     */
+    public List<Recensione> getReviewsByUser(String username) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM recensione WHERE testo = ? AND username_utente = ? AND id_film = ?");
-            ps.setString(1, testo);
-            ps.setString(2, usernameUtente);
-            ps.setInt(3, idFilm);
-            if (ps.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM recensione WHERE username_utente = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            List<Recensione> recensioni = new ArrayList<>();
+            while (rs.next()) {
+                Recensione r = new Recensione();
+                r.setIdRecensione(rs.getInt(1));
+                r.setValutazione(rs.getInt(2));
+                r.setTesto(rs.getString(3));
+                r.setSegnalazione(rs.getBoolean(4));
+                r.setIdFilm(rs.getInt(5));
+                r.setUsernameUtente(rs.getString(6));
+                recensioni.add(r);
             }
+            return recensioni;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public boolean doUpdateSegnalazioneTrueByTestoUsernameUtenteIdFilm(String testo, String usernameUtente, int idFilm) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = true WHERE testo = ? AND username_utente = ? AND id_film = ?");
-            ps.setString(1, testo);
-            ps.setString(2, usernameUtente);
-            ps.setInt(3, idFilm);
-            if (ps.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public boolean doUpdateSegnalazioneFalseByTestoUsernameUtenteIdFilm(String testo, String usernameUtente, int idFilm) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE recensione SET segnalazione = false WHERE testo = ? AND username_utente = ? AND id_film = ?");
-            ps.setString(1, testo);
-            ps.setString(2, usernameUtente);
-            ps.setInt(3, idFilm);
-            if (ps.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 }

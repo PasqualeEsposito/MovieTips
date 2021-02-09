@@ -37,18 +37,20 @@ public class FilmServlet extends HttpServlet {
         }
         FilmDAO filmDAO = new FilmDAO();
         Film film = filmDAO.getFilm(id);
-        /*if (film == null)
-            request.setAttribute("errorTest", "Errore: film non presente nel database");
-        else
-            request.setAttribute("errorTest", "Ok: film presente nel database");*/
+        String errore = "";
         if (film == null) {
-            throw new MyServletException("Siamo spiacenti, la pagina richiesta non è stata trovata");
+            errore = "Errore: film non esistente";
+            request.setAttribute("errorTest", errore);
+        } else {
+            request.setAttribute("errorTest", errore);
+            RecensioneDAO recensioneDAO = new RecensioneDAO();
+            List<Recensione> recensioni = recensioneDAO.getReviewsByFilm(id);
+            request.setAttribute("film", film);
+            request.setAttribute("recensioni", recensioni);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/film.jsp");
+            requestDispatcher.forward(request, response);
+            return;
         }
-        RecensioneDAO recensioneDAO = new RecensioneDAO();
-        List<Recensione> recensioni = recensioneDAO.getReviewsByFilm(id);
-        request.setAttribute("film", film);
-        request.setAttribute("recensioni", recensioni);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/film.jsp");
-        requestDispatcher.forward(request, response);
+        //throw new MyServletException(errore);
     }
 }

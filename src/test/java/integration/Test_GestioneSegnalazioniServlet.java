@@ -48,7 +48,7 @@ public class Test_GestioneSegnalazioniServlet extends Mockito {
         Utente utente = new Utente("fabrizio_ceriello", "fabrizio.ceriello@unisa.it",
                 "Fabrizio", "Ceriello", "Uomo", "1999-12-30", "001000");
         request.getSession().setAttribute("utente", utente);
-        String message = "Errore: utente non riveste il ruolo di moderatore";
+        String message = "Errore: utente non ricopre il ruolo di moderatore";
         servlet.doGet(request, response);
         String result = (String) request.getAttribute("errorTest");
         assertEquals(message, result);

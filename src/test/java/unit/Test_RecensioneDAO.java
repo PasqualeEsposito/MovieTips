@@ -90,6 +90,30 @@ public class Test_RecensioneDAO extends TestCase {
     }
 
     @Test
+    public void testVisualizzaPaginaSegnalazioni1() {
+        List<Recensione> list = new ArrayList<>();
+        assertEquals(-1, recensioneDAO.getReportedReviews(null, list)); // L’utente non ha effettuato l’accesso
+    }
+
+    @Test
+    public void testVisualizzaPaginaSegnalazioni2() {
+        List<Recensione> list = new ArrayList<>();
+        Utente utente = new Utente();
+        utente.setUsername("fabrizio_ceriello");
+        utente.setRuolo("001000");
+        assertEquals(-2, recensioneDAO.getReportedReviews(utente, list)); // L’utente non ricopre il ruolo di moderatore
+    }
+
+    @Test
+    public void testVisualizzaPaginaSegnalazioni3() {
+        List<Recensione> list = new ArrayList<>();
+        Utente utente = new Utente();
+        utente.setUsername("marco_bellamico");
+        utente.setRuolo("000001");
+        assertEquals(1, recensioneDAO.getReportedReviews(utente, list)); // L’utente ricopre il ruolo di moderatore
+    }
+
+    @Test
     public void testIgnoraSegnalazione1() {
         assertEquals(-1, recensioneDAO.ignoreReporting(2, null)); // L’utente non ha effettuato l’accesso
     }
@@ -255,31 +279,6 @@ public class Test_RecensioneDAO extends TestCase {
             }
         assertEquals(1, flag);
     }
-
-    @Test
-    public void testVisualizzaSegnalazioni1() {
-        List<Recensione> list = new ArrayList<>();
-        assertEquals(-1, recensioneDAO.getReportedReviews(null, list)); // L’utente non ha effettuato l’accesso
-    }
-
-    @Test
-    public void testVisualizzaSegnalazioni2() {
-        List<Recensione> list = new ArrayList<>();
-        Utente utente = new Utente();
-        utente.setUsername("fabrizio_ceriello");
-        utente.setRuolo("001000");
-        assertEquals(-2, recensioneDAO.getReportedReviews(utente, list)); // L’utente non ricopre il ruolo di moderatore
-    }
-
-    @Test
-    public void testVisualizzaSegnalazioni3() {
-        List<Recensione> list = new ArrayList<>();
-        Utente utente = new Utente();
-        utente.setUsername("marco_bellamico");
-        utente.setRuolo("000001");
-        assertEquals(1, recensioneDAO.getReportedReviews(utente, list)); // L’utente ricopre il ruolo di moderatore
-    }
-
 
     @AfterEach
     public void tearDown() {
